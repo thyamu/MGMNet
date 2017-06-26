@@ -1,4 +1,6 @@
-original_data
-data/ec_lists
-data/kegg_mapping
+data
 docs
+original_data
+results
+test
+*.pyc
