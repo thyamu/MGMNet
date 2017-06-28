@@ -11,16 +11,19 @@ class Kegg:
         for line in EnzRxn_file:
             items = line.rstrip().split('\t')
             dict_a[items[0]] = items[1:]
+        EnzRxn_file.close()
 
         dict_b = {}
         for line in RxnReat_file:
             items = line.rstrip().split('\t')
             dict_b[items[0]] = items[1:]
+        RxnReat_file.close()
 
         dict_c = {}
         for line in RxnProd_file:
             items = line.rstrip().split('\t')
             dict_c[items[0]] = items[1:]
+        RxnProd_file.close()
 
         self.enz_rxn = dict_a
         self.rxn_reac = dict_b

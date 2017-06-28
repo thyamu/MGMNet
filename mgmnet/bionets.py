@@ -11,6 +11,7 @@ def loadRxns(level, group, species):
         if rxn in rxn_list:
             continue
         rxn_list.append(rxn)
+    inputfile.close()
     return rxn_list
 
 
@@ -24,6 +25,7 @@ def loadSetRxns(level, group, set_species):
             if rxn in rxn_list:
                 continue
             rxn_list.append(rxn)
+        inputfile.close()
     return rxn_list
 
 
