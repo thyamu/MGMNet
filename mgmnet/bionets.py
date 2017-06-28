@@ -1,5 +1,4 @@
 import os
-import time
 
 
 def loadRxns(level, group, species):
