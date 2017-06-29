@@ -1,4 +1,7 @@
-data/*
+data/ec_array
+data/kegg_mapping
+data/rxn_lists
+*.zip
 docs
 networks
 original_data
