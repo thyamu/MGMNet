@@ -1,6 +1,9 @@
-data
+data/*
 docs
+networks
 original_data
 results
+rxn_nets
+sub_nets
 test
 *.pyc
