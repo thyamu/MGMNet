@@ -10,3 +10,6 @@ rxn_nets
 sub_nets
 test
 *.pyc
+*.xlsx
+*.xls
+*.dat
