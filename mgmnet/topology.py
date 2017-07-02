@@ -49,7 +49,7 @@ for system_name in name_lists:
     end_run = sys.argv[2]
     # for species in range(1, BIOSYSTEMS[system_name] + 1):
     for species in range(start_run, end_run):
-        if species > 0:
+        if species > BIOSYSTEMS[system_name]:
             continue
         # species # species_name
         rxn_list, species_name = bn.load_list_rxn(system_name, species)
