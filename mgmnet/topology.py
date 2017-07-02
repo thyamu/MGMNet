@@ -1,3 +1,4 @@
+import sys
 import os
 import kegg as kg
 import bio_nets as bn
@@ -17,8 +18,8 @@ if not os.path.exists(dir_results):
     os.makedirs(dir_results)
 
 #name_lists = ['ecosystem_YNP', 'ecosystem_JGI']
-name_lists = ['individual_bacteria']
-
+#name_lists = ['individual_bacteria-parsed']
+name_lists = ['ecosystem_YNP']
 
 for system_name in name_lists:
 
@@ -44,9 +45,11 @@ for system_name in name_lists:
     # EC 1.9.3.1
     dict_species_enzPresence = bn.enz_presence(system_name, BIOSYSTEMS[system_name], '1.9.3.1')
 
-
-    for species in range(1, BIOSYSTEMS[system_name] + 1):
-        if species > 1:
+    start_run = sys.argv[1]
+    end_run = sys.argv[2]
+    # for species in range(1, BIOSYSTEMS[system_name] + 1):
+    for species in range(start_run, end_run):
+        if species > 0:
             continue
         # species # species_name
         rxn_list, species_name = bn.load_list_rxn(system_name, species)
