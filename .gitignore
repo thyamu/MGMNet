@@ -1,4 +1,5 @@
 cluster
+data
 data/ec_array
 data/kegg_mapping
 data/rxn_lists
@@ -10,7 +11,9 @@ results
 rxn_nets
 sub_nets
 test
+*.dat
 *.pyc
+*.sbatch
 *.xlsx
 *.xls
-*.dat
+
