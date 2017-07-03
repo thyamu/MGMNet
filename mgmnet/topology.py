@@ -45,12 +45,13 @@ for system_name in name_lists:
     # EC 1.9.3.1
     dict_species_enzPresence = bn.enz_presence(system_name, BIOSYSTEMS[system_name], '1.9.3.1')
 
-    start_run = sys.argv[1]
-    end_run = sys.argv[2]
+    start_run = int(sys.argv[1])
+    end_run = int(sys.argv[2])
     # for species in range(1, BIOSYSTEMS[system_name] + 1):
-    for species in range(start_run, end_run):
-        if species > BIOSYSTEMS[system_name]:
-            continue
+    if end_run > BIOSYSTEMS[system_name]:
+        end_run = BIOSYSTEMS[system_name]
+
+    for species in range(start_run, end_run + 1):
         # species # species_name
         rxn_list, species_name = bn.load_list_rxn(system_name, species)
 
@@ -140,12 +141,3 @@ for system_name in name_lists:
         with open(outputFileName, 'a') as f:
             csvf = csv.writer(f)
             csvf.writerow(data)
-
-
-
-        '''
-        stime = time.time()
-
-        etime = time.time()
-        print nbr_nodes, "time node nbr from number_of_nodes()", etime - stime
-        '''
