@@ -8,6 +8,7 @@ docs
 networks
 original_data
 results
+results_local
 rxn_nets
 sub_nets
 test
@@ -16,4 +17,3 @@ test
 *.sbatch
 *.xlsx
 *.xls
-
