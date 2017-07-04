@@ -1,6 +1,6 @@
 import sys
 import os
-import kegg as kg
+import kegg_cluster as kg
 import bio_nets as bn
 import networkx as nx
 import numpy as np
@@ -27,7 +27,7 @@ species = int(sys.argv[3])
 
 system_name = '%s_%s'%(level, group)
 
-dr = '../results'
+dr = '../../results'
 if not os.path.exists(dr):
     os.makedirs(dr)
 
