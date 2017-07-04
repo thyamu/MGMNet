@@ -17,7 +17,6 @@ Nbr_BIOSYSTEMS = {'ecosystem_YNP':26, 'ecosystem_JGI':5587, \
         'individual_archaea_parsed':199, 'individual_bacteria_parsed':1153}
 
 
-
 # level
 level = Level_BIOSYSTEMS[sys.argv[1]]
 # group
@@ -27,7 +26,7 @@ species = int(sys.argv[3])
 
 system_name = '%s_%s'%(level, group)
 
-dr = '../../results'
+dr = '../../results_cluster'
 if not os.path.exists(dr):
     os.makedirs(dr)
 

@@ -8,7 +8,7 @@ docs
 networks
 original_data
 results
-results_local
+results_cluster
 rxn_nets
 sub_nets
 test
