@@ -14,7 +14,7 @@ Group_BIOSYSTEMS = {'y': 'YNP', 'j': 'JGI', 'a': 'archaea', 'b': 'bacteria', \
                     'ap':'archaea_parsed', 'bp':'bacteria_parsed'}
 Nbr_BIOSYSTEMS = {'ecosystem_YNP':26, 'ecosystem_JGI':5587, \
         'individual_archaea':845, 'individual_bacteria':21637, \
-        'individual_archaea-parsed':199, 'individual_bacteria-parsed':1153}
+        'individual_archaea_parsed':199, 'individual_bacteria_parsed':1153}
 
 
 
