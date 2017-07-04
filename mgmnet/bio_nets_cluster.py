@@ -1,7 +1,7 @@
 
 def load_list_rxn(system_name, species):
     rxn_list = []
-    inputfile = open('../data/rxn_lists/%s/%d.dat'%(system_name, species), 'r')
+    inputfile = open('../../data/rxn_lists/%s/%d.dat'%(system_name, species), 'r')
     species_name = inputfile.readline().rstrip()[2:]
     for line in inputfile:
         rxn = line.rstrip()
@@ -27,7 +27,7 @@ def load_list_rxn(system_name, species):
 
 def enz_presence(system_name, nbr_species, enz):
     dict_species_enzPresence = {}
-    inputfile = open('../data/ec_array/ec_%s.dat'%(system_name), 'r')
+    inputfile = open('../../data/ec_array/ec_%s.dat'%(system_name), 'r')
     list_system_ec = inputfile.readline().rstrip().split('\t')
     if enz in list_system_ec:
         index_enz = list_system_ec.index(enz) # list_system_ec has unique EC numbers. In general, index() returns the first index
