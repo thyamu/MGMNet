@@ -1,7 +1,7 @@
 import sys
 import os
 import kegg_cluster as kg
-import bio_nets as bn
+import bio_nets_cluster as bn
 import networkx as nx
 import numpy as np
 import csv
