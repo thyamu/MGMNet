@@ -3,9 +3,9 @@ import os
 
 class Kegg:
     def __init__(self):
-        EnzRxn_file = open('../../data/kegg_mapping/kegg_enz_rxn.dat', 'r')
-        RxnReat_file = open('../../data/kegg_mapping/kegg_rxn_reactants.dat', 'r')
-        RxnProd_file = open('../../data/kegg_mapping/kegg_rxn_products.dat', 'r')
+        EnzRxn_file = open('../data/kegg_mapping/kegg_enz_rxn.dat', 'r')
+        RxnReat_file = open('../data/kegg_mapping/kegg_rxn_reactants.dat', 'r')
+        RxnProd_file = open('../data/kegg_mapping/kegg_rxn_products.dat', 'r')
 
         dict_a = {}
         for line in EnzRxn_file:

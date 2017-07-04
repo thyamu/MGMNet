@@ -26,7 +26,7 @@ species = int(sys.argv[3])
 
 system_name = '%s_%s'%(level, group)
 
-dr = '../../results_cluster'
+dr = '../results_cluster'
 if not os.path.exists(dr):
     os.makedirs(dr)
 
