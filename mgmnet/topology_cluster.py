@@ -36,23 +36,23 @@ if not os.path.exists(drs):
     os.makedirs(drs)
 
 
-header = [ "level", "group", "species", "species_name", \
-           "nbr_nodes", "nbr_edges", "nbr_connected_components", \
-           "nbr_nodes_lcc", "nbr_edges_lcc", \
-           "ave_degree_lcc", "std_degree_lcc", \
-           "ave_degree_square_lcc", "std_degree_square_lcc", \
-           "ave_clustering_coeff_lcc", "std_clustering_coeff_lcc", \
-           "ave_shortest_path_length_lcc", "std_shortest_path_length_lcc", \
-           "ave_betweenness_nodes_lcc", "std_betweenness_nodes_lcc", \
-           "ave_betweenness_edges_lcc", "std_betweenness_edges_lcc", \
-           "assortativity_lcc", "attribute_assortativity_lcc", \
-           "diameter_lcc", "EC 1.9.3.1 presence"]
+# header = [ "level", "group", "species", "species_name", \
+#            "nbr_nodes", "nbr_edges", "nbr_connected_components", \
+#            "nbr_nodes_lcc", "nbr_edges_lcc", \
+#            "ave_degree_lcc", "std_degree_lcc", \
+#            "ave_degree_square_lcc", "std_degree_square_lcc", \
+#            "ave_clustering_coeff_lcc", "std_clustering_coeff_lcc", \
+#            "ave_shortest_path_length_lcc", "std_shortest_path_length_lcc", \
+#            "ave_betweenness_nodes_lcc", "std_betweenness_nodes_lcc", \
+#            "ave_betweenness_edges_lcc", "std_betweenness_edges_lcc", \
+#            "assortativity_lcc", "attribute_assortativity_lcc", \
+#            "diameter_lcc", "EC 1.9.3.1 presence"]
 
 outputFileName = drs + '/%s-%s.csv'%(system_name, species)
-with open(outputFileName, 'w') as f:
-    if os.stat(outputFileName).st_size == 0: # if file not yet written
-        csvf = csv.writer(f)
-        csvf.writerow(header)
+# with open(outputFileName, 'w') as f:
+#     if os.stat(outputFileName).st_size == 0: # if file not yet written
+#         csvf = csv.writer(f)
+#         csvf.writerow(header)
 
 # EC 1.9.3.1
 dict_species_enzPresence = bn.enz_presence(system_name, Nbr_BIOSYSTEMS[system_name], '1.9.3.1')
@@ -143,6 +143,6 @@ data = [ level, group, species, species_name, \
            assortativity_lcc, attribute_assortativity_lcc, \
            diameter_lcc, ec_presence]
 
-with open(outputFileName, 'a') as f:
+with open(outputFileName, 'w') as f
     csvf = csv.writer(f)
     csvf.writerow(data)
