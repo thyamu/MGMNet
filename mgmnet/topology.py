@@ -24,7 +24,7 @@ group = Group_BIOSYSTEMS[sys.argv[2]]
 
 system_name = '%s_%s'%(level, group)
 
-dr = '../results_local'
+dr = '../results'
 if not os.path.exists(dr):
     os.makedirs(dr)
 
