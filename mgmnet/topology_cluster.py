@@ -143,6 +143,6 @@ data = [ level, group, species, species_name, \
            assortativity_lcc, attribute_assortativity_lcc, \
            diameter_lcc, ec_presence]
 
-with open(outputFileName, 'w') as f
+with open(outputFileName, 'w') as f:
     csvf = csv.writer(f)
     csvf.writerow(data)
