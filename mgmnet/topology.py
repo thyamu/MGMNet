@@ -9,7 +9,7 @@ import csv
 
 kegg = kg.Kegg()
 
-Level_BIOSYSTEMS = {'e': 'ecosystem', 'i': 'individual_bacteria'}
+Level_BIOSYSTEMS = {'e': 'ecosystem', 'i': 'individual'}
 Group_BIOSYSTEMS = {'y': 'YNP', 'j': 'JGI', 'a': 'archaea', 'b': 'bacteria', \
                     'ap':'archaea_parsed', 'bp':'bacteria_parsed'}
 Nbr_BIOSYSTEMS = {'ecosystem_YNP':26, 'ecosystem_JGI':5587, \
