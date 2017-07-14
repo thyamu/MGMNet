@@ -1,4 +1,8 @@
-cluster
+cluster/batch_run_old
+cluster/error
+cluster/out
+cluster/test
+cluster_local
 data
 data/ec_array
 data/kegg_mapping
