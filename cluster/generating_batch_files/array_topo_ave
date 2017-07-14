@@ -10,7 +10,7 @@ for i in $(seq 1 1 $upperBound)
 do
     j=$i
     runStartIndex=$(($j*$nbrSubmit-$nbrSubmit))
-    sed -e "s/arrayIndex/1-$nbrSubmit/" topo_new.sbatch > ../${runJobName}_$j.batch
+    sed -e "s/arrayIndex/1-$nbrSubmit/" seed_topo_ave > ../${runJobName}_$j.batch
     sed -i "s/jobName/${runJobName}/" ../${runJobName}_$j.batch
     sed -i "s/level/${runLevel}/" ../${runJobName}_$j.batch
     sed -i "s/group/${runGroup}/" ../${runJobName}_$j.batch
@@ -18,7 +18,7 @@ do
 done
 j=$(($j+1))
 runStartIndex=$(($j*$nbrSubmit-$nbrSubmit))
-sed -e "s/arrayIndex/1-$restSubmit/" topo_new.sbatch > ../${runJobName}_$j.batch
+sed -e "s/arrayIndex/1-$restSubmit/" seed_topo_ave > ../${runJobName}_$j.batch
 sed -i "s/jobName/${runJobName}/" ../${runJobName}_$j.batch
 sed -i "s/level/${runLevel}/" ../${runJobName}_$j.batch
 sed -i "s/group/${runGroup}/" ../${runJobName}_$j.batch
