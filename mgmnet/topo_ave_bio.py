@@ -27,7 +27,7 @@ species = int(sys.argv[3])
 
 system_name = '%s_%s'%(level, group)
 
-dr = '../results_cluster_new'
+dr = '../results_cluster'
 if not os.path.exists(dr):
     os.makedirs(dr)
 
@@ -153,7 +153,7 @@ if nbr_edges > 0:
         csvf = csv.writer(f)
         csvf.writerow(data)
 
-else: # ==> nbr_edges == 0:
+else: # ==> if nbr_edges == 0:
     data = [ level, group, species, species_name, \
                nbr_nodes, nbr_edges, 0, \
                0, 0, \
