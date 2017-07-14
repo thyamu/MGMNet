@@ -6,25 +6,28 @@ import networkx as nx
 import numpy as np
 import csv
 
-
 kegg = kg.Kegg()
 
-Level_BIOSYSTEMS = {'e': 'ecosystem', 'i': 'individual'}
+Level_BIOSYSTEMS = {'e': 'ecosystem', 'i': 'individual', 'b':'biosphere'}
 Group_BIOSYSTEMS = {'y': 'YNP', 'j': 'JGI', 'a': 'archaea', 'b': 'bacteria', \
-                    'ap':'archaea_parsed', 'bp':'bacteria_parsed'}
+                    'ap':'archaea_parsed', 'bp':'bacteria_parsed', \
+                    'e': 'eukarya', 'k': 'kegg'}
 Nbr_BIOSYSTEMS = {'ecosystem_YNP':26, 'ecosystem_JGI':5587, \
         'individual_archaea':845, 'individual_bacteria':21637, \
-        'individual_archaea_parsed':199, 'individual_bacteria_parsed':1153}
+        'individual_archaea_parsed':199, 'individual_bacteria_parsed':1153,\
+        'individual_eukarya':77, 'biosphere_kegg':1}
 
 
 # level
 level = Level_BIOSYSTEMS[sys.argv[1]]
 # group
 group = Group_BIOSYSTEMS[sys.argv[2]]
+# species
+species = int(sys.argv[3])
 
 system_name = '%s_%s'%(level, group)
 
-dr = '../results'
+dr = '../results_cluster_new'
 if not os.path.exists(dr):
     os.makedirs(dr)
 
@@ -44,30 +47,35 @@ header = [ "level", "group", "species", "species_name", \
            "assortativity_lcc", "attribute_assortativity_lcc", \
            "diameter_lcc", "EC 1.9.3.1 presence"]
 
-outputFileName = drs + '/%s.csv'%(system_name)
+outputFileName = drs + '/%s-%d.csv'%(system_name, species)
 with open(outputFileName, 'w') as f:
-    csvf = csv.writer(f)
-    csvf.writerow(header)
+    if os.stat(outputFileName).st_size == 0: # if file not yet written
+        csvf = csv.writer(f)
+        csvf.writerow(header)
 
-# EC 1.9.3.1
-dict_species_enzPresence = bn.enz_presence(system_name, Nbr_BIOSYSTEMS[system_name], '1.9.3.1')
+# EC 1.9.3.1 presence for system_name
+if system_name == "biosphere_kegg":
+    dict_species_enzPresence = {1:1}
+else:
+    dict_species_enzPresence = bn.enz_presence(system_name, Nbr_BIOSYSTEMS[system_name], '1.9.3.1')
 
-start_run = 1
-end_run = Nbr_BIOSYSTEMS[system_name]
-
-for species in range(start_run, end_run + 1):
-    # species # species_name
+# species_name
+if system_name == "biosphere_kegg":
+    rxn_list = kegg.rxn_reac.keys()
+    species_name = 'kegg'
+else:
     rxn_list, species_name = bn.load_list_rxn(system_name, species)
 
-    #--- Import sub-netwroks ---#
-    sEdges = bn.sub_edges(rxn_list, kegg.rxn_reac, kegg.rxn_prod)
-    G = nx.Graph(sEdges)
+#--- Import sub-netwroks ---#
+sEdges = bn.sub_edges(rxn_list, kegg.rxn_reac, kegg.rxn_prod)
+G = nx.Graph(sEdges)
 
-    # nbr_nodes
-    nbr_nodes = G.number_of_nodes()
-    # nbr_edges
-    nbr_edges = G.number_of_edges()
+# nbr_nodes
+nbr_nodes = G.number_of_nodes()
+# nbr_edges
+nbr_edges = G.number_of_edges()
 
+if nbr_edges > 0:
     # nbr_connected_components (with G_lcc)
     if nx.is_connected(G):
         nbr_connected_components = 1
@@ -129,7 +137,6 @@ for species in range(start_run, end_run + 1):
     # EC 1.9.3.1 presence
     ec_presence = dict_species_enzPresence[species]
 
-
     data = [ level, group, species, species_name, \
                nbr_nodes, nbr_edges, nbr_connected_components, \
                nbr_nodes_lcc, nbr_edges_lcc, \
@@ -141,6 +148,23 @@ for species in range(start_run, end_run + 1):
                ave_betweenness_edges_lcc, std_betweenness_edges_lcc, \
                assortativity_lcc, attribute_assortativity_lcc, \
                diameter_lcc, ec_presence]
+
+    with open(outputFileName, 'a') as f:
+        csvf = csv.writer(f)
+        csvf.writerow(data)
+
+else: # ==> nbr_edges == 0:
+    data = [ level, group, species, species_name, \
+               nbr_nodes, nbr_edges, 0, \
+               0, 0, \
+               0, 0, \
+               0, 0, \
+               0, 0, \
+               0, 0, \
+               0, 0, \
+               0, 0, \
+               0, 0, \
+               0, 0]
 
     with open(outputFileName, 'a') as f:
         csvf = csv.writer(f)
