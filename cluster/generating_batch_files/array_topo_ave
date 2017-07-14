@@ -1,6 +1,6 @@
-runLevel="e"
-runGroup="y"
-nbrTotal=26
+runLevel="b"
+runGroup="k"
+nbrTotal=1
 nbrSubmit=1000
 runJobName=topo_${runLevel}${runGroup}
 upperBound=$(($nbrTotal/$nbrSubmit))
