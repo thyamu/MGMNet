@@ -1,0 +1,25 @@
+runLevel="e"
+runGroup="y"
+nbrTotal=26
+nbrSubmit=1000
+runJobName=topo_${runLevel}${runGroup}
+upperBound=$(($nbrTotal/$nbrSubmit))
+restSubmit=$(($nbrTotal-$upperBound*$nbrSubmit))
+j=0
+for i in $(seq 1 1 $upperBound)
+do
+    j=$i
+    runStartIndex=$(($j*$nbrSubmit-$nbrSubmit))
+    sed -e "s/arrayIndex/1-$nbrSubmit/" topo_new.sbatch > ../${runJobName}_$j.batch
+    sed -i "s/jobName/${runJobName}/" ../${runJobName}_$j.batch
+    sed -i "s/level/${runLevel}/" ../${runJobName}_$j.batch
+    sed -i "s/group/${runGroup}/" ../${runJobName}_$j.batch
+    sed -i "s/startIndex/$runStartIndex/" ../${runJobName}_$j.batch
+done
+j=$(($j+1))
+runStartIndex=$(($j*$nbrSubmit-$nbrSubmit))
+sed -e "s/arrayIndex/1-$restSubmit/" topo_new.sbatch > ../${runJobName}_$j.batch
+sed -i "s/jobName/${runJobName}/" ../${runJobName}_$j.batch
+sed -i "s/level/${runLevel}/" ../${runJobName}_$j.batch
+sed -i "s/group/${runGroup}/" ../${runJobName}_$j.batch
+sed -i "s/startIndex/$runStartIndex/" ../${runJobName}_$j.batch

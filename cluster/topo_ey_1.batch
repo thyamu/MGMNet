@@ -1,0 +1,14 @@
+#!/bin/sh
+#SBATCH --job-name=topo_ey
+#SBATCH --array=1-26
+#SBATCH -t 0-12:00                  # wall time (D-HH:MM)
+#SBATCH --qos=normal                # QOS "queue"
+#SBATCH -o out/topo_ey_%A_%j.out             # STDOUT (%j = JobId)
+#SBATCH -e error/topo_ey_%A_%j.err             # STDERR (%j = JobId)
+#SBATCH --mail-type=FAIL,END        # notifications for job done & fail
+#SBATCH --mail-user=hkim8@vt.edu # send-to ad
+
+module load gcc/4.9.2
+module load python/2.7.9
+runID=$(($SLURM_ARRAY_TASK_ID+0))
+python ../mgmnet/topology_cluster_new.py e y $runID
