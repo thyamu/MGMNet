@@ -14,6 +14,16 @@ def load_list_rxn(system_name, species):
     return rxn_list, species_name
 
 
+def combine_list_rxn(nbr_combination, dict_group_ratio, ):
+    rxn_set = set()
+    for group, ratio in dict_group_ratio.iteritems():
+
+
+
+
+
+
+
 def enz_presence(system_name, nbr_species, enz):
     dict_species_enzPresence = {}
     inputfile = open('../data/ec_array/ec_%s.dat'%(system_name), 'r')
