@@ -1,7 +1,8 @@
 import sys
 import os
 import kegg as kg
-import bio_nets as bn
+import net_generator as ng
+import net_attr
 import networkx as nx
 import numpy as np
 import csv
@@ -57,17 +58,17 @@ with open(outputFileName, 'w') as f:
 if system_name == "biosphere_kegg":
     dict_species_enzPresence = {1:1}
 else:
-    dict_species_enzPresence = bn.enz_presence(system_name, Nbr_BIOSYSTEMS[system_name], '1.9.3.1')
+    dict_species_enzPresence = net_attr.enz_presence(system_name, Nbr_BIOSYSTEMS[system_name], '1.9.3.1')
 
 # species_name
 if system_name == "biosphere_kegg":
     rxn_list = kegg.rxn_reac.keys()
     species_name = 'kegg'
 else:
-    rxn_list, species_name = bn.load_list_rxn(system_name, species)
+    rxn_list, species_name = ng.load_list_rxn(system_name, species)
 
 #--- Import sub-netwroks ---#
-sEdges = bn.sub_edges(rxn_list, kegg.rxn_reac, kegg.rxn_prod)
+sEdges = ng.sub_edges(rxn_list, kegg.rxn_reac, kegg.rxn_prod)
 G = nx.Graph(sEdges)
 
 # nbr_nodes
@@ -124,7 +125,7 @@ if nbr_edges > 0:
     assortativity_lcc = nx.degree_assortativity_coefficient(G_lcc)
 
     # attribute_assortativity_lcc
-    rEdges = bn.rxn_edges(rxn_list, kegg.rxn_reac, kegg.rxn_prod)
+    rEdges = ng.rxn_edges(rxn_list, kegg.rxn_reac, kegg.rxn_prod)
     rxnG = nx.DiGraph(rEdges)
     rxn_degree = rxnG.degree()
     for u in G_lcc.nodes_iter():
