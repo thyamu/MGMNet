@@ -17,6 +17,7 @@ results_cluster
 rxn_nets
 sub_nets
 test
+viz
 *.dat
 *.pyc
 *.sbatch
