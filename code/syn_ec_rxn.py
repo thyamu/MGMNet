@@ -1,5 +1,5 @@
 import sys
-import net_generator as ng
+import mgmnet.net_generator as ng
 import numpy as np
 import csv
 
@@ -22,10 +22,10 @@ Nbr_Individual_Parsed = Nbr_BIOSYSTEMS['individual_archaea_parsed'] + \
                  Nbr_BIOSYSTEMS['individual_eukarya']
 
 lower_bound = int(sys.argv[1])
-for i in range(lower_bound, lower_bound + 10):
+for i in range(lower_bound, lower_bound + 5):
     print "####### sample", i
     genomeFile = open('../results/genomeIndividualList-bae-%d.dat'%i, 'w')
-    genome_list = np.random.choice(range(1, Nbr_Individual), 20000, replace=False)
+    genome_list = np.random.choice(range(1, Nbr_Individual), 21000, replace=False)
     #list_nbr_rxn = []
     rxn_set = set()
     index = 1
@@ -48,10 +48,10 @@ for i in range(lower_bound, lower_bound + 10):
     genomeFile.close()
 
 
-for i in range(lower_bound, lower_bound + 10):
+for i in range(lower_bound, lower_bound + 5):
     print "####### sample", i
     genomeFile = open('../results/genomeIndividualList-b-%d.dat'%i, 'w')
-    genome_list = np.random.choice(range(1, Nbr_BIOSYSTEMS['individual_bacteria']), 20000, replace=False)
+    genome_list = np.random.choice(range(1, Nbr_BIOSYSTEMS['individual_bacteria']), 21000, replace=False)
     #list_nbr_rxn = []
     rxn_set = set()
     index = 0

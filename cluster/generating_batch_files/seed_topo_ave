@@ -11,4 +11,4 @@
 module load gcc/4.9.2
 module load python/2.7.9
 runID=$(($SLURM_ARRAY_TASK_ID+startIndex))
-python ../mgmnet/topo_ave_bio.py level group $runID
+python ../code/topo_ave_bio.py level group $runID

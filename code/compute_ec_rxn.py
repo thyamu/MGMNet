@@ -1,10 +1,11 @@
 import sys
 import os
-import net_attr
-import net_generator as ng
+import mgmnet.kegg as kg
+import mgmnet.net_attr
+import mgmnet.net_generator as ng
 import numpy as np
 import csv
-import kegg as kg
+
 
 kegg = kg.Kegg()
 
