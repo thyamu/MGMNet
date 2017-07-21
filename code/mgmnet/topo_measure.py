@@ -43,7 +43,7 @@ class topoMeasure:
         # nbr_edges
         nbr_edges = G.number_of_edges()
 
-        data = [0] * len(self.header1)
+        data = [0] * len(self.header1) # if nbr_edges == 0, then data =[0, ... , 0]
 
         if nbr_edges > 0:
             # nbr_connected_components (with G_lcc)
