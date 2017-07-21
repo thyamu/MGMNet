@@ -15,7 +15,7 @@ group = bio.group[sys.argv[2]]
 species = int(sys.argv[3])
 
 system_name = '%s_%s'%(level, group)
-dr = '../results_test'
+dr = '../results_cluster'
 if not os.path.exists(dr):
     os.makedirs(dr)
 drs = dr + '/%s'%(system_name)
