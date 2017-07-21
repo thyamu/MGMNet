@@ -1,6 +1,3 @@
-import os
-
-
 class Kegg:
     def __init__(self):
         EnzRxn_file = open('../data/kegg_mapping/kegg_enz_rxn.dat', 'r')
