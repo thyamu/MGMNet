@@ -1,20 +1,22 @@
 import sys
 import os
 import csv
-import mgmnet.bio_nets as bn
+import mgmnet.kegg_nets as kn
 import mgmnet.topo_measure as tm
 
-bio = bn.bioSys()
+#bio = bn.bioSys()
+kegg = kn.Kegg()
 topo = tm.topoMeasure()
 
 # level
-level = bio.level[sys.argv[1]]
+level = "biosphere" # = kegg.level[sys.argv[1]]
 # group
-group = bio.group[sys.argv[2]]
+group = "kegg" # = kegg.group[sys.argv[2]]
 # species
-species = int(sys.argv[3])
+species = 1 # = int(sys.argv[3])
 
-system_name = '%s_%s'%(level, group)
+system_name = '%s_%s'%(level, group) #"biosphere_kegg"
+
 #dr = '../results_cluster'
 dr = '../results_test'
 if not os.path.exists(dr):
@@ -31,24 +33,22 @@ with open(outputFileName, 'w') as f:
         csvf.writerow(header)
 
 # species_name
-species_name = bio.species_name(system_name, species)
+species_name = kegg.species_name()
 
 # nbr_ec
-nbr_ec = bio.number_of_ec(system_name, species)
+nbr_ec = kegg.number_of_ec()
 # nbr_rxn
-nbr_rxn = bio.number_of_rxn(system_name, species)
+nbr_rxn = kegg.number_of_rxn()
 # EC 1.9.3.1 presence
 enz = '1.9.3.1'
-ec_presence = bio.enz_presence(system_name, species, enz)
+ec_presence = kegg.enz_presence(enz)
 
 data0 = [level, group, species, species_name, nbr_ec, nbr_rxn, ec_presence]
 
-#--- To import sub-netwroks with rxn-degree for node attributes ---#
-sEdges = bio.sub_edges(system_name, species)
-nodeAttr = bio.rxn_degree(system_name, species)
+#--- Import sub-netwroks ---#
+sEdges = kegg.sub_edges()
+nodeAttr = kegg.rxn_degree()
 
-
-#--- To Compute ---#
 data1 = topo.global_measure(sEdges, nodeAttr)
 data = data0 + data1
 

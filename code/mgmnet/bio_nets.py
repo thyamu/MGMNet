@@ -11,7 +11,6 @@ class bioSys:
 
 
     def species_name(self, system_name, species):
-        rxn_list = []
         inputfile = open('../data/rxn_lists/%s/%d.dat'%(system_name, species), 'r')
         species_name = inputfile.readline().rstrip()[2:]
         inputfile.close()
@@ -19,7 +18,6 @@ class bioSys:
 
 
     def number_of_ec(self, system_name, species):
-        dict_species_nbrEc = {}
         inputfile = open('../data/ec_array/ec_%s.dat'%(system_name), 'r')
         list_system_ec = inputfile.readline().rstrip().split('\t')
         line_number = 1
@@ -40,22 +38,26 @@ class bioSys:
 
 
     def enz_presence(self, system_name, species, enz):
-        inputfile = open('../data/ec_array/ec_%s.dat'%(system_name), 'r')
-        list_system_ec = inputfile.readline().rstrip().split('\t')
-        ep = 0
-        if enz in list_system_ec: #check if the enzyme exists in the list for the system_name
-            index_enz = list_system_ec.index(enz) # list_system_ec has unique EC numbers. In general, index() returns the first index
-            line_number = 1
-            for line in inputfile:
-                if species == line_number:
-                    items = line.rstrip().split('\t')
-                    if items[index_enz] == '0':
-                        ep = 0
-                    else:
-                        ep = 1
-                    break
-                line_number += 1
-        return ep
+        import kegg_nets as kg
+        kegg = kg.Kegg()
+        ep = False
+        if enz in kegg.enz: #check if the enzyme exists in kegg database
+            inputfile = open('../data/ec_array/ec_%s.dat'%(system_name), 'r')
+            list_system_ec = inputfile.readline().rstrip().split('\t')
+            if enz in list_system_ec: #check if the enzyme exists in the list for the system_name
+                index_enz = list_system_ec.index(enz) # index() returns the first index
+                line_number = 1
+                for line in inputfile:
+                    if species == line_number:
+                        items = line.rstrip().split('\t')
+                        if items[index_enz] == '0': #no empty element for ec_array
+                            ep = False
+                        else:
+                            ep = True
+                        break
+                    line_number += 1
+            inputfile.close()
+        return int(ep)
 
 
     def load_list_rxn(self, system_name, species):
@@ -72,7 +74,7 @@ class bioSys:
 
 
     def sub_edges(self, system_name, species):
-        import kegg as kg
+        import kegg_nets as kg
         kegg = kg.Kegg()
         edge_list = []
         rxn_list = self.load_list_rxn(system_name, species)
@@ -86,7 +88,7 @@ class bioSys:
 
 
     def rxn_edges(self, system_name, species):
-        import kegg as kg
+        import kegg_nets as kg
         kegg = kg.Kegg()
         edge_list = []
         rxn_list = self.load_list_rxn(system_name, species)
@@ -99,7 +101,7 @@ class bioSys:
 
 
     def rxn_degree(self, system_name, species):
-        import kegg as kg
+        import kegg_nets as kg
         kegg = kg.Kegg()
         rxn_list = self.load_list_rxn(system_name, species)
         sub_set = set()
