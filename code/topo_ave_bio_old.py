@@ -59,7 +59,7 @@ if nbr_edges > 0:
         G_lcc = G
     else:
         nbr_connected_components = nx.number_connected_components(G)
-
+        G_lcc = max(nx.connected_component_subgraphs(G), key=len)
     # nbr_nodes_lcc
     nbr_nodes_lcc = G_lcc.number_of_nodes()
     # nbr_edges_lcc
