@@ -2,11 +2,7 @@ cluster/batch_run_old
 cluster/error
 cluster/out
 cluster/test
-cluster_local
 data
-data/ec_array
-data/kegg_mapping
-data/rxn_lists
 *.zip
 docs
 networks
@@ -14,11 +10,11 @@ original_data
 organizing_data
 results
 results_cluster
-rxn_nets
-sub_nets
+results_test
 test
 viz
 *.dat
+*.nb
 *.pyc
 *.sbatch
 *.xlsx
