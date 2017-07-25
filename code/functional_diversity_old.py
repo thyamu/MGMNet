@@ -1,7 +1,7 @@
 import sys
-import mgmnet.net_generator as ng
 import numpy as np
 import csv
+import mgmnet.bio_nets as bn
 
 Level_BIOSYSTEMS = {'e': 'ecosystem', 'i': 'individual', 'b':'biosphere'}
 Group_BIOSYSTEMS = {'y': 'YNP', 'j': 'JGI', 'a': 'archaea', 'b': 'bacteria', \

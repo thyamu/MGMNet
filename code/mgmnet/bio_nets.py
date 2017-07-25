@@ -60,14 +60,30 @@ class bioSys:
         return int(ep)
 
 
+    def load_array_ec(self, system_name):
+        ec_array = {}
+        inputfile = open('../data/ec_array/ec_%s.dat'%(system_name), 'r')
+        list_system_ec = inputfile.readline().rstrip().split('\t')
+        species = 1
+        for line in inputfile:
+            ec_array[species] = []
+            items = line.rstrip().split('\t')
+            for i in range(2, len(items)):
+                if items[i] != '0':
+                    ec_array[species].append(list_system_ec[i])
+            species += 1
+        inputfile.close()
+        return ec_array
+
+
     def load_list_rxn(self, system_name, species):
         rxn_list = []
         inputfile = open('../data/rxn_lists/%s/%d.dat'%(system_name, species), 'r')
         species_name = inputfile.readline()
         for line in inputfile:
             rxn = line.rstrip()
-            if rxn in rxn_list:
-                continue
+            # if rxn in rxn_list: ==> rxn_lists contain unique rxns for each genome
+            #     continue
             rxn_list.append(rxn)
         inputfile.close()
         return rxn_list

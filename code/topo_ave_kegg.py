@@ -17,8 +17,7 @@ species = 1 # = int(sys.argv[3])
 
 system_name = '%s_%s'%(level, group) #"biosphere_kegg"
 
-#dr = '../results_cluster'
-dr = '../results_test'
+dr = '../results_cluster'
 if not os.path.exists(dr):
     os.makedirs(dr)
 drs = dr + '/%s'%(system_name)
