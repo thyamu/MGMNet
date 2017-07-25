@@ -53,7 +53,6 @@ def dist_func():
     system_name = '%s_%s'%(level, group)
     genome_list = list(range(1, bio.number_of_species[system_name] + 1))
 
-
     ec_file_name = drs + '/ec_%s-%d.dat'%(group, run)
     ec_file = open(ec_file_name, 'w')
 
@@ -96,3 +95,5 @@ if analysis == 'evol':
     evol_func(drf, group, run)
 if analysis == 'dist':
     dist_func(drf)
+
+    
