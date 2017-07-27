@@ -1,4 +1,16 @@
 class synEco:
+    def assign_seed(self, index1, index2):
+        seed1 = 268332
+        seed2 = 800304
+        np.random.seed(seed1)
+        list_first_seed = np.random.random_integers(0, 1000000, index1+1)
+        #print list_first_seed
+        np.random.seed(seed2)
+        list_second_seed = np.random.random_integers(0, 1000000, index2+1)
+        #print list_second_seed
+        new_seed = list_first_seed[index1] + list_second_seed[index2]
+        return new_seed
+
     def load_list_ec(self, system_name, species):
         ec_list = []
         inputfile = open('../data/ec_lists/%s/ec_%s-%d.dat'%(system_name, system_name, species), 'r')
