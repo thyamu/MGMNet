@@ -70,13 +70,13 @@ class synEco:
         return edge_list
 
 
-    def rxn_degree(self, system_name, species):
+    def rxn_degree(self, list_genome):
         import kegg_nets as kg
         kegg = kg.Kegg()
-        rxn_list = self.load_list_rxn(system_name, species)
+        rxn_set = self.combined_set_rxn(list_genome)
         sub_set = set()
         dict_sub_nbrRxn = {}
-        for x in rxn_list:
+        for x in rxn_set:
             for r in kegg.rxn_reac[x]:
                 if r not in sub_set:
                     dict_sub_nbrRxn[r] = 0
