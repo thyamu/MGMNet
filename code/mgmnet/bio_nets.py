@@ -11,7 +11,7 @@ class bioSys:
 
 
     def species_name(self, system_name, species):
-        inputfile = open('../data/rxn_lists/%s/%d.dat'%(system_name, species), 'r')
+        inputfile = open('../data/rxn_lists/%s/rxn_%s-%d.dat'%(system_name, system_name, species), 'r')
         species_name = inputfile.readline().rstrip()[2:]
         inputfile.close()
         return species_name
@@ -31,7 +31,7 @@ class bioSys:
         return nbrEc
 
     def number_of_rxn(self, system_name, species):
-        inputfile = open('../data/rxn_lists/%s/%d.dat'%(system_name, species), 'r')
+        inputfile = open('../data/rxn_lists/%s/rxn_%s-%d.dat'%(system_name, system_name, species), 'r')
         nbr_rxn = sum(1 for line in inputfile) - 1 #subtract 1 for the header in rxn_lists file
         inputfile.close()
         return nbr_rxn
@@ -78,7 +78,7 @@ class bioSys:
 
     def load_list_rxn(self, system_name, species):
         rxn_list = []
-        inputfile = open('../data/rxn_lists/%s/%d.dat'%(system_name, species), 'r')
+        inputfile = open('../data/rxn_lists/%s/rxn_%s-%d.dat'%(system_name, system_name, species), 'r')
         species_name = inputfile.readline()
         for line in inputfile:
             rxn = line.rstrip()

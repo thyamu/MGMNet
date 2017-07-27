@@ -1,9 +1,8 @@
 class synEco:
-    def load_array_ec(self, list_system_name):
-        ec_array = {}
-        inputfile = open('../data/ec_array/ec_%s.dat'%(system_name), 'r')
-        list_system_ec = inputfile.readline().rstrip().split('\t')
-        species = 1
+    def load_list_ec(self, system_name, species):
+        ec_list = []
+        inputfile = open('../data/ec_lists/%s/ec_%s-%d.dat'%(system_name, system_name, species), 'r')
+        inputfile.readline()
         for line in inputfile:
             ec_array[species] = []
             items = line.rstrip().split('\t')
@@ -12,12 +11,20 @@ class synEco:
                     ec_array[species].append(list_system_ec[i])
             species += 1
         inputfile.close()
-        return ec_array
+        return ec_list
 
+    def combine_set_ec(self, list_genome):
+        ec_set = set()
+        for genome in list_genome:
+            system_name = genome[0]
+            species = genome[1]
+            ec_list = self.load_list_ec(system_name, species)
+            ec_set = ec_set.union(set(ec_list))
+        return ec_set
 
     def load_list_rxn(self, system_name, species):
         rxn_list = []
-        inputfile = open('../data/rxn_lists/%s/%d.dat'%(system_name, species), 'r')
+        inputfile = open('../data/rxn_lists/%s/rxn_%s-%d.dat'%(system_name, system_name, species), 'r')
         species_name = inputfile.readline()
         for line in inputfile:
             rxn = line.rstrip()
@@ -27,13 +34,21 @@ class synEco:
         inputfile.close()
         return rxn_list
 
+    def combined_set_rxn(self, list_genome):
+        rxn_set = set()
+        for genome in list_genome:
+            system_name = genome[0]
+            species = genome[1]
+            rxn_list = self.load_list_rxn(system_name, species)
+            rxn_set = rxn_set.union(set(rxn_list))
+        return rxn_set
 
-    def sub_edges(self, system_name, species):
+    def sub_edges(self, list_genome):
         import kegg_nets as kg
         kegg = kg.Kegg()
         edge_list = []
-        rxn_list = self.load_list_rxn(system_name, species)
-        for x in rxn_list:
+        rxn_set = self.combined_set_rxn(list_genome)
+        for x in rxn_set:
             for r in kegg.rxn_reac[x]:
                 for p in kegg.rxn_prod[x]:
                     if r == p: ### remove self-loops from sub-sub nets
@@ -42,12 +57,12 @@ class synEco:
         return edge_list
 
 
-    def rxn_edges(self, system_name, species):
+    def rxn_edges(self, list_genome):
         import kegg_nets as kg
         kegg = kg.Kegg()
         edge_list = []
-        rxn_list = self.load_list_rxn(system_name, species)
-        for x in rxn_list:
+        rxn_set = self.combined_set_rxn(list_genome)
+        for x in rxn_set:
             for r in kegg.rxn_reac[x]:
                 edge_list.append((r, x))
             for p in kegg.rxn_prod[x]:
