@@ -82,18 +82,15 @@ def dist_func():
 
 analysis = sys.argv[1]
 
-dr = '../results'
-if not os.path.exists(dr):
-    os.makedirs(dr)
-drf = dr + '/bio_function'
-if not os.path.exists(drf):
-    os.makedirs(drf)
+dr = ''
+for ds in ('../results', '/bio_function'):
+    dr = dr + ds
+    if not os.path.exists(dr):
+        os.makedirs(dr)
 
 if analysis == 'evol':
     group = sys.argv[2]
     run = int(sys.argv[3])
-    evol_func(drf, group, run)
+    evol_func(dr, group, run)
 if analysis == 'dist':
-    dist_func(drf)
-
-    
+    dist_func(dr)

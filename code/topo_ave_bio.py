@@ -15,13 +15,14 @@ group = bio.group[sys.argv[2]]
 species = int(sys.argv[3])
 
 system_name = '%s_%s'%(level, group)
-dr = '../results_cluster'
-if not os.path.exists(dr):
-    os.makedirs(dr)
-drs = dr + '/%s'%(system_name)
-if not os.path.exists(drs):
-    os.makedirs(drs)
-outputFileName = drs + '/%s-%d.csv'%(system_name, species)
+
+dr = ''
+for ds in ('../results_cluster','/%s'%(system_name)):
+    dr = dr + ds
+    if not os.path.exists(dr):
+        os.makedirs(dr)
+
+outputFileName = dr + '/%s-%d.csv'%(system_name, species)
 
 header = topo.header
 with open(outputFileName, 'w') as f:
