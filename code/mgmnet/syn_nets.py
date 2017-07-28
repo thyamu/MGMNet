@@ -1,13 +1,9 @@
 class synEco:
     def __init__(self):
-        self.level = {'e': 'ecosystem', 'i': 'individual', 'b':'biosphere'}
-        self.group = {'y': 'YNP', 'j': 'JGI', 'a': 'archaea', 'b': 'bacteria', \
-                        'ap':'archaea_parsed', 'bp':'bacteria_parsed', \
-                        'e': 'eukarya', 'k': 'kegg'}
-        self.number_of_species = {'ecosystem_YNP':26, 'ecosystem_JGI':5587, \
-            'individual_archaea':845, 'individual_bacteria':21637, \
-            'individual_archaea_parsed':199, 'individual_bacteria_parsed':1153,\
-            'individual_eukarya':77, 'biosphere_kegg':1}
+        self.level = 'synthetic'
+        self.group = {'a': 'archaea', 'b': 'bacteria', 'e': 'eukarya'}
+        self.number_of_species = {'archaea':845, 'bacteria':21637, 'eukarya':77}
+
 
     def assign_seed(self, index1, index2):
         import numpy as np
@@ -22,18 +18,18 @@ class synEco:
         new_seed = list_first_seed[index1] + list_second_seed[index2]
         return new_seed
 
-
     def combine_set_genome(self, group_dict, comSize, comSet):
         import numpy as np
         new_seed = self.assign_seed(comSize, comSet)
         np.random.seed(new_seed)
-
         genome_dict = {}
         for group in group_dict.iterkeys():
-            np.random.choice(1, self.number_of_species[group], group_dict[group]
-
-
-        return genome_set
+            if group_dict[group] == 0:
+                continue 
+            genome_dict[group] = np.random.choice(\
+                                range(1, self.number_of_species[group] + 1), \
+                                int(group_dict[group] * comSize), replace = False)
+        return genome_dict
 
     def load_list_ec(self, system_name, species):
         ec_list = []
@@ -49,13 +45,13 @@ class synEco:
         inputfile.close()
         return ec_list
 
-    def combine_set_ec(self, list_genome):
+    def combine_set_ec(self, genome_dict):
         ec_set = set()
-        for genome in list_genome:
-            system_name = genome[0]
-            species = genome[1]
-            ec_list = self.load_list_ec(system_name, species)
-            ec_set = ec_set.union(set(ec_list))
+        for group in genome_dict.iterkeys():
+            system_name = 'synthetic_%s'%(group)
+            for species in genome_dict[group]:
+                ec_list = self.load_list_ec(system_name, species)
+                ec_set = ec_set.union(set(ec_list))
         return ec_set
 
     def load_list_rxn(self, system_name, species):
@@ -70,20 +66,20 @@ class synEco:
         inputfile.close()
         return rxn_list
 
-    def combined_set_rxn(self, list_genome):
+    def combined_set_rxn(self, genome_list):
         rxn_set = set()
-        for genome in list_genome:
+        for genome in genome_list:
             system_name = genome[0]
             species = genome[1]
             rxn_list = self.load_list_rxn(system_name, species)
             rxn_set = rxn_set.union(set(rxn_list))
         return rxn_set
 
-    def sub_edges(self, list_genome):
+    def sub_edges(self, genome_list):
         import kegg_nets as kg
         kegg = kg.Kegg()
         edge_list = []
-        rxn_set = self.combined_set_rxn(list_genome)
+        rxn_set = self.combined_set_rxn(genome_list)
         for x in rxn_set:
             for r in kegg.rxn_reac[x]:
                 for p in kegg.rxn_prod[x]:
@@ -93,11 +89,11 @@ class synEco:
         return edge_list
 
 
-    def rxn_edges(self, list_genome):
+    def rxn_edges(self, genome_list):
         import kegg_nets as kg
         kegg = kg.Kegg()
         edge_list = []
-        rxn_set = self.combined_set_rxn(list_genome)
+        rxn_set = self.combined_set_rxn(genome_list)
         for x in rxn_set:
             for r in kegg.rxn_reac[x]:
                 edge_list.append((r, x))
@@ -106,10 +102,10 @@ class synEco:
         return edge_list
 
 
-    def rxn_degree(self, list_genome):
+    def rxn_degree(self, genome_list):
         import kegg_nets as kg
         kegg = kg.Kegg()
-        rxn_set = self.combined_set_rxn(list_genome)
+        rxn_set = self.combined_set_rxn(genome_list)
         sub_set = set()
         dict_sub_nbrRxn = {}
         for x in rxn_set:
