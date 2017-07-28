@@ -30,7 +30,7 @@ class synEco:
 
         genome_dict = {}
         for group in group_dict.iterkeys():
-            np.random.group_dict[group]
+            np.random.choice(1, self.number_of_species[group], group_dict[group]
 
 
         return genome_set
