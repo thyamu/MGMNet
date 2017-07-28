@@ -8,18 +8,16 @@ syn = sn.synEco()
 topo = tm.topoMeasure()
 
 # level
-level = 'ecosystem'
+level = 'synthetic'
 # group
-group = 'syn_%s'%(sys.argv[1]) # ex. syn_a ==> synthetic nets of archaea genomes
+group = syn.group[sys.argv[1]] # ex. syn_a ==> synthetic nets of archaea genomes
 # species
-comSize = int(sys.argv[2])
-comSet = int(sys.argv[3])
-species = 'size%d_set%d'%(comSize, comSet)
+comSize = int(sys.argv[2]); comSet = int(sys.argv[3]); species = 'size%d_set%d'%(comSize, comSet)
 
 system_name = '%s_%s'%(level, group)
 
 dr = ''
-for ds in ('../results_cluster','/%s'%(system_name)):
+for ds in ('../results_test','/%s'%(system_name)):
     dr = dr + ds
     if not os.path.exists(dr):
         os.makedirs(dr)
@@ -35,10 +33,14 @@ with open(outputFileName, 'w') as f:
 # species_name
 species_name = species
 
+
+#----- To genereate list_genome -----#
+genome_dict = sn.combine_set_genome(comSize, comSet)
+
 # nbr_ec
-nbr_ec = sn.number_of_ec(system_name, species)
+ec_set = sn.combine_set_ec(genome_set); nbr_ec = len(ec_set)
 # nbr_rxn
-nbr_rxn = sn.number_of_rxn(system_name, species)
+rxn_set = sn.combined_set_rxn(genome_set); br_rxn = sn.number_of_rxn(system_name, species)
 # EC 1.9.3.1 presence
 enz = '1.9.3.1'
 ec_presence = sn.enz_presence(system_name, species, enz)

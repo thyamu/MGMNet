@@ -1,5 +1,16 @@
 class synEco:
+    def __init__(self):
+        self.level = {'e': 'ecosystem', 'i': 'individual', 'b':'biosphere'}
+        self.group = {'y': 'YNP', 'j': 'JGI', 'a': 'archaea', 'b': 'bacteria', \
+                        'ap':'archaea_parsed', 'bp':'bacteria_parsed', \
+                        'e': 'eukarya', 'k': 'kegg'}
+        self.number_of_species = {'ecosystem_YNP':26, 'ecosystem_JGI':5587, \
+            'individual_archaea':845, 'individual_bacteria':21637, \
+            'individual_archaea_parsed':199, 'individual_bacteria_parsed':1153,\
+            'individual_eukarya':77, 'biosphere_kegg':1}
+
     def assign_seed(self, index1, index2):
+        import numpy as np
         seed1 = 268332
         seed2 = 800304
         np.random.seed(seed1)
@@ -10,6 +21,19 @@ class synEco:
         #print list_second_seed
         new_seed = list_first_seed[index1] + list_second_seed[index2]
         return new_seed
+
+
+    def combine_set_genome(self, group_dict, comSize, comSet):
+        import numpy as np
+        new_seed = self.assign_seed(comSize, comSet)
+        np.random.seed(new_seed)
+
+        genome_dict = {}
+        for group in group_dict.iterkeys():
+            np.random.group_dict[group]
+
+
+        return genome_set
 
     def load_list_ec(self, system_name, species):
         ec_list = []
