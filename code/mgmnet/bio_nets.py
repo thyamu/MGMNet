@@ -75,6 +75,15 @@ class bioSys:
         inputfile.close()
         return ec_array
 
+    def load_list_ec(self, system_name, species):
+        ec_list = []
+        inputfile = open('../data/ec_lists/%s/ec_%s-%d.dat'%(system_name, system_name, species), 'r')
+        inputfile.readline()
+        for line in inputfile:
+            items = line.rstrip().split('\t')
+            ec_list.append(items[0])
+        inputfile.close()
+        return ec_list
 
     def load_list_rxn(self, system_name, species):
         rxn_list = []
