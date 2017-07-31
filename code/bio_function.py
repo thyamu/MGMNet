@@ -41,6 +41,49 @@ def evol_func(drf, group, run):
         index += 1
     rxn_file.close()
 
+def evol_func_all(drf, run):
+    import mgmnet.bio_nets as bn
+    bio = bn.bioSys()
+
+    dre = drf + '/evol_func_all'
+    if not os.path.exists(dre):
+        os.makedirs(dre)
+
+    ec_file_name = dre + '/evol_nbr_ec_all-%d.dat'%(run)
+    ec_file = open(ec_file_name, 'w')
+
+    ec_set = set()
+    index = 1
+    for group in bio.individual_group:
+        system_name = group
+        genome_list = list(range(1, bio.number_of_species[system_name] + 1))
+        genome_list = np.random.permutation(genome_list)
+        ec_array = bio.load_array_ec(system_name)
+        for species in genome_list:
+            ec_list = ec_array[species]
+            ec_set = ec_set.union(set(ec_list))
+            ec_file.write('%d\t%d\n'%(index, len(ec_set)))
+            index += 1
+    ec_file.close()
+
+    rxn_file_name = dre + '/evol_nbr_rxn_all-%d.dat'%(run)
+    rxn_file = open(rxn_file_name, 'w')
+    rxn_set = set()
+    index = 1
+    for group in bio.individual_group:
+        system_name = group
+        genome_list = list(range(1, bio.number_of_species[system_name] + 1))
+        genome_list = np.random.permutation(genome_list)
+        for species in genome_list:
+            rxn_list = bio.load_list_rxn(system_name, species)
+            rxn_set = rxn_set.union(set(rxn_list))
+            rxn_set.union(set(rxn_list))
+            rxn_file.write('%d\t%d\n'%(index, len(rxn_set)))
+            index += 1
+    rxn_file.close()
+
+
+
 
 def dist_func():
     import mgmnet.bio_nets as bn
@@ -91,6 +134,9 @@ for ds in ('../results', '/bio_function'):
 if analysis == 'evol':
     group = sys.argv[2]
     run = int(sys.argv[3])
-    evol_func(dr, group, run)
+    if group == 'all':
+        evol_func_all(dr, run)
+    else:
+        evol_func(dr, group, run)
 if analysis == 'dist':
     dist_func(dr)

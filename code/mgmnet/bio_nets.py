@@ -9,6 +9,9 @@ class bioSys:
             'individual_archaea_parsed':199, 'individual_bacteria_parsed':1153,\
             'individual_eukarya':77, 'biosphere_kegg':1}
 
+        self.individual_group = ['individual_archaea', 'individual_bacteria', \
+            'individual_archaea_parsed', 'individual_bacteria_parsed', 'individual_eukarya']
+
 
     def species_name(self, system_name, species):
         inputfile = open('../data/rxn_lists/%s/rxn_%s-%d.dat'%(system_name, system_name, species), 'r')
