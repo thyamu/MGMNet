@@ -41,7 +41,7 @@ def evol_func(drf, group, run):
         index += 1
     rxn_file.close()
 
-def evol_func_all(drf, run):
+def evol_func_all(drf, run, parsed):
     import mgmnet.bio_nets as bn
     bio = bn.bioSys()
 
@@ -49,12 +49,20 @@ def evol_func_all(drf, run):
     if not os.path.exists(dre):
         os.makedirs(dre)
 
-    ec_file_name = dre + '/evol_nbr_ec_all-%d.dat'%(run)
-    ec_file = open(ec_file_name, 'w')
+    if parsed == True:
+        file_name = 'all_parsed'
+        group_list = bio.individual_parsed_group
+        print file_name, group_list
+    else:
+        file_name = 'all'
+        group_list = bio.individual_group
+        print file_name, group_list
 
+    ec_file_name = dre + '/evol_nbr_ec_%s-%d.dat'%(file_name, run)
+    ec_file = open(ec_file_name, 'w')
     ec_set = set()
     index = 1
-    for group in bio.individual_group:
+    for group in group_list:
         system_name = group
         genome_list = list(range(1, bio.number_of_species[system_name] + 1))
         genome_list = np.random.permutation(genome_list)
@@ -66,11 +74,11 @@ def evol_func_all(drf, run):
             index += 1
     ec_file.close()
 
-    rxn_file_name = dre + '/evol_nbr_rxn_all-%d.dat'%(run)
+    rxn_file_name = dre + '/evol_nbr_rxn_%s-%d.dat'%(file_name, run)
     rxn_file = open(rxn_file_name, 'w')
     rxn_set = set()
     index = 1
-    for group in bio.individual_group:
+    for group in group_list:
         system_name = group
         genome_list = list(range(1, bio.number_of_species[system_name] + 1))
         genome_list = np.random.permutation(genome_list)
@@ -81,8 +89,6 @@ def evol_func_all(drf, run):
             rxn_file.write('%d\t%d\n'%(index, len(rxn_set)))
             index += 1
     rxn_file.close()
-
-
 
 
 def dist_func():
@@ -135,7 +141,9 @@ if analysis == 'evol':
     group = sys.argv[2]
     run = int(sys.argv[3])
     if group == 'all':
-        evol_func_all(dr, run)
+        evol_func_all(dr, run, parsed=False)
+    elif group == 'all_parsed':
+        evol_func_all(dr, run, parsed=True)
     else:
         evol_func(dr, group, run)
 if analysis == 'dist':

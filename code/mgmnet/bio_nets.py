@@ -10,7 +10,9 @@ class bioSys:
             'individual_eukarya':77, 'biosphere_kegg':1}
 
         self.individual_group = ['individual_archaea', 'individual_bacteria', \
-            'individual_archaea_parsed', 'individual_bacteria_parsed', 'individual_eukarya']
+            'individual_eukarya']
+        self.individual_parsed_group = ['individual_archaea_parsed', \
+            'individual_bacteria_parsed', 'individual_eukarya']
 
 
     def species_name(self, system_name, species):
