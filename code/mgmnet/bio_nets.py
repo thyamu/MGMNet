@@ -1,6 +1,6 @@
 class bioSys:
     def __init__(self):
-        self.level = {'e': 'ecosystem', 'i': 'individual', 'b':'biosphere'}
+        self.level = {'e': 'ecosystem', 'i': 'individual', 'ui': 'union_individual_all', 'b':'biosphere'}
         self.group = {'y': 'YNP', 'j': 'JGI', 'a': 'archaea', 'b': 'bacteria', \
                         'ap':'archaea_parsed', 'bp':'bacteria_parsed', \
                         'e': 'eukarya', 'k': 'kegg'}
@@ -9,9 +9,9 @@ class bioSys:
             'individual_archaea_parsed':199, 'individual_bacteria_parsed':1153,\
             'individual_eukarya':77, 'biosphere_kegg':1}
 
-        self.individual_group = ['individual_archaea', 'individual_bacteria', \
+        self.union_individual = ['individual_archaea', 'individual_bacteria', \
             'individual_eukarya']
-        self.individual_parsed_group = ['individual_archaea_parsed', \
+        self.union_individual_parsed = ['individual_archaea_parsed', \
             'individual_bacteria_parsed', 'individual_eukarya']
 
 
