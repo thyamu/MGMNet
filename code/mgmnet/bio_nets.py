@@ -1,18 +1,25 @@
 class bioSys:
     def __init__(self):
-        self.level = {'e': 'ecosystem', 'i': 'individual', 'ui': 'union_individual_all', 'b':'biosphere'}
+        self.level = {'e': 'ecosystem', 'i': 'individual', \
+                     'b':'biosphere', 'ui': 'union_individual'}
         self.group = {'y': 'YNP', 'j': 'JGI', 'a': 'archaea', 'b': 'bacteria', \
                         'ap':'archaea_parsed', 'bp':'bacteria_parsed', \
                         'e': 'eukarya', 'k': 'kegg'}
+
         self.number_of_species = {'ecosystem_YNP':26, 'ecosystem_JGI':5587, \
             'individual_archaea':845, 'individual_bacteria':21637, \
             'individual_archaea_parsed':199, 'individual_bacteria_parsed':1153,\
-            'individual_eukarya':77, 'biosphere_kegg':1}
+            'individual_eukarya':77, 'biosphere_kegg':1, \
+            'union_individual_archaea':845, 'union_individual_bacteria':21637, \
+            'union_individual_archaea_parsed':199, 'union_individual_bacteria_parsed':1153,\
+            'union_individual_eukarya':77, \
+            'union_individual_all': 22559, 'union_individual_all_parsed': 1429}
 
-        self.union_individual = ['individual_archaea', 'individual_bacteria', \
-            'individual_eukarya']
-        self.union_individual_parsed = ['individual_archaea_parsed', \
-            'individual_bacteria_parsed', 'individual_eukarya']
+        # self.union_individual_all = ['individual_archaea', 'individual_bacteria', \
+        #     'individual_eukarya']
+        #
+        # self.union_individual_all_parsed = ['individual_archaea_parsed', \
+        #     'individual_bacteria_parsed', 'individual_eukarya']
 
 
     def species_name(self, system_name, species):
@@ -42,7 +49,7 @@ class bioSys:
         return nbr_rxn
 
 
-    def enz_presence(self, system_name, species, enz):
+    def enz_presence_from_data(self, system_name, species, enz):
         import kegg_nets as kg
         kegg = kg.Kegg()
         ep = False
@@ -62,6 +69,14 @@ class bioSys:
                         break
                     line_number += 1
             inputfile.close()
+        return int(ep)
+
+
+    def enz_presence_from_ECset(self, ec_set, enz):
+        if enz in ec_set: #check if the enzyme exists in the list for the system_name
+            ep = True
+        else:
+            ep = False
         return int(ep)
 
 
