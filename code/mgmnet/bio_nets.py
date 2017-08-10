@@ -50,38 +50,6 @@ class bioSys:
         inputfile.close()
         return nbr_rxn
 
-
-    def enz_presence(self, system_name, species, enz):
-        import kegg_nets as kg
-        kegg = kg.Kegg()
-        ep = False
-        if enz in kegg.enz: #check if the enzyme exists in kegg database
-            inputfile = open('../data/ec_array/ec_%s.dat'%(system_name), 'r')
-            list_system_ec = inputfile.readline().rstrip().split('\t')
-            if enz in list_system_ec: #check if the enzyme exists in the list for the system_name
-                index_enz = list_system_ec.index(enz) # index() returns the first index
-                line_number = 1
-                for line in inputfile:
-                    if species == line_number:
-                        items = line.rstrip().split('\t')
-                        if items[index_enz] == '0': #no empty element for ec_array
-                            ep = False
-                        else:
-                            ep = True
-                        break
-                    line_number += 1
-            inputfile.close()
-        return int(ep)
-
-
-    # def enz_presence_from_ECset(self, ec_set, enz):
-    #     if enz in ec_set: #check if the enzyme exists in the list for the system_name
-    #         ep = True
-    #     else:
-    #         ep = False
-    #     return int(ep)
-
-
     def load_array_ec(self, system_name):
         ec_array = {}
         inputfile = open('../data/ec_array/ec_%s.dat'%(system_name), 'r')
