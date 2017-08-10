@@ -38,11 +38,11 @@ species_name = kegg.species_name()
 nbr_ec = kegg.number_of_ec()
 # nbr_rxn
 nbr_rxn = kegg.number_of_rxn()
-# EC 1.9.3.1 presence
-enz = '1.9.3.1'
-ec_presence = kegg.enz_presence(enz)
+# # EC 1.9.3.1 presence
+# enz = '1.9.3.1'
+# ec_presence = kegg.enz_presence(enz)
 
-data0 = [level, group, species, species_name, nbr_ec, nbr_rxn, ec_presence]
+data0 = [level, group, species, species_name, nbr_ec, nbr_rxn]
 
 #--- Import sub-netwroks ---#
 sEdges = kegg.sub_edges()
