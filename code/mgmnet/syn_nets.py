@@ -1,11 +1,27 @@
 class synEco:
     def __init__(self):
-        self.level = 'synthetic'
-        self.group = {'a': ['archaea'], 'b': ['bacteria'], 'e': ['eukarya'],\
-                      'abe': ['archaea', 'bacteria', 'eukarya'] }
-        self.number_of_species = {'archaea':845, 'bacteria':21637, 'eukarya':77}
-        self.random_group = {'ab':{'archaea':100, 'bacteria':100}, \
-                            'abe':{'archaea':100, 'bacteria':100, 'eukarya':77}
+        self.level = {'s':'synthetic', \
+                    'ui': 'union_individual'}
+
+        self.group = {'a': 'archaea', \
+                    'b': 'bacteria', \
+                    'ap':'archaea_parsed', \
+                    'bp':'bacteria_parsed', \
+                    'e': 'eukarya', \
+                    'all': 'all', \
+                    'allp': 'all_parsed'}
+
+        self.number_of_species = {'union_individual_archaea':845, \
+                                'union_individual_bacteria':21637, \
+                                'union_individual_archaea_parsed':199, \
+                                'union_individual_bacteria_parsed':1153,\
+                                'union_individual_eukarya':77, \
+                                'union_individual_all': 22559,\
+                                'union_individual_all_parsed': 1429}
+
+        # self.number_of_species = {'archaea':845, 'bacteria':21637, 'eukarya':77}
+        # self.random_group = {'ab':{'archaea':100, 'bacteria':100}, \
+        #                     'abe':{'archaea':100, 'bacteria':100, 'eukarya':77}
 
     def assign_seed(self, index1, index2):
         import numpy as np
