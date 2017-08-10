@@ -37,11 +37,11 @@ species_name = bio.species_name(system_name, species)
 nbr_ec = bio.number_of_ec(system_name, species)
 # nbr_rxn
 nbr_rxn = bio.number_of_rxn(system_name, species)
-# EC 1.9.3.1 presence
-enz = '1.9.3.1'
-ec_presence = bio.enz_presence(system_name, species, enz)
+# # EC 1.9.3.1 presence
+# enz = '1.9.3.1'
+# ec_presence = bio.enz_presence(system_name, species, enz)
 
-data0 = [level, group, species, species_name, nbr_ec, nbr_rxn, ec_presence]
+data0 = [level, group, species, species_name, nbr_ec, nbr_rxn]
 
 #----- To import sub-netwroks with rxn-degree for node attributes -----#
 sEdges = bio.sub_edges(system_name, species)
