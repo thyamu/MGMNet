@@ -5,8 +5,7 @@ class topoMeasure:
                        "species", \
                        "species_name", \
                        "nbr_ec", \
-                       "nbr_rxn", \
-                       "EC 1.9.3.1 presence"]
+                       "nbr_rxn"]
 
         self.header1 = ["nbr_nodes",\
                        "nbr_edges", \
