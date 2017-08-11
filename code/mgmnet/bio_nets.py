@@ -43,27 +43,12 @@ class bioSys:
         inputfile.close()
         return nbrEc
 
-
     def number_of_rxn(self, system_name, species):
         inputfile = open('../data/rxn_lists/%s/rxn_%s-%d.dat'%(system_name, system_name, species), 'r')
         nbr_rxn = sum(1 for line in inputfile) - 1 #subtract 1 for the header in rxn_lists file
         inputfile.close()
         return nbr_rxn
 
-    def load_array_ec(self, system_name):
-        ec_array = {}
-        inputfile = open('../data/ec_array/ec_%s.dat'%(system_name), 'r')
-        list_system_ec = inputfile.readline().rstrip().split('\t')
-        species = 1
-        for line in inputfile:
-            ec_array[species] = []
-            items = line.rstrip().split('\t')
-            for i in range(2, len(items)):
-                if items[i] != '0':
-                    ec_array[species].append(list_system_ec[i])
-            species += 1
-        inputfile.close()
-        return ec_array
 
     def load_list_ec(self, system_name, species):
         ec_list = []
@@ -75,14 +60,24 @@ class bioSys:
         inputfile.close()
         return ec_list
 
+
+    # def number_of_effective_ec(self, system_name, species):
+    #     eff_ec_list = []
+    #     inputfile = open('../data/effective_ec_lists/%s/effective_ec_%s-%d.dat'%(system_name, system_name, species), 'r')
+    #     inputfile.readline()
+    #     line_number = 0
+    #     for line in inputfile:
+    #         line_number += 1
+    #     inputfile.close()
+    #     return line_number
+
+
     def load_list_rxn(self, system_name, species):
         rxn_list = []
         inputfile = open('../data/rxn_lists/%s/rxn_%s-%d.dat'%(system_name, system_name, species), 'r')
         species_name = inputfile.readline()
         for line in inputfile:
-            rxn = line.rstrip()
-            # if rxn in rxn_list: ==> rxn_lists contain unique rxns for each genome
-            #     continue
+            rxn = line.rstrip()  # rxn_lists contain unique rxns for each genome
             rxn_list.append(rxn)
         inputfile.close()
         return rxn_list

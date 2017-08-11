@@ -37,9 +37,6 @@ species_name = bio.species_name(system_name, species)
 nbr_ec = bio.number_of_ec(system_name, species)
 # nbr_rxn
 nbr_rxn = bio.number_of_rxn(system_name, species)
-# # EC 1.9.3.1 presence
-# enz = '1.9.3.1'
-# ec_presence = bio.enz_presence(system_name, species, enz)
 
 data0 = [level, group, species, species_name, nbr_ec, nbr_rxn]
 

@@ -4,7 +4,6 @@ import csv
 import mgmnet.kegg_nets as kn
 import mgmnet.topo_measure as tm
 
-#bio = bn.bioSys()
 kegg = kn.Kegg()
 topo = tm.topoMeasure()
 
