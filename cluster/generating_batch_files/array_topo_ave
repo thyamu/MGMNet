@@ -2,7 +2,8 @@ runLevel="b"
 runGroup="k"
 nbrTotal=1
 nbrSubmit=1000
-runJobName=topo_${runLevel}${runGroup}
+runJobName="topo_${runLevel}${runGroup}"
+runScriptName="topo_ave_union.py"
 upperBound=$(($nbrTotal/$nbrSubmit))
 restSubmit=$(($nbrTotal-$upperBound*$nbrSubmit))
 j=0
@@ -12,6 +13,7 @@ do
     runStartIndex=$(($j*$nbrSubmit-$nbrSubmit))
     sed -e "s/arrayIndex/1-$nbrSubmit/" seed_topo_ave > ../${runJobName}_$j.batch
     sed -i "s/jobName/${runJobName}/" ../${runJobName}_$j.batch
+    sed -i "s/scriptName/${runScriptName}/" ../${runJobName}_$j.batch
     sed -i "s/level/${runLevel}/" ../${runJobName}_$j.batch
     sed -i "s/group/${runGroup}/" ../${runJobName}_$j.batch
     sed -i "s/startIndex/$runStartIndex/" ../${runJobName}_$j.batch
@@ -20,6 +22,7 @@ j=$(($j+1))
 runStartIndex=$(($j*$nbrSubmit-$nbrSubmit))
 sed -e "s/arrayIndex/1-$restSubmit/" seed_topo_ave > ../${runJobName}_$j.batch
 sed -i "s/jobName/${runJobName}/" ../${runJobName}_$j.batch
+sed -i "s/scriptName/${runScriptName}/" ../${runJobName}_$j.batch
 sed -i "s/level/${runLevel}/" ../${runJobName}_$j.batch
 sed -i "s/group/${runGroup}/" ../${runJobName}_$j.batch
 sed -i "s/startIndex/$runStartIndex/" ../${runJobName}_$j.batch
