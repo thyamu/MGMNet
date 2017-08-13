@@ -4,7 +4,6 @@ class topoMeasure:
                        "group", \
                        "species", \
                        "species_name", \
-                       "nbr_ec", \
                        "nbr_rxn"]
 
         self.header1 = ["nbr_nodes",\

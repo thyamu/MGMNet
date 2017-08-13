@@ -29,25 +29,14 @@ class Kegg:
         self.enz = self.enz_rxn.keys()
         self.rxn = self.rxn_reac.keys()
 
+
     def species_name(self):
         return "kegg"
-
-
-    def number_of_ec(self):
-        nbrEc = len(self.enz)
-        return nbrEc
 
 
     def number_of_rxn(self):
         nbr_rxn = len(self.rxn)
         return nbr_rxn
-
-
-    def enz_presence(self, enz):
-        ep = False
-        if enz in self.enz:
-            ep = True
-        return int(ep)
 
 
     def sub_edges(self):

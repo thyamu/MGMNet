@@ -30,46 +30,11 @@ class bioSys:
         return species_name
 
 
-    def number_of_ec(self, system_name, species):
-        inputfile = open('../data/ec_array/ec_%s.dat'%(system_name), 'r')
-        list_system_ec = inputfile.readline().rstrip().split('\t')
-        line_number = 1
-        for line in inputfile:
-            if species == line_number:
-                items = line.rstrip().split('\t')
-                nbrEc = items[1]
-                break
-            line_number += 1
-        inputfile.close()
-        return nbrEc
-
     def number_of_rxn(self, system_name, species):
         inputfile = open('../data/rxn_lists/%s/rxn_%s-%d.dat'%(system_name, system_name, species), 'r')
         nbr_rxn = sum(1 for line in inputfile) - 1 #subtract 1 for the header in rxn_lists file
         inputfile.close()
         return nbr_rxn
-
-
-    def load_list_ec(self, system_name, species):
-        ec_list = []
-        inputfile = open('../data/ec_lists/%s/ec_%s-%d.dat'%(system_name, system_name, species), 'r')
-        inputfile.readline()
-        for line in inputfile:
-            items = line.rstrip().split('\t')
-            ec_list.append(items[0])
-        inputfile.close()
-        return ec_list
-
-
-    # def number_of_effective_ec(self, system_name, species):
-    #     eff_ec_list = []
-    #     inputfile = open('../data/effective_ec_lists/%s/effective_ec_%s-%d.dat'%(system_name, system_name, species), 'r')
-    #     inputfile.readline()
-    #     line_number = 0
-    #     for line in inputfile:
-    #         line_number += 1
-    #     inputfile.close()
-    #     return line_number
 
 
     def load_list_rxn(self, system_name, species):
