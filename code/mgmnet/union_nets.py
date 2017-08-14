@@ -31,7 +31,6 @@ class unionEco:
         for line in inputfile:
             items = line.rstrip().split('\t')
             label = int(items[0])
-            #print label
             nbr_rxn += 1
             if label > species:
                 break
@@ -48,7 +47,6 @@ class unionEco:
             label = int(items[0])
             if label > species:
                 break
-            print items
             rxn = items[1]
             rxn_list.append(rxn)
         inputfile.close()
