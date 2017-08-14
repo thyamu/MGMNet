@@ -1,6 +1,10 @@
 runLevel="u"
 runGroup="a"
-listMissing=()
+listMissing=(11
+16
+18
+21
+24)
 nbrTotal=${#listMissing[@]}
 nbrSubmit=1000
 runJobName=topo_${runLevel}${runGroup}
@@ -13,7 +17,7 @@ do
     j=$i
     sed -e "s/arrayIndex/1-$nbrSubmit/" seed_topo_ave_missing > ../missing_${runJobName}_$j.batch
     sed -i "s/jobName/${runJobName}/" ../missing_${runJobName}_$j.batch
-    sed -i "s/scriptName/${runScriptName}/" ../${runJobName}_$j.batch
+    sed -i "s/scriptName/${runScriptName}/" ../missing_${runJobName}_$j.batch
     sed -i "s/level/${runLevel}/" ../missing_${runJobName}_$j.batch
     sed -i "s/group/${runGroup}/" ../missing_${runJobName}_$j.batch
 
@@ -21,6 +25,6 @@ done
 j=$(($j+1))
 sed -e "s/arrayIndex/1-$restSubmit/" seed_topo_ave_missing > ../missing_${runJobName}_$j.batch
 sed -i "s/jobName/${runJobName}/" ../missing_${runJobName}_$j.batch
-sed -i "s/scriptName/${runScriptName}/" ../${runJobName}_$j.batch
+sed -i "s/scriptName/${runScriptName}/" ../missing_${runJobName}_$j.batch
 sed -i "s/level/${runLevel}/" ../missing_${runJobName}_$j.batch
 sed -i "s/group/${runGroup}/" ../missing_${runJobName}_$j.batch
