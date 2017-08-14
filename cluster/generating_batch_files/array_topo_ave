@@ -1,6 +1,6 @@
-runLevel="b"
-runGroup="k"
-nbrTotal=1200
+runLevel="u"
+runGroup="all"
+nbrTotal=383
 nbrSubmit=1000
 runJobName="topo_${runLevel}${runGroup}"
 runScriptName="topo_ave_union.py"

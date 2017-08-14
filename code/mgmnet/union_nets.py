@@ -10,13 +10,13 @@ class unionEco:
                     'all': 'all', \
                     'allp': 'all_parsed'}
 
-        self.number_of_species = {'union_archaea':845, \
-                                'union_bacteria':21637, \
-                                'union_archaea_parsed':199, \
-                                'union_bacteria_parsed':1153,\
-                                'union_eukarya':77, \
-                                'union_all': 22559,\
-                                'union_all_parsed': 1429}
+        self.number_of_species = {'union_archaea':188, \
+                                'union_bacteria':183, \
+                                'union_archaea_parsed':105, \
+                                'union_bacteria_parsed':154,\
+                                'union_eukarya':58, \
+                                'union_all': 383,\
+                                'union_all_parsed': 291}
 
 
     def species_name(self, system_name, species):

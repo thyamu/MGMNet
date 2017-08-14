@@ -5,8 +5,8 @@
 #SBATCH --qos=normal                # QOS "queue"
 #SBATCH -o out/jobName_%A_%j.out             # STDOUT (%j = JobId)
 #SBATCH -e error/jobName_%A_%j.err             # STDERR (%j = JobId)
-#SBATCH --mail-type=FAIL,END        # notifications for job done & fail
-#SBATCH --mail-user=hkim8@vt.edu # send-to ad
+#SBATCH --mail-type=FAIL       # notifications for job done & fail
+#SBATCH --mail-user=hkim8@alumni.nd.edu # send-to ad
 
 module load gcc/4.9.2
 module load python/2.7.9
