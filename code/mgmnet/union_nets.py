@@ -25,11 +25,16 @@ class unionEco:
 
 
     def number_of_rxn(self, system_name, species):
-        rxn_set = set()
-        for species in range(1, self.number_of_species[system_name] +1):
-            rxn_list = self.load_list_rxn(system_name, species)
-            rxn_set = rxn_set.union(set(rxn_list))
-        nbr_rxn = len(rxn_set)
+        inputfile = open('../data/rxn_lists/%s/rxn_%s-%d.dat'%(system_name, system_name, species), 'r')
+        inputfile.readline() #header
+        nbr_rxn = 0
+        for line in inputfile:
+            items = line.rstrip().split('\t')
+            label = items[0]
+            nbr_rxn += 1
+            if label > species:
+                break
+        inputfile.close()
         return nbr_rxn
 
 
@@ -38,7 +43,11 @@ class unionEco:
         inputfile = open('../data/rxn_lists/%s/rxn_%s-%d.dat'%(system_name, system_name, species), 'r')
         species_name = inputfile.readline()
         for line in inputfile:
-            rxn = line.rstrip() #rxn_lists contain unique rxns for each genome
+            items = line.rstrip().split('\t')
+            label = items[0]
+            if label > species:
+                break
+            rxn = items[1]
             rxn_list.append(rxn)
         inputfile.close()
         return rxn_list
