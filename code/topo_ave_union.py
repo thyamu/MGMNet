@@ -17,7 +17,7 @@ species = int(sys.argv[3])
 system_name = '%s_%s'%(level, group)
 
 dr = ''
-for ds in ('../results_cluster','topo_ave','/%s'%(system_name)):
+for ds in ('../results_test','/topo_ave','/%s'%(system_name)):
     dr = dr + ds
     if not os.path.exists(dr):
         os.makedirs(dr)
@@ -33,17 +33,14 @@ with open(outputFileName, 'w') as f:
 # species_name
 species_name = union.species_name(system_name, species)
 
-# nbr_ec
-nbr_ec = union.number_of_ec(system_name, species)
 # nbr_rxn
-nbr_rxn = union.number_of_rxn(system_name, species)
+nbr_rxn = union.number_of_rxn(system_name, system_species)
 
-data0 = [level, group, species, species_name, nbr_ec, nbr_rxn]
+data0 = [level, group, species, species_name, nbr_rxn]
 
 #----- To import sub-netwroks with rxn-degree for node attributes -----#
-sEdges = union.sub_edges(system_name, species)
-nodeAttr = union.rxn_degree(system_name, species)
-
+sEdges = union.sub_edges(system_name, system_species)
+nodeAttr = union.rxn_degree(system_name, system_species)
 
 #--- To Compute ---#
 data1 = topo.global_measure(sEdges, nodeAttr)

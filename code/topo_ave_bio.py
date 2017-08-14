@@ -33,12 +33,10 @@ with open(outputFileName, 'w') as f:
 # species_name
 species_name = bio.species_name(system_name, species)
 
-# nbr_ec
-nbr_ec = bio.number_of_ec(system_name, species)
 # nbr_rxn
 nbr_rxn = bio.number_of_rxn(system_name, species)
 
-data0 = [level, group, species, species_name, nbr_ec, nbr_rxn]
+data0 = [level, group, species, species_name, nbr_rxn]
 
 #----- To import sub-netwroks with rxn-degree for node attributes -----#
 sEdges = bio.sub_edges(system_name, species)
