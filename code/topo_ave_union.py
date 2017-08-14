@@ -34,13 +34,13 @@ with open(outputFileName, 'w') as f:
 species_name = union.species_name(system_name, species)
 
 # nbr_rxn
-nbr_rxn = union.number_of_rxn(system_name, system_species)
+nbr_rxn = union.number_of_rxn(system_name, species)
 
 data0 = [level, group, species, species_name, nbr_rxn]
 
 #----- To import sub-netwroks with rxn-degree for node attributes -----#
-sEdges = union.sub_edges(system_name, system_species)
-nodeAttr = union.rxn_degree(system_name, system_species)
+sEdges = union.sub_edges(system_name, species)
+nodeAttr = union.rxn_degree(system_name, species)
 
 #--- To Compute ---#
 data1 = topo.global_measure(sEdges, nodeAttr)

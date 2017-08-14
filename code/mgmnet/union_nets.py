@@ -25,12 +25,13 @@ class unionEco:
 
 
     def number_of_rxn(self, system_name, species):
-        inputfile = open('../data/rxn_lists/%s/rxn_%s-%d.dat'%(system_name, system_name, species), 'r')
+        inputfile = open('../data/union_data/rxn_%s.dat'%(system_name), 'r')
         inputfile.readline() #header
         nbr_rxn = 0
         for line in inputfile:
             items = line.rstrip().split('\t')
-            label = items[0]
+            label = int(items[0])
+            #print label
             nbr_rxn += 1
             if label > species:
                 break
@@ -40,13 +41,14 @@ class unionEco:
 
     def load_list_rxn(self, system_name, species):
         rxn_list = []
-        inputfile = open('../data/rxn_lists/%s/rxn_%s-%d.dat'%(system_name, system_name, species), 'r')
-        species_name = inputfile.readline()
+        inputfile = open('../data/union_data/rxn_%s.dat'%(system_name), 'r')
+        inputfile.readline()
         for line in inputfile:
             items = line.rstrip().split('\t')
-            label = items[0]
+            label = int(items[0])
             if label > species:
                 break
+            print items
             rxn = items[1]
             rxn_list.append(rxn)
         inputfile.close()
