@@ -25,6 +25,6 @@ done
 j=$(($j+1))
 sed -e "s/arrayIndex/1-$restSubmit/" seed_topo_ave_missing > ../missing_${runJobName}_$j.batch
 sed -i "s/jobName/${runJobName}/" ../missing_${runJobName}_$j.batch
-sed -i "s/scriptName/${runScriptName}/" ../missing_${runJobName}_$j.batch
+sed -i "s/scriptName/${runScriptName}/" ../missing_${runJobName}_$j.batch:q
 sed -i "s/level/${runLevel}/" ../missing_${runJobName}_$j.batch
 sed -i "s/group/${runGroup}/" ../missing_${runJobName}_$j.batch
