@@ -1,4 +1,4 @@
-class bioSys:
+class bio:
     def __init__(self):
         self.level = {'e': 'ecosystem', \
                     'i': 'individual', \

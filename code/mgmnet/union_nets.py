@@ -1,22 +1,24 @@
-class unionEco:
+class union:
     def __init__(self):
-        self.level ={'u': 'union'}
+        self.level ={'ui': 'union_individual', 'ue': 'union_ecosystem'}
 
         self.group = {'a': 'archaea', \
                     'b': 'bacteria', \
                     'ap':'archaea_parsed', \
                     'bp':'bacteria_parsed', \
                     'e': 'eukarya', \
+                    'j': 'JGI', \
                     'all': 'all', \
                     'allp': 'all_parsed'}
 
-        self.number_of_species = {'union_archaea':188, \
-                                'union_bacteria':183, \
-                                'union_archaea_parsed':105, \
-                                'union_bacteria_parsed':154,\
-                                'union_eukarya':58, \
-                                'union_all': 383,\
-                                'union_all_parsed': 291}
+        self.number_of_species = {'union_individual_archaea':188, \
+                                'union_individual_bacteria':183, \
+                                'union_individual_archaea_parsed':105, \
+                                'union_individual_bacteria_parsed':154,\
+                                'union_individual_eukarya':58, \
+                                'union_individual_all': 383,\
+                                'union_individual_all_parsed': 291, \
+                                'union_ecosystem_JGI':5587}
 
 
     def species_name(self, system_name, species):

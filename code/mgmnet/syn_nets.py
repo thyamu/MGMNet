@@ -1,107 +1,67 @@
-class synEco:
+class synthetic:
     def __init__(self):
-        self.level = {'s':'synthetic', \
-                    'ui': 'union_individual'}
+        self.level = {'si': 'synthetic_individual',\
+                    'se':'synthetic_ecosystem'}
 
         self.group = {'a': 'archaea', \
                     'b': 'bacteria', \
                     'ap':'archaea_parsed', \
                     'bp':'bacteria_parsed', \
                     'e': 'eukarya', \
+                    'j': 'JGI', \
                     'all': 'all', \
                     'allp': 'all_parsed'}
 
-        self.number_of_species = {'union_individual_archaea':845, \
-                                'union_individual_bacteria':21637, \
-                                'union_individual_archaea_parsed':199, \
-                                'union_individual_bacteria_parsed':1153,\
-                                'union_individual_eukarya':77, \
-                                'union_individual_all': 22559,\
-                                'union_individual_all_parsed': 1429}
+        self.number_of_species = {'synthetic_individual_archaea':200, \
+                                'synthetic_individual_bacteria':200, \
+                                'synthetic_individual_archaea_parsed':100, \
+                                'synthetic_individual_bacteria_parsed':150,\
+                                'synthetic_individual_eukarya':60, \
+                                'synthetic_individual_all': 400,\
+                                'synthetic_individual_all_parsed': 300
+                                'synthetic_ecosystem_JGI':5587}
 
-        # self.number_of_species = {'archaea':845, 'bacteria':21637, 'eukarya':77}
-        # self.random_group = {'ab':{'archaea':100, 'bacteria':100}, \
-        #                     'abe':{'archaea':100, 'bacteria':100, 'eukarya':77}
 
-    def assign_seed(self, index1, index2):
-        import numpy as np
-        seed1 = 268332
-        seed2 = 800304
-        np.random.seed(seed1)
-        list_first_seed = np.random.random_integers(0, 1000000, index1+1)
-        #print list_first_seed
-        np.random.seed(seed2)
-        list_second_seed = np.random.random_integers(0, 1000000, index2+1)
-        #print list_second_seed
-        new_seed = list_first_seed[index1] + list_second_seed[index2]
-        return new_seed
+    def species_name(self, system_name, species):
+        species_name = system_name + '-upto-%d'%(species)
+        return species_name
 
-    def combine_set_genome(self, group_dict, comSize, comSet):
-        import numpy as np
-        new_seed = self.assign_seed(comSize, comSet)
-        np.random.seed(new_seed)
-        genome_dict = {}
-        for group in group_dict.iterkeys():
-            if group_dict[group] == 0:
-                continue
-            genome_dict[group] = np.random.choice(\
-                                range(1, self.number_of_species[group] + 1), \
-                                int(group_dict[group] * comSize), replace = False)
-        return genome_dict
 
-    def load_list_ec(self, system_name, species):
-        ec_list = []
-        inputfile = open('../data/ec_lists/%s/ec_%s-%d.dat'%(system_name, system_name, species), 'r')
-        inputfile.readline()
+    def number_of_rxn(self, system_name, species):
+        inputfile = open('../data/union_data/rxn_%s.dat'%(system_name), 'r')
+        inputfile.readline() #header
+        nbr_rxn = 0
         for line in inputfile:
             items = line.rstrip().split('\t')
-            ec_list.append(items[0])
+            label = int(items[0])
+            nbr_rxn += 1
+            if label > species:
+                break
         inputfile.close()
-        return ec_list
-
-    def combine_set_ec(self, genome_dict):
-        ec_set = set()
-        for group in genome_dict.iterkeys():
-            system_name = 'individual_%s'%(group)
-            for species in genome_dict[group]:
-                ec_list = self.load_list_ec(system_name, species)
-                ec_set = ec_set.union(set(ec_list))
-        return ec_set
-
-    def combined_enz_presence(self, ec_set, enz):
-        ep = 0
-        if enz in ec_set:
-            ep = 1
-        return ep
+        return nbr_rxn
 
 
     def load_list_rxn(self, system_name, species):
         rxn_list = []
-        inputfile = open('../data/rxn_lists/%s/rxn_%s-%d.dat'%(system_name, system_name, species), 'r')
-        species_name = inputfile.readline()
+        inputfile = open('../data/union_data/rxn_%s.dat'%(system_name), 'r')
+        inputfile.readline()
         for line in inputfile:
-            rxn = line.rstrip()
-            # if rxn in rxn_list: ==> rxn_lists contain unique rxns for each genome
-            #     continue
+            items = line.rstrip().split('\t')
+            label = int(items[0])
+            if label > species:
+                break
+            rxn = items[1]
             rxn_list.append(rxn)
         inputfile.close()
         return rxn_list
 
-    def combined_set_rxn(self, genome_dict):
-        rxn_set = set()
-        for group in genome_dict.iterkeys():
-            system_name = 'individual_%s'%(group)
-            for species in genome_dict[group]:
-                rxn_list = self.load_list_rxn(system_name, species)
-                rxn_set = rxn_set.union(set(rxn_list))
-        return rxn_set
 
-    def combined_sub_edges(self, genome_dict):
+    def sub_edges(self, system_name, species):
         import kegg_nets as kg
         kegg = kg.Kegg()
         edge_list = []
-        rxn_set = self.combined_set_rxn(genome_dict)
-        for x in rxn_set:
+        rxn_list = self.load_list_rxn(system_name, species)
+        for x in rxn_list:
             for r in kegg.rxn_reac[x]:
                 for p in kegg.rxn_prod[x]:
                     if r == p: ### remove self-loops from sub-sub nets
@@ -110,12 +70,12 @@ class synEco:
         return edge_list
 
 
-    def combined_rxn_edges(self, genome_dict):
+    def rxn_edges(self, system_name, species):
         import kegg_nets as kg
         kegg = kg.Kegg()
         edge_list = []
-        rxn_set = self.combined_set_rxn(genome_dict)
-        for x in rxn_set:
+        rxn_list = self.load_list_rxn(system_name, species)
+        for x in rxn_list:
             for r in kegg.rxn_reac[x]:
                 edge_list.append((r, x))
             for p in kegg.rxn_prod[x]:
@@ -123,13 +83,13 @@ class synEco:
         return edge_list
 
 
-    def combined_rxn_degree(self, genome_dict):
+    def rxn_degree(self, system_name, species):
         import kegg_nets as kg
         kegg = kg.Kegg()
-        rxn_set = self.combined_set_rxn(genome_dict)
+        rxn_list = self.load_list_rxn(system_name, species)
         sub_set = set()
         dict_sub_nbrRxn = {}
-        for x in rxn_set:
+        for x in rxn_list:
             for r in kegg.rxn_reac[x]:
                 if r not in sub_set:
                     dict_sub_nbrRxn[r] = 0
@@ -145,3 +105,30 @@ class synEco:
                 else:
                     dict_sub_nbrRxn[p] += 1
         return dict_sub_nbrRxn
+
+
+    # def assign_seed(self, index1, index2):
+    #     import numpy as np
+    #     seed1 = 268332
+    #     seed2 = 800304
+    #     np.random.seed(seed1)
+    #     list_first_seed = np.random.random_integers(0, 1000000, index1+1)
+    #     #print list_first_seed
+    #     np.random.seed(seed2)
+    #     list_second_seed = np.random.random_integers(0, 1000000, index2+1)
+    #     #print list_second_seed
+    #     new_seed = list_first_seed[index1] + list_second_seed[index2]
+    #     return new_seed
+
+    # def combine_set_genome(self, group_dict, comSize, comSet):
+    #     import numpy as np
+    #     new_seed = self.assign_seed(comSize, comSet)
+    #     np.random.seed(new_seed)
+    #     genome_dict = {}
+    #     for group in group_dict.iterkeys():
+    #         if group_dict[group] == 0:
+    #             continue
+    #         genome_dict[group] = np.random.choice(\
+    #                             range(1, self.number_of_species[group] + 1), \
+    #                             int(group_dict[group] * comSize), replace = False)
+    #     return genome_dict

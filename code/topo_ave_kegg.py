@@ -4,7 +4,7 @@ import csv
 import mgmnet.kegg_nets as kn
 import mgmnet.topo_measure as tm
 
-kegg = kn.Kegg()
+kegg = kn.kegg()
 topo = tm.topoMeasure()
 
 # level

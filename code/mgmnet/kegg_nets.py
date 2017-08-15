@@ -1,4 +1,4 @@
-class Kegg:
+class kegg:
     def __init__(self):
         EnzRxn_file = open('../data/kegg_mapping/kegg_enz_rxn.dat', 'r')
         RxnReat_file = open('../data/kegg_mapping/kegg_rxn_reactants.dat', 'r')

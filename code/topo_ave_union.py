@@ -4,7 +4,7 @@ import csv
 import mgmnet.union_nets as un
 import mgmnet.topo_measure as tm
 
-union = un.unionEco()
+union = un.union()
 topo = tm.topoMeasure()
 
 # level

@@ -4,7 +4,7 @@ import csv
 import mgmnet.bio_nets as bn
 import mgmnet.topo_measure as tm
 
-bio = bn.bioSys()
+bio = bn.bio()
 topo = tm.topoMeasure()
 
 # level
