@@ -50,7 +50,7 @@ class bio:
 
     def sub_edges(self, system_name, species):
         import kegg_nets as kg
-        kegg = kg.Kegg()
+        kegg = kg.kegg()
         edge_list = []
         rxn_list = self.load_list_rxn(system_name, species)
         for x in rxn_list:
@@ -64,7 +64,7 @@ class bio:
 
     def rxn_edges(self, system_name, species):
         import kegg_nets as kg
-        kegg = kg.Kegg()
+        kegg = kg.kegg()
         edge_list = []
         rxn_list = self.load_list_rxn(system_name, species)
         for x in rxn_list:
@@ -77,7 +77,7 @@ class bio:
 
     def rxn_degree(self, system_name, species):
         import kegg_nets as kg
-        kegg = kg.Kegg()
+        kegg = kg.kegg()
         rxn_list = self.load_list_rxn(system_name, species)
         sub_set = set()
         dict_sub_nbrRxn = {}
