@@ -33,9 +33,13 @@ species = int(sys.argv[3])
 
 system_name = '%s_%s'%(level, group)
 
-sEdges = bio.sub_edges(system_name, species)
+dr = ''
+for ds in ('../results_cluster', 'deg_dist', '/%s'%(system_name)):
+    dr = dr + ds
+    if not os.path.exists(dr):
+        os.makedirs(dr)
 
-dd_file_name = 'test_degree_distribution_%s-%d'%(system_name, species)
+sEdges = bio.sub_edges(system_name, species)
 
 G = nx.Graph(sEdges)
 
@@ -43,6 +47,9 @@ G = nx.Graph(sEdges)
 nbr_edges = G.number_of_edges()
 
 if nbr_edges > 0:
+
+    dd_file_name = dr + 'lcc_deg_dist_%s-%d.csv'%(system_name, species)
+
     # nbr_connected_components (with G_lcc)
     if nx.is_connected(G):
         nbr_connected_components = 1
