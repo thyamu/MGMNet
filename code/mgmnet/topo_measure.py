@@ -109,3 +109,28 @@ class topoMeasure:
                      assortativity_lcc, attribute_assortativity_lcc, \
                      diameter_lcc]
         return data
+
+def degree_histogram(sEdges, file_name):
+    import networkx as nx
+    import collections
+    import csv
+    G = nx.Graph(sEdges)
+    # nbr_connected_components (with G_lcc)
+    if nx.is_connected(G):
+        nbr_connected_components = 1
+        G_lcc = G
+    else:
+        nbr_connected_components = nx.number_connected_components(G)
+        G_lcc = max(nx.connected_component_subgraphs(G), key=len)
+    # degree_lcc
+    list_degree_lcc = G_lcc.degree().values()
+    dict_a = collections.Counter(list_degree_lcc)
+    max_list = max(dict_a.keys())
+    with open(file_name, 'w') as f:
+        csvf = csv.writer(f)
+        csvf.writerow(("degree","frequency"))
+        for i in range(1, max_list + 1):
+            freq = 0
+            if i in dict_a.keys():
+                freq = dict_a[i]
+            csvf.writerow((i, freq))
