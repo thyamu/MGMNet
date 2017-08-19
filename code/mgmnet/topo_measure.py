@@ -110,7 +110,7 @@ class topoMeasure:
                      diameter_lcc]
         return data
 
-def degree_histogram(sEdges, file_name):
+def sub_degree_histogram_old(sEdges, file_name):
     import networkx as nx
     import collections
     import csv
@@ -124,6 +124,21 @@ def degree_histogram(sEdges, file_name):
         G_lcc = max(nx.connected_component_subgraphs(G), key=len)
     # degree_lcc
     list_degree_lcc = G_lcc.degree().values()
+    dict_a = collections.Counter(list_degree_lcc)
+    max_list = max(dict_a.keys())
+    with open(file_name, 'w') as f:
+        csvf = csv.writer(f)
+        csvf.writerow(("degree","frequency"))
+        for i in range(1, max_list + 1):
+            freq = 0
+            if i in dict_a.keys():
+                freq = dict_a[i]
+            csvf.writerow((i, freq))
+
+def degree_histogram(list_degree_lcc, file_name):
+    #import networkx as nx
+    import collections
+    import csv
     dict_a = collections.Counter(list_degree_lcc)
     max_list = max(dict_a.keys())
     with open(file_name, 'w') as f:
