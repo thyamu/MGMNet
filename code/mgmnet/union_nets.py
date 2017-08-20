@@ -18,7 +18,7 @@ class union:
                                 'union_individual_eukarya':58, \
                                 'union_individual_all': 383,\
                                 'union_individual_all_parsed': 291}
-                                #'union_ecosystem_JGI':5587} ==> add this with proper number
+                                'union_ecosystem_JGI':309}
 
 
     def species_name(self, system_name, species):
