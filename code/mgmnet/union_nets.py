@@ -17,8 +17,8 @@ class union:
                                 'union_individual_bacteria_parsed':154,\
                                 'union_individual_eukarya':58, \
                                 'union_individual_all': 383,\
-                                'union_individual_all_parsed': 291, \
-                                'union_ecosystem_JGI':5587}
+                                'union_individual_all_parsed': 291}
+                                #'union_ecosystem_JGI':5587} ==> add this with proper number
 
 
     def species_name(self, system_name, species):
@@ -27,7 +27,7 @@ class union:
 
 
     def number_of_rxn(self, system_name, species):
-        inputfile = open('../data/union_data/rxn_%s.dat'%(system_name), 'r')
+        inputfile = open('../data/union/rxn_lists/rxn_%s.dat'%(system_name), 'r')
         inputfile.readline() #header
         nbr_rxn = 0
         for line in inputfile:
@@ -42,7 +42,7 @@ class union:
 
     def load_list_rxn(self, system_name, species):
         rxn_list = []
-        inputfile = open('../data/union_data/rxn_%s.dat'%(system_name), 'r')
+        inputfile = open('../data/union/rxn_lists/rxn_%s.dat'%(system_name), 'r')
         inputfile.readline()
         for line in inputfile:
             items = line.rstrip().split('\t')
