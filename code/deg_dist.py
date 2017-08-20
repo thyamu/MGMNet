@@ -10,22 +10,12 @@ module_name = sys.argv[1]
 module_dict = {'bio': bn.bio, 'union': un.union, 'syn': sn.synthetic}
 class_name = module_dict[module_name]()
 
-# list_systems = ['ecosystem_YNP',\
-#             'ecosystem_JGI',\
-#             'individual_archaea_parsed',\
-#             'individual_archaea',\
-#             'individual_bacteria_parsed',\
-#             'individual_bacteria']
-
-
-for system_name in ['ecosystem_YNP']: #class_name.number_of_species.iterkeys():
-
+for system_name in class_name.number_of_species.iterkeys():
     dr_sub = ''
     for ds in ('../results_cluster', '/deg_dist', '/%s'%(module_name), '/sub_degree', '/%s'%(system_name)):
         dr_sub = dr_sub + ds
         if not os.path.exists(dr_sub):
             os.makedirs(dr_sub)
-
     for species in range(1, class_name.number_of_species[system_name] + 1):
         sEdges = class_name.sub_edges(system_name, species)
         if len(sEdges) > 0:
