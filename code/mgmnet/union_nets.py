@@ -17,7 +17,7 @@ class union:
                                 'union_individual_bacteria_parsed':154,\
                                 'union_individual_eukarya':58, \
                                 'union_individual_all': 383,\
-                                'union_individual_all_parsed': 291}
+                                'union_individual_all_parsed': 291, \
                                 'union_ecosystem_JGI':309}
 
 
