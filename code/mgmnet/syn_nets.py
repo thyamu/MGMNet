@@ -18,7 +18,7 @@ class synthetic:
                                 'synthetic_individual_bacteria_parsed':150,\
                                 'synthetic_individual_eukarya':60, \
                                 'synthetic_individual_all': 400,\
-                                'synthetic_individual_all_parsed': 300
+                                'synthetic_individual_all_parsed': 300, \
                                 'synthetic_ecosystem_JGI':5587}
 
 
