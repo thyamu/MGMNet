@@ -57,7 +57,11 @@ for system_name in class_name.number_of_species.iterkeys():
 
     for species in range(1, class_name.number_of_species[system_name] + 1):
         print species
-        resultFileName = dr_results + '/' + class_name.result_file_string%(system_name, species)
+        result_file_string = {'bio': '%s-%d.csv'%(system_name, species), \
+                       'union': '%s-upto-%d.csv'%(system_name, species), \
+                       'syn': sn.synthetic()}
+
+        resultFileName = dr_results + '/' + result_file_string[module_name]s
         #print resultFileName
         if not os.path.isfile(resultFileName):
             sample = [species]
@@ -96,6 +100,7 @@ for system_name in class_name.number_of_species.iterkeys():
                 os.makedirs(dr_missing_batch)
         missingBatchName = dr_missing_batch + '/missing_topo_ave_%s'%(system_name)
         shutil.copyfile(missingFileName, missingBatchName)
+
 
 #-------- Merge all files into one-----------#
 finalFileName = dr_collection + '/topo_ave_%s.csv'%(module_name)

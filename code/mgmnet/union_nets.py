@@ -29,8 +29,6 @@ class union:
                                 'union_individual_all_parsed': 2, \
                                 'union_ecosystem_JGI':2}
 
-        self.result_file_string = '%s-upto-%d.csv'
-
 
     def species_name(self, system_name, species):
         species_name = system_name + '-upto-%d'%(species)

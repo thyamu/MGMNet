@@ -27,8 +27,6 @@ class bio:
                 'individual_archaea_parsed':1, 'individual_bacteria_parsed':1, \
                 'individual_eukarya':1}
 
-        self.result_file_string = '%s-%d.csv'
-
 
     def species_name(self, system_name, species):
         if system_name == 'biosphere_kegg':
