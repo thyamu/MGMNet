@@ -8,10 +8,10 @@ import mgmnet.topo_measure as tm
 import networkx as nx
 
 module_name = sys.argv[1]
-module_dict = {'bio': bn.bio, \
-               'union': un.union, \
-               'syn': sn.synthetic}
-class_name = module_dict[module_name]()
+module_dict = {'bio': bn.bio(), \
+               'union': un.union(), \
+               'syn': sn.synthetic()}
+class_name = module_dict[module_name]
 
 for system_name in class_name.number_of_species.iterkeys():
 #for system_name in ['union_individual_archaea']:

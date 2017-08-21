@@ -20,6 +20,17 @@ class union:
                                 'union_individual_all_parsed': 291, \
                                 'union_ecosystem_JGI':309}
 
+        self.lines_in_topo_ave = {'union_individual_archaea':2, \
+                                'union_individual_bacteria':2, \
+                                'union_individual_archaea_parsed':2, \
+                                'union_individual_bacteria_parsed':2,\
+                                'union_individual_eukarya':2, \
+                                'union_individual_all': 2,\
+                                'union_individual_all_parsed': 2, \
+                                'union_ecosystem_JGI':2}
+
+        self.result_file_string = '%s-upto-%d.csv'
+
 
     def species_name(self, system_name, species):
         species_name = system_name + '-upto-%d'%(species)

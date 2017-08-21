@@ -22,6 +22,13 @@ class bio:
                                 'individual_eukarya':77, \
                                 'biosphere_kegg':1}
 
+        self.lines_in_topo_ave = {'ecosystem_YNP':2, 'ecosystem_JGI':2, \
+                'individual_archaea':1, 'individual_bacteria':1, \
+                'individual_archaea_parsed':1, 'individual_bacteria_parsed':1, \
+                'individual_eukarya':1}
+
+        self.result_file_string = '%s-%d.csv'
+
 
     def species_name(self, system_name, species):
         if system_name == 'biosphere_kegg':
