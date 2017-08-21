@@ -1,6 +1,6 @@
 runLevel="ui"
 runGroup="all"
-nbrTotal=${#listMissing[@]}
+nbrTotal=$(wc -l missing_samples_union_all | awk '{print $1}')
 nbrSubmit=1000
 runJobName=topo_${runLevel}${runGroup}
 runScriptName="topo_ave_union.py"
@@ -11,8 +11,8 @@ for i in $(seq 1 1 $upperBound)
 do
     j=$i
     sed -e "s/arrayIndex/1-$nbrSubmit/" seed_topo_ave_missing_test > ../missing_${runJobName}_$j.batch
-    sed -e ‘1s/^/listVar=(/' -e '$s/$/)/' missing_samples_union_all.csv > test.tmp
-    sed -e ‘/load python/rtest.tmp' seed_topo_ave_missing_test
+    sed -e '1s/^/listVar=\(/' -e '$s/$/\)/' missing_samples_union_all > test.tmp
+    sed -i -e '/load python/rtest.tmp' ../missing_${runJobName}_$j.batch
     sed -i "s/jobName/${runJobName}/" ../missing_${runJobName}_$j.batch
     sed -i "s/scriptName/${runScriptName}/" ../missing_${runJobName}_$j.batch
     sed -i "s/level/${runLevel}/" ../missing_${runJobName}_$j.batch
@@ -21,8 +21,8 @@ do
 done
 j=$(($j+1))
 sed -e "s/arrayIndex/1-$restSubmit/" seed_topo_ave_missing_test > ../missing_${runJobName}_$j.batch
-sed -e ‘1s/^/listVar=(/' -e '$s/$/)/' missing_samples_union_all.csv > test.tmp
-sed -e ‘/load python/rtest.tmp' seed_topo_ave_missing_test
+sed -e '1s/^/listVar=\(/' -e '$s/$/\)/' missing_samples_union_all > test.tmp
+sed -i -e '/load python/rtest.tmp' ../missing_${runJobName}_$j.batch
 sed -i "s/jobName/${runJobName}/" ../missing_${runJobName}_$j.batch
 sed -i "s/scriptName/${runScriptName}/" ../missing_${runJobName}_$j.batch
 sed -i "s/level/${runLevel}/" ../missing_${runJobName}_$j.batch
