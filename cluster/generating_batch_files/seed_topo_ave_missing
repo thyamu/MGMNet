@@ -10,6 +10,10 @@
 
 module load gcc/4.9.2
 module load python/2.7.9
-listVar=samples
+listVar=(11
+16
+18
+21
+24)
 runID=${listVar[$SLURM_ARRAY_TASK_ID]}
 python ../code/scriptName level group $runID
