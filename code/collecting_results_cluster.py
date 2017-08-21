@@ -57,7 +57,8 @@ for system_name in class_name.number_of_species.iterkeys():
 
     for species in range(1, class_name.number_of_species[system_name] + 1):
         print species
-        resultFileName = dr_results + '/%s-'%(system_name) + class_name.result_file_string%(system_name, species)
+        resultFileName = dr_results + '/' + class_name.result_file_string%(system_name, species)
+        #print resultFileName
         if not os.path.isfile(resultFileName):
             sample = [species]
             with open(missingFileName, "a") as mf:
