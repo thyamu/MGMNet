@@ -33,6 +33,9 @@ for ds in ('../results_cluster', '/topo_ave', '/%s'%(module_name)):
     if not os.path.exists(dr_missing):
         os.makedirs(dr_missing)
 
+dr_missing_batch = ''
+for ds in ('../cluster', '/missing'):
+    dr_missing_batch = dr_missing_batch + ds
 
 
 #---------- collecting results and identifying missing results ----------#
@@ -55,13 +58,15 @@ for system_name in class_name.number_of_species.iterkeys():
     with open(missingFileName, "w") as mf:
        cmf = csv.writer(mf)
 
+
+
     for species in range(1, class_name.number_of_species[system_name] + 1):
         print species
         result_file_string = {'bio': '%s-%d.csv'%(system_name, species), \
                        'union': '%s-upto-%d.csv'%(system_name, species), \
                        'syn': '%s-%d.csv'%(system_name, species)} #==>change the string after generate syn results
 
-        resultFileName = dr_results + '/' + result_file_string[module_name]s
+        resultFileName = dr_results + '/' + result_file_string[module_name]
         #print resultFileName
         if not os.path.isfile(resultFileName):
             sample = [species]
@@ -91,16 +96,17 @@ for system_name in class_name.number_of_species.iterkeys():
 
     df_list.append(pd.read_csv(collectedFileName))
 
+    missingBatchName = dr_missing_batch + '/missing_topo_ave_%s'%(system_name)
+    if os.path.isfile(missingBatchName):
+        os.remove(missingBatchName)
+
     #------copy missingFile to cluster folder -------#
     if os.stat(missingFileName).st_size > 0:
-        dr_missing_batch = ''
-        for ds in ('../cluster', '/missing'):
-            dr_missing_batch = dr_missing_batch + ds
-            if not os.path.exists(dr_missing_batch):
-                os.makedirs(dr_missing_batch)
-        missingBatchName = dr_missing_batch + '/missing_topo_ave_%s'%(system_name)
+        if not os.path.exists(dr_missing_batch):
+            os.makedirs(dr_missing_batch)
         shutil.copyfile(missingFileName, missingBatchName)
-
+    else:
+        os.remove(missingFileName)
 
 #-------- Merge all files into one-----------#
 finalFileName = dr_collection + '/topo_ave_%s.csv'%(module_name)
