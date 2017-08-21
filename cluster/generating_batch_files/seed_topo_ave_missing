@@ -15,5 +15,5 @@ listVar=(11
 18
 21
 24)
-runID=${listVar[$(($SLURM_ARRAY_TASK_ID+1))]}
+runID=${listVar[$(($SLURM_ARRAY_TASK_ID-1))]}
 python ../code/scriptName level group $runID
