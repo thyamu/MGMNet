@@ -1,7 +1,5 @@
-cluster/batch_run_old
 cluster/error
 cluster/out
-cluster/test
 data
 *.zip
 docs
