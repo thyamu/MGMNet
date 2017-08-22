@@ -1,7 +1,7 @@
-class synthetic:
+class syn:
     def __init__(self):
-        self.level = {'si': 'synthetic_individual',\
-                    'se':'synthetic_ecosystem'}
+        self.level = {'si': 'syn_individual',\
+                    'se':'syn_ecosystem'}
 
         self.group = {'a': 'archaea', \
                     'b': 'bacteria', \
@@ -12,24 +12,24 @@ class synthetic:
                     'all': 'all', \
                     'allp': 'all_parsed'}
 
-        self.number_of_species = {'synthetic_individual_archaea':200, \
-                                'synthetic_individual_bacteria':200, \
-                                'synthetic_individual_archaea_parsed':100, \
-                                'synthetic_individual_bacteria_parsed':150,\
-                                'synthetic_individual_eukarya':60, \
-                                'synthetic_individual_all': 400,\
-                                'synthetic_individual_all_parsed': 300, \
-                                'synthetic_ecosystem_JGI':300}
+        self.number_of_species = {'syn_individual_archaea':250, \
+                                'syn_individual_bacteria':300, \
+                                'syn_individual_archaea_parsed':150 \
+                                'syn_individual_bacteria_parsed':200,\
+                                'syn_individual_eukarya':77, \
+                                'syn_individual_all': 627,\
+                                'syn_individual_all_parsed': 427, \
+                                'syn_ecosystem_JGI':500}
 
+        self.lines_in_topo_ave = {'syn_individual_archaea':2, \
+                                'syn_individual_bacteria':2, \
+                                'syn_individual_archaea_parsed':2, \
+                                'syn_individual_bacteria_parsed':2,\
+                                'syn_individual_eukarya':2, \
+                                'syn_individual_all': 2,\
+                                'syn_individual_all_parsed': 2, \
+                                'syn_ecosystem_JGI':2}
 
-        self.lines_in_topo_ave = {'synthetic_individual_archaea':2, \
-                                'synthetic_individual_bacteria':2, \
-                                'synthetic_individual_archaea_parsed':2, \
-                                'synthetic_individual_bacteria_parsed':2,\
-                                'synthetic_individual_eukarya':2, \
-                                'synthetic_individual_all': 2,\
-                                'synthetic_individual_all_parsed': 2, \
-                                'synthetic_ecosystem_JGI':2}
 
     def species_name(self, system_name, species):
         species_name = system_name + '-upto-%d'%(species)
