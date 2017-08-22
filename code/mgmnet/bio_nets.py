@@ -13,14 +13,14 @@ class bio:
                     'e': 'eukarya', \
                     'k': 'kegg'}
 
-        self.number_of_species = {'ecosystem_YNP':26, \
-                                'ecosystem_JGI':5587, \
-                                'individual_archaea':845, \
+        self.number_of_species = {'individual_archaea':845, \
                                 'individual_bacteria':21637, \
                                 'individual_archaea_parsed':199, \
                                 'individual_bacteria_parsed':1153,\
                                 'individual_eukarya':77, \
-                                'biosphere_kegg':1}
+                                'biosphere_kegg':1, \
+                                'ecosystem_JGI':5587, \
+                                'ecosystem_YNP':26}
 
         self.lines_in_topo_ave = {'ecosystem_YNP':2, 'ecosystem_JGI':2, \
                 'individual_archaea':1, 'individual_bacteria':1, \
