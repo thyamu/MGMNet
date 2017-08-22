@@ -1,6 +1,7 @@
 class union:
     def __init__(self):
-        self.level ={'ui': 'union_individual', 'ue': 'union_ecosystem'}
+        self.level ={'ui': 'union_individual',\
+                    'ue': 'union_ecosystem'}
 
         self.group = {'a': 'archaea', \
                     'b': 'bacteria', \
