@@ -19,8 +19,17 @@ class synthetic:
                                 'synthetic_individual_eukarya':60, \
                                 'synthetic_individual_all': 400,\
                                 'synthetic_individual_all_parsed': 300, \
-                                'synthetic_ecosystem_JGI':5587}
+                                'synthetic_ecosystem_JGI':300}
 
+
+        self.lines_in_topo_ave = {'synthetic_individual_archaea':2, \
+                                'synthetic_individual_bacteria':2, \
+                                'synthetic_individual_archaea_parsed':2, \
+                                'synthetic_individual_bacteria_parsed':2,\
+                                'synthetic_individual_eukarya':2, \
+                                'synthetic_individual_all': 2,\
+                                'synthetic_individual_all_parsed': 2, \
+                                'synthetic_ecosystem_JGI':2}
 
     def species_name(self, system_name, species):
         species_name = system_name + '-upto-%d'%(species)
