@@ -58,8 +58,6 @@ for system_name in class_name.number_of_species.iterkeys():
     with open(missingFileName, "w") as mf:
        cmf = csv.writer(mf)
 
-
-
     for species in range(1, class_name.number_of_species[system_name] + 1):
         print species
         result_file_string = {'bio': '%s-%d.csv'%(system_name, species), \
