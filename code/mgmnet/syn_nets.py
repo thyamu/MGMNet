@@ -12,14 +12,15 @@ class syn:
                     'all': 'all', \
                     'allp': 'all_parsed'}
 
-        self.number_of_species = {'syn_individual_archaea':250, \
-                                'syn_individual_bacteria':300, \
-                                'syn_individual_archaea_parsed':150 \
-                                'syn_individual_bacteria_parsed':200,\
-                                'syn_individual_eukarya':77, \
-                                'syn_individual_all': 627,\
-                                'syn_individual_all_parsed': 427, \
-                                'syn_ecosystem_JGI':500}
+        # for all and allp union_nets type of reading files: otherwise
+        self.number_of_species = {'syn_individual_archaea':2500, \
+                                'syn_individual_bacteria':3000, \
+                                'syn_individual_archaea_parsed':1500 \
+                                'syn_individual_bacteria_parsed':2000,\
+                                'syn_individual_eukarya':770, \
+                                'syn_individual_all': 6270,\
+                                'syn_individual_all_parsed': 4270, \
+                                'syn_ecosystem_JGI':5000}
 
         self.lines_in_topo_ave = {'syn_individual_archaea':2, \
                                 'syn_individual_bacteria':2, \
