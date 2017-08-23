@@ -1,10 +1,10 @@
 import sys
 import os
 import csv
-import mgmnet.union_nets as un
+import mgmnet.syn_nets as sn
 import mgmnet.topo_measure as tm
 
-union = un.union()
+syn = sn.syn()
 topo = tm.topoMeasure()
 
 # level
@@ -17,7 +17,7 @@ species = int(sys.argv[3])
 system_name = '%s_%s'%(level, group)
 
 dr = ''
-for ds in ('../results_cluster','/topo_ave', '/union', '/%s'%(system_name)):
+for ds in ('../results_cluster','/topo_ave', '/syn', '/%s'%(system_name)):
     dr = dr + ds
     if not os.path.exists(dr):
         os.makedirs(dr)
