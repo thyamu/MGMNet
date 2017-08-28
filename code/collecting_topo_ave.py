@@ -17,7 +17,7 @@ header = topo.header
 module_name = sys.argv[1]
 module_dict = {'bio': bn.bio(), \
                'union': un.union(), \
-               'syn': sn.synthetic()}
+               'syn': sn.syn()}
 class_name = module_dict[module_name]
 
 #---------- directories ----------#
