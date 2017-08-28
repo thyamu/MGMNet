@@ -1,9 +1,9 @@
-runLevel="ue"
-runGroup="j"
-nbrTotal=309
+runLevel="si"
+runGroup="a"
+nbrTotal=4770
 nbrSubmit=1000
 runJobName="topo_${runLevel}${runGroup}"
-runScriptName="topo_ave_union.py"
+runScriptName="topo_ave_syn.py"
 upperBound=$(($nbrTotal/$nbrSubmit))
 restSubmit=$(($nbrTotal-$upperBound*$nbrSubmit))
 j=0
