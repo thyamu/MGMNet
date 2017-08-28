@@ -16,3 +16,4 @@ viz
 *.sbatch
 *.xlsx
 *.xls
+.DS_Store
