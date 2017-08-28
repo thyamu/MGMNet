@@ -8,21 +8,21 @@ syn = sn.syn()
 topo = tm.topoMeasure()
 
 # level
-level = union.level[sys.argv[1]]
+level = syn.level[sys.argv[1]]
 # group
-group = union.group[sys.argv[2]]
+group = syn.group[sys.argv[2]]
 # species
 species = int(sys.argv[3])
 
 system_name = '%s_%s'%(level, group)
 
 dr = ''
-for ds in ('../results_cluster','/topo_ave', '/syn', '/%s'%(system_name)):
+for ds in ('../results_test','/topo_ave', '/syn', '/%s'%(system_name)):
     dr = dr + ds
     if not os.path.exists(dr):
         os.makedirs(dr)
 
-outputFileName = dr + '/%s-upto-%d.csv'%(system_name, species)
+outputFileName = dr + '/%s-%d.csv'%(system_name, species)
 
 header = topo.header
 with open(outputFileName, 'w') as f:
@@ -31,16 +31,16 @@ with open(outputFileName, 'w') as f:
         csvf.writerow(header)
 
 # species_name
-species_name = union.species_name(system_name, species)
+species_name = syn.species_name(system_name, species)
 
 # nbr_rxn
-nbr_rxn = union.number_of_rxn(system_name, species)
+nbr_rxn = syn.number_of_rxn(system_name, species)
 
 data0 = [level, group, species, species_name, nbr_rxn]
 
 #----- To import sub-netwroks with rxn-degree for node attributes -----#
-sEdges = union.sub_edges(system_name, species)
-nodeAttr = union.rxn_degree(system_name, species)
+sEdges = syn.sub_edges(system_name, species)
+nodeAttr = syn.rxn_degree(system_name, species)
 
 #--- To Compute ---#
 data1 = topo.global_measure(sEdges, nodeAttr)

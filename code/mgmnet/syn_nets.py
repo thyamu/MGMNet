@@ -12,16 +12,6 @@ class syn:
                     'all': 'all', \
                     'allp': 'all_parsed'}
 
-        # for all and allp union_nets type of reading files: otherwise
-        # self.number_of_species = {'syn_individual_archaea':250, \
-        #                         'syn_individual_bacteria':250, \
-        #                         'syn_individual_archaea_parsed':1500 \
-        #                         'syn_individual_bacteria_parsed':2000,\
-        #                         'syn_individual_eukarya':770, \
-        #                         'syn_individual_all': 6270,\
-        #                         'syn_individual_all_parsed': 4270, \
-        #                         'syn_ecosystem_JGI':5000}
-
         self.number_of_samples = {'syn_individual_archaea':200, \
                                 'syn_individual_bacteria':200, \
                                 'syn_individual_archaea_parsed':120,\
@@ -40,40 +30,25 @@ class syn:
                                 'syn_individual_all_parsed': 2, \
                                 'syn_ecosystem_JGI':2}
 
-
     def species_name(self, system_name, species):
-        species_name = system_name + '-upto-%d'%(species)
+        species_name = system_name + '-%d'%(species)
         return species_name
 
-
     def number_of_rxn(self, system_name, species):
-        inputfile = open('../data/union_data/rxn_%s.dat'%(system_name), 'r')
-        inputfile.readline() #header
-        nbr_rxn = 0
-        for line in inputfile:
-            items = line.rstrip().split('\t')
-            label = int(items[0])
-            nbr_rxn += 1
-            if label > species:
-                break
+        inputfile = open('../data/syn/rxn_lists/%s/rxn_%s-%d.dat'%(system_name, system_name, species), 'r')
+        nbr_rxn = sum(1 for line in inputfile) - 1 #subtract 1 for the header in rxn_lists file
         inputfile.close()
         return nbr_rxn
 
-
     def load_list_rxn(self, system_name, species):
         rxn_list = []
-        inputfile = open('../data/union_data/rxn_%s.dat'%(system_name), 'r')
-        inputfile.readline()
+        inputfile = open('../data/syn/rxn_lists/%s/rxn_%s-%d.dat'%(system_name, system_name, species), 'r')
+        species_name = inputfile.readline()
         for line in inputfile:
-            items = line.rstrip().split('\t')
-            label = int(items[0])
-            if label > species:
-                break
-            rxn = items[1]
+            rxn = line.rstrip()  # rxn_lists contain unique rxns for each genome
             rxn_list.append(rxn)
         inputfile.close()
         return rxn_list
-
 
     def sub_edges(self, system_name, species):
         import kegg_nets as kg
@@ -124,30 +99,3 @@ class syn:
                 else:
                     dict_sub_nbrRxn[p] += 1
         return dict_sub_nbrRxn
-
-
-    # def assign_seed(self, index1, index2):
-    #     import numpy as np
-    #     seed1 = 268332
-    #     seed2 = 800304
-    #     np.random.seed(seed1)
-    #     list_first_seed = np.random.random_integers(0, 1000000, index1+1)
-    #     #print list_first_seed
-    #     np.random.seed(seed2)
-    #     list_second_seed = np.random.random_integers(0, 1000000, index2+1)
-    #     #print list_second_seed
-    #     new_seed = list_first_seed[index1] + list_second_seed[index2]
-    #     return new_seed
-
-    # def combine_set_genome(self, group_dict, comSize, comSet):
-    #     import numpy as np
-    #     new_seed = self.assign_seed(comSize, comSet)
-    #     np.random.seed(new_seed)
-    #     genome_dict = {}
-    #     for group in group_dict.iterkeys():
-    #         if group_dict[group] == 0:
-    #             continue
-    #         genome_dict[group] = np.random.choice(\
-    #                             range(1, self.number_of_species[group] + 1), \
-    #                             int(group_dict[group] * comSize), replace = False)
-    #     return genome_dict
