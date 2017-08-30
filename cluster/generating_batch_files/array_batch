@@ -1,5 +1,6 @@
+rm ../*.batch
 runLevel="si"
-runGroup="a"
+runGroup="all"
 nbrTotal=4770
 nbrSubmit=1000
 runJobName="topo_${runLevel}${runGroup}"
