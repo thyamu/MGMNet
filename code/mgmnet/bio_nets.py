@@ -18,34 +18,26 @@ class bio:
                                 'individual_archaea_parsed':199, \
                                 'individual_bacteria_parsed':1153,\
                                 'individual_eukarya':77, \
-                                'biosphere_kegg':1, \
+                                'biosphere_kegg':2, \
                                 'ecosystem_JGI':5587, \
                                 'ecosystem_YNP':26}
 
-        self.lines_in_topo_ave = {'ecosystem_YNP':2, 'ecosystem_JGI':2, \
+        self.lines_in_topo_ave = {'biosphere_kegg':2, 'ecosystem_YNP':2, 'ecosystem_JGI':2, \
                 'individual_archaea':1, 'individual_bacteria':1, \
                 'individual_archaea_parsed':1, 'individual_bacteria_parsed':1, \
                 'individual_eukarya':1}
 
 
     def species_name(self, system_name, species):
-        if system_name == 'biosphere_kegg':
-            species_name = "kegg"
-        else:
-            inputfile = open('../data/bio/rxn_lists/%s/rxn_%s-%d.dat'%(system_name, system_name, species), 'r')
-            species_name = inputfile.readline().rstrip()[2:]
-            inputfile.close()
+        inputfile = open('../data/bio/rxn_lists/%s/rxn_%s-%d.dat'%(system_name, system_name, species), 'r')
+        species_name = inputfile.readline().rstrip()[2:]
+        inputfile.close()
         return species_name
 
     def number_of_rxn(self, system_name, species):
-        if system_name == 'biosphere_kegg':
-            import kegg_nets as kg
-            kegg = kg.kegg()
-            nbr_rxn = len(kegg.rxn)
-        else:
-            inputfile = open('../data/bio/rxn_lists/%s/rxn_%s-%d.dat'%(system_name, system_name, species), 'r')
-            nbr_rxn = sum(1 for line in inputfile) - 1 #subtract 1 for the header in rxn_lists file
-            inputfile.close()
+        inputfile = open('../data/bio/rxn_lists/%s/rxn_%s-%d.dat'%(system_name, system_name, species), 'r')
+        nbr_rxn = sum(1 for line in inputfile) - 1 #subtract 1 for the header in rxn_lists file
+        inputfile.close()
         return nbr_rxn
 
     def load_list_rxn(self, system_name, species):
@@ -62,10 +54,7 @@ class bio:
         import kegg_nets as kg
         kegg = kg.kegg()
         edge_list = []
-        if system_name == 'biosphere_kegg':
-            rxn_list = kegg.rxn
-        else:
-            rxn_list = self.load_list_rxn(system_name, species)
+        rxn_list = self.load_list_rxn(system_name, species)
         for x in rxn_list:
             for r in kegg.rxn_reac[x]:
                 for p in kegg.rxn_prod[x]:
@@ -79,10 +68,7 @@ class bio:
         import kegg_nets as kg
         kegg = kg.kegg()
         edge_list = []
-        if system_name == 'biosphere_kegg':
-            rxn_list = kegg.rxn
-        else:
-            rxn_list = self.load_list_rxn(system_name, species)
+        rxn_list = self.load_list_rxn(system_name, species)
         for x in rxn_list:
             for r in kegg.rxn_reac[x]:
                 edge_list.append((r, x))
@@ -94,10 +80,7 @@ class bio:
     def rxn_degree(self, system_name, species):
         import kegg_nets as kg
         kegg = kg.kegg()
-        if system_name == 'biosphere_kegg':
-            rxn_list = kegg.rxn
-        else:
-            rxn_list = self.load_list_rxn(system_name, species)
+        rxn_list = self.load_list_rxn(system_name, species)
         sub_set = set()
         dict_sub_nbrRxn = {}
         for x in rxn_list:
