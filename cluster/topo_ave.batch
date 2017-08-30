@@ -1,0 +1,12 @@
+#!/bin/sh
+#SBATCH --job-name=jobName
+#SBATCH -t 0-12:00                  # wall time (D-HH:MM)
+#SBATCH --qos=queue
+#SBATCH -o out/jobName_%j.out             # STDOUT (%j = JobId)
+#SBATCH -e error/jobName_%j.err             # STDERR (%j = JobId)
+#SBATCH --mail-type=FAIL       # notifications for job done & fail
+#SBATCH --mail-user=hkim8@alumni.nd.edu # send-to ad
+
+module load gcc/4.9.2
+module load python/2.7.9
+python ../code/topo_ave_bio.py s k 1
