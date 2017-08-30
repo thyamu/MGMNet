@@ -56,7 +56,7 @@ class bio:
         edge_list = []
         rxn_list = self.load_list_rxn(system_name, species)
         for x in rxn_list:
-            if x not in kegg.rxn: #change this loop by changing kegg.rxn_reac or prod or associdated files
+            if x not in kegg.rxn_reac.keys() or x not in kegg.rxn_prod.keys(): #change this loop by changing kegg.rxn_reac or prod or associdated files
                 continue
             for r in kegg.rxn_reac[x]:
                 for p in kegg.rxn_prod[x]:
