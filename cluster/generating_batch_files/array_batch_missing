@@ -11,7 +11,7 @@ j=0
 for i in $(seq 1 1 $upperBound)
 do
     j=$i
-    sed -e "s/arrayIndex/1-$nbrSubmit/" seed_topo_ave_missing > ../missing_${runJobName}_$j.batch
+    sed -e "s/arrayIndex/1-$nbrSubmit/" seed_array_topo_ave_missing > ../missing_${runJobName}_$j.batch
     sed -e '1s/^/listVar=\(/' -e '$s/$/\)/' ../missing/missing_topo_ave_${runSystemName} > test.tmp
     sed -i -e '/load python/rtest.tmp' ../missing_${runJobName}_$j.batch
     sed -i "s/jobName/${runJobName}/" ../missing_${runJobName}_$j.batch
@@ -21,7 +21,7 @@ do
 
 done
 j=$(($j+1))
-sed -e "s/arrayIndex/1-$restSubmit/" seed_topo_ave_missing > ../missing_${runJobName}_$j.batch
+sed -e "s/arrayIndex/1-$restSubmit/" seed_array_topo_ave_missing > ../missing_${runJobName}_$j.batch
 sed -e '1s/^/listVar=\(/' -e '$s/$/\)/' ../missing/missing_topo_ave_${runSystemName} > test.tmp
 sed -i -e '/load python/rtest.tmp' ../missing_${runJobName}_$j.batch
 sed -i "s/jobName/${runJobName}/" ../missing_${runJobName}_$j.batch

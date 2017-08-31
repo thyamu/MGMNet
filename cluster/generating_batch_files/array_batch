@@ -1,7 +1,7 @@
 rm ../*.batch
-runLevel="si"
-runGroup="all"
-nbrTotal=4770
+runLevel="se"
+runGroup="j"
+nbrTotal=4000
 nbrSubmit=1000
 runJobName="topo_${runLevel}${runGroup}"
 runScriptName="topo_ave_syn.py"
@@ -12,7 +12,7 @@ for i in $(seq 1 1 $upperBound)
 do
     j=$i
     runStartIndex=$(($j*$nbrSubmit-$nbrSubmit))
-    sed -e "s/arrayIndex/1-$nbrSubmit/" seed_topo_ave > ../${runJobName}_$j.batch
+    sed -e "s/arrayIndex/1-$nbrSubmit/" seed_array_topo_ave > ../${runJobName}_$j.batch
     sed -i "s/jobName/${runJobName}/" ../${runJobName}_$j.batch
     sed -i "s/scriptName/${runScriptName}/" ../${runJobName}_$j.batch
     sed -i "s/level/${runLevel}/" ../${runJobName}_$j.batch
@@ -21,7 +21,7 @@ do
 done
 j=$(($j+1))
 runStartIndex=$(($j*$nbrSubmit-$nbrSubmit))
-sed -e "s/arrayIndex/1-$restSubmit/" seed_topo_ave > ../${runJobName}_$j.batch
+sed -e "s/arrayIndex/1-$restSubmit/" seed_array_topo_ave > ../${runJobName}_$j.batch
 sed -i "s/jobName/${runJobName}/" ../${runJobName}_$j.batch
 sed -i "s/scriptName/${runScriptName}/" ../${runJobName}_$j.batch
 sed -i "s/level/${runLevel}/" ../${runJobName}_$j.batch
