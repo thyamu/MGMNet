@@ -2,7 +2,9 @@ rm ../*.batch
 runLevel="si"
 runGroup="all"
 runSystemName="syn_individual_all"
-nbrTotal=$(wc -l ../missing/missing_topo_ave_syn_individual_all | awk '{print $1}')
+runMissingSample="../missing/missing_topo_ave_syn_individual_all"
+nbrTotal=$(wc -l ${runMissingSample} | awk '{print $1}')
+dos2unix ${runMissingSample} 
 nbrSubmit=100
 runJobName=topo_${runLevel}${runGroup}
 runScriptName="topo_ave_union.py"
