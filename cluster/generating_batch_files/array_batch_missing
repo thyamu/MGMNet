@@ -1,6 +1,6 @@
-runLevel="ui"
-runGroup="e"
-runSystemName="union_individual_eukarya"
+runLevel="si"
+runGroup="all"
+runSystemName="syn_individual_all"
 nbrTotal=$(wc -l missing_samples_union_all | awk '{print $1}')
 nbrSubmit=1000
 runJobName=topo_${runLevel}${runGroup}
