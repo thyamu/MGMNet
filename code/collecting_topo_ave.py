@@ -40,12 +40,12 @@ for ds in ('../cluster', '/missing'):
 
 #---------- collecting results and identifying missing results ----------#
 df_list = []
-#for system_name in class_name.number_of_species.iterkeys():
-for system_name in ['syn_individual_archaea',\
-                    'syn_individual_bacteria',\
-                    'syn_individual_eukarya',\
-                    'syn_individual_all',\
-                    'syn_ecosystem_JGI']:
+for system_name in class_name.number_of_species.iterkeys():
+# for system_name in ['syn_individual_archaea',\
+#                     'syn_individual_bacteria',\
+#                     'syn_individual_eukarya',\
+#                     'syn_individual_all']:#,\
+#                     #'syn_ecosystem_JGI']:
     print system_name
 
     dr_results = ''
