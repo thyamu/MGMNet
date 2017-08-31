@@ -86,6 +86,8 @@ class bio:
         sub_set = set()
         dict_sub_nbrRxn = {}
         for x in rxn_list:
+            if x not in kegg.rxn_reac.keys() or x not in kegg.rxn_prod.keys(): #change this loop by changing kegg.rxn_reac or prod or associdated files
+                continue
             for r in kegg.rxn_reac[x]:
                 if r not in sub_set:
                     dict_sub_nbrRxn[r] = 0
