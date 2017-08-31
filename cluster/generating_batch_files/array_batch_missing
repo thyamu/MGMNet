@@ -1,8 +1,8 @@
 runLevel="si"
 runGroup="all"
 runSystemName="syn_individual_all"
-nbrTotal=$(wc -l missing_samples_union_all | awk '{print $1}')
-nbrSubmit=1000
+nbrTotal=$(wc -l ../missing/missing_topo_ave_syn_individual_all | awk '{print $1}')
+nbrSubmit=100
 runJobName=topo_${runLevel}${runGroup}
 runScriptName="topo_ave_union.py"
 upperBound=$(($nbrTotal/$nbrSubmit))
