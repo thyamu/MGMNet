@@ -2,7 +2,7 @@ rm ../*.batch
 runLevel="ri"
 runGroup="k"
 nbrTotal=5000
-nbrSubmit=1000
+nbrSubmit=500
 runJobName="topo_${runLevel}${runGroup}"
 runScriptName="topo_ave_ranRxn.py"
 upperBound=$(($nbrTotal/$nbrSubmit))
