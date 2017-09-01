@@ -3,7 +3,7 @@ import os
 import mgmnet.bio_nets as bn
 import mgmnet.union_nets as un
 import mgmnet.syn_nets as sn
-import mgment.ranRxn_nets as rn
+import mgmnet.ranRxn_nets as rn
 import mgmnet.kegg_nets as kn
 import mgmnet.topo_measure as tm
 import networkx as nx
@@ -16,9 +16,9 @@ module_dict = {'bio': bn.bio(), \
 class_name = module_dict[module_name]
 
 # level
-level = bio.level[sys.argv[2]]
+level = class_name.level[sys.argv[2]]
 # group
-group = bio.group[sys.argv[3]]
+group = class_name.group[sys.argv[3]]
 # species
 species = int(sys.argv[4])
 
