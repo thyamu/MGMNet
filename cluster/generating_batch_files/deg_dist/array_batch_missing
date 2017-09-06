@@ -2,32 +2,34 @@ runClassName="syn"
 runLevel="si"
 runGroup="all"
 runSystemName="syn_individual_all"
-runMissingSample="../../missing/deg_dist/missing_deg_dist_syn_individual_all"
-runScriptName="topo_ave_syn.py"
+runMissingSample=../../missing/deg_dist/missing_deg_dist_${runSystemName}
+runScriptName="deg_dist.py"
 nbrTotal=$(wc -l ${runMissingSample} | awk '{print $1}')
 dos2unix ${runMissingSample}
 nbrSubmit=100
-runJobName=topo_${runLevel}${runGroup}
+runJobName=deg_${runLevel}${runGroup}
 upperBound=$(($nbrTotal/$nbrSubmit))
 restSubmit=$(($nbrTotal-$upperBound*$nbrSubmit))
 j=0
 for i in $(seq 1 1 $upperBound)
 do
     j=$i
-    sed -e "s/arrayIndex/1-$nbrSubmit/" seed_array_topo_ave_missing > ../../missing_${runJobName}_$j.batch
-    sed -e '1s/^/listVar=\(/' -e '$s/$/\)/' ../../missing/missing_topo_ave_${runSystemName} > test.tmp
+    sed -e "s/arrayIndex/1-$nbrSubmit/" seed_array_deg_dist_missing > ../../missing_${runJobName}_$j.batch
+    sed -e '1s/^/listVar=\(/' -e '$s/$/\)/' ${runMissingSample} > test.tmp
     sed -i -e '/load python/rtest.tmp' ../../missing_${runJobName}_$j.batch
     sed -i "s/jobName/${runJobName}/" ../../missing_${runJobName}_$j.batch
     sed -i "s/scriptName/${runScriptName}/" ../../missing_${runJobName}_$j.batch
+    sed -i "s/className/${runClassName}/" ../../missing_${runJobName}_$j.batch
     sed -i "s/level/${runLevel}/" ../../missing_${runJobName}_$j.batch
     sed -i "s/group/${runGroup}/" ../../missing_${runJobName}_$j.batch
 
 done
 j=$(($j+1))
-sed -e "s/arrayIndex/1-$restSubmit/" seed_array_topo_ave_missing > ../../missing_${runJobName}_$j.batch
-sed -e '1s/^/listVar=\(/' -e '$s/$/\)/' ../../missing/missing_topo_ave_${runSystemName} > test.tmp
+sed -e "s/arrayIndex/1-$restSubmit/" seed_array_deg_dist_missing > ../../missing_${runJobName}_$j.batch
+sed -e '1s/^/listVar=\(/' -e '$s/$/\)/' ../../missing/deg_dist/missing_deg_dist_${runSystemName} > test.tmp
 sed -i -e '/load python/rtest.tmp' ../../missing_${runJobName}_$j.batch
 sed -i "s/jobName/${runJobName}/" ../../missing_${runJobName}_$j.batch
 sed -i "s/scriptName/${runScriptName}/" ../../missing_${runJobName}_$j.batch
+sed -i "s/className/${runClassName}/" ../../missing_${runJobName}_$j.batch
 sed -i "s/level/${runLevel}/" ../../missing_${runJobName}_$j.batch
 sed -i "s/group/${runGroup}/" ../../missing_${runJobName}_$j.batch
