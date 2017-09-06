@@ -1,10 +1,9 @@
-rm ../../*.batch
 runLevel="ri"
 runGroup="k"
+runScriptName="topo_ave_syn.py"
 nbrTotal=5000
 nbrSubmit=1000
 runJobName="topo_${runLevel}${runGroup}"
-runScriptName="topo_ave_ranRxn.py"
 upperBound=$(($nbrTotal/$nbrSubmit))
 restSubmit=$(($nbrTotal-$upperBound*$nbrSubmit))
 j=0
