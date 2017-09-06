@@ -13,7 +13,7 @@ viz
 *.dat
 *.nb
 *.pyc
-*.sbatch
+*.batch
 *.xlsx
 *.xls
 .DS_Store
