@@ -8,4 +8,4 @@
 
 module load gcc/4.9.2
 module load python/2.7.9
-python ../code/topo_ave_bio.py s k 1
+python ../code/topo_ave_bio.py s k 2

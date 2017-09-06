@@ -1,0 +1,14 @@
+#!/bin/sh
+#SBATCH --job-name=jobName
+#SBATCH --array=arrayIndex
+#SBATCH -t 0-12:00                  # wall time (D-HH:MM)
+#SBATCH --qos=normal                # QOS "queue"
+#SBATCH -o out/jobName_%A_%j.out             # STDOUT (%j = JobId)
+#SBATCH -e error/jobName_%A_%j.err             # STDERR (%j = JobId)
+#SBATCH --mail-type=FAIL       # notifications for job done & fail
+#SBATCH --mail-user=hkim8@alumni.nd.edu # send-to ad
+
+module load gcc/4.9.2
+module load python/2.7.9
+runID=$(($SLURM_ARRAY_TASK_ID+startIndex))
+python ../code/scriptName className level group $runID

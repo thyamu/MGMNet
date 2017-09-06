@@ -30,7 +30,7 @@ for ds in ('../results_cluster', '/deg_dist', '/%s'%(module_name), '/sub_degree'
     dr_sub = dr_sub + ds
     if not os.path.exists(dr_sub):
         os.makedirs(dr_sub)
-
+#for species in range(1, class_name.number_of_species[system_name] + 1):
 sEdges = class_name.sub_edges(system_name, species)
 if len(sEdges) > 0:
     ddsub_file_name = dr_sub + '/deg_dist_lcc_%s-%d.csv'%(system_name, species)
