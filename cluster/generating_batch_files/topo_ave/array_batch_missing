@@ -1,5 +1,5 @@
 runLevel="si"
-runGroup="all"
+runGroup="a"
 runSystemName="syn_individual_all"
 runMissingSample="../../missing/topo_ave/missing_topo_ave_${runSystemName}"
 runScriptName="topo_ave_syn.py"

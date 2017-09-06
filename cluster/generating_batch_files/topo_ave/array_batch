@@ -1,7 +1,7 @@
-runLevel="ri"
-runGroup="k"
+runLevel="si"
+runGroup="ap"
 runScriptName="topo_ave_syn.py"
-nbrTotal=5000
+nbrTotal=1200
 nbrSubmit=1000
 runJobName="topo_${runLevel}${runGroup}"
 upperBound=$(($nbrTotal/$nbrSubmit))
