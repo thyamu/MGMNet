@@ -1,7 +1,8 @@
+runClassName="syn"
 runLevel="si"
 runGroup="all"
 runSystemName="syn_individual_all"
-runMissingSample="../../missing/missing_topo_ave_syn_individual_all"
+runMissingSample="../../missing/deg_dist/missing_deg_dist_syn_individual_all"
 runScriptName="topo_ave_syn.py"
 nbrTotal=$(wc -l ${runMissingSample} | awk '{print $1}')
 dos2unix ${runMissingSample}

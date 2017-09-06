@@ -1,4 +1,3 @@
-rm ../../*.batch
 runClassName="syn"
 runLevel="si"
 runGroup="all"
