@@ -1,7 +1,7 @@
-runClassName="syn"
-runLevel="si"
-runGroup="all"
-runSystemName="syn_individual_all"
+runClassName="ranRxn"
+runLevel="ri"
+runGroup="k"
+runSystemName="ranRxn_individual_kegg"
 runMissingSample="../../missing/deg_dist/missing_deg_dist_${runSystemName}"
 runScriptName="deg_dist.py"
 nbrTotal=$(wc -l ${runMissingSample} | awk '{print $1}')
