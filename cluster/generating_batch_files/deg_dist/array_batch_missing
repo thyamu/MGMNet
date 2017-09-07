@@ -15,7 +15,7 @@ for i in $(seq 1 1 $upperBound)
 do
     j=$i
     sed -e "s/arrayIndex/1-$nbrSubmit/" seed_array_deg_dist_missing > ../../missing_${runJobName}_$j.batch
-    sed -e '1s/^/listVar=\(/' -e '$s/$/\)/' ${runMissingSample} > test.tmp
+    sed -e '1s/^/listVar=\(/' -e '$s/$/\)/' ../../missing/deg_dist/missing_deg_dist_${runSystemName} > test.tmp
     sed -i -e '/load python/rtest.tmp' ../../missing_${runJobName}_$j.batch
     sed -i "s/jobName/${runJobName}/" ../../missing_${runJobName}_$j.batch
     sed -i "s/scriptName/${runScriptName}/" ../../missing_${runJobName}_$j.batch
@@ -26,7 +26,7 @@ do
 done
 j=$(($j+1))
 sed -e "s/arrayIndex/1-$restSubmit/" seed_array_deg_dist_missing > ../../missing_${runJobName}_$j.batch
-sed -e '1s/^/listVar=\(/' -e '$s/$/\)/' ${runMissingSample} > test.tmp
+sed -e '1s/^/listVar=\(/' -e '$s/$/\)/' ../../missing/deg_dist/missing_deg_dist_${runSystemName} > test.tmp
 sed -i -e '/load python/rtest.tmp' ../../missing_${runJobName}_$j.batch
 sed -i "s/jobName/${runJobName}/" ../../missing_${runJobName}_$j.batch
 sed -i "s/scriptName/${runScriptName}/" ../../missing_${runJobName}_$j.batch
