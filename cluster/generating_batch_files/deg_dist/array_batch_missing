@@ -7,7 +7,7 @@ runScriptName="deg_dist.py"
 nbrTotal=$(wc -l ${runMissingSample} | awk '{print $1}')
 dos2unix ${runMissingSample}
 nbrSubmit=100
-runJobName="deg_${runLevel}${runGroup}""
+runJobName="deg_${runLevel}${runGroup}"
 upperBound=$(($nbrTotal/$nbrSubmit))
 restSubmit=$(($nbrTotal-$upperBound*$nbrSubmit))
 j=0
