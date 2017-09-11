@@ -7,8 +7,7 @@ import mgmnet.kegg_nets as kn
 import mgmnet.topo_measure as tm
 import networkx as nx
 
-#module_name = sys.argv[1]
-module_name = 'bio'
+module_name = sys.argv[1]
 module_dict = {'bio': bn.bio(), \
                'union': un.union(), \
                'syn': sn.syn()}
