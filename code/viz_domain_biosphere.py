@@ -47,13 +47,15 @@ for i, j in G_all.edges_iter():
             edge_weight += 1
     G_all.add_edge(i, j, weight=edge_weight)
 
+list_node_weight = {'union_individual_archaea': 1, 'union_individual_bacteria': 10, 'union_individual_eukarya': 100}
+
 for n in G_all.nodes_iter():
-    node_weight = 1
-    for s in range(1, len(list_domain) + 1):
-        system_name = list_domain[s-1]
+    node_weight = 0
+    for system_name in list_domain:
         if n in G[system_name]:
-            node_weight += s
+            node_weight += list_node_weight[system_name]
     G_all.add_node(n, weight=node_weight)
+
 
 file_name = '../viz/sub_net_weighted_all_domain.gexf'
 nx.write_gexf(G_all, file_name)
