@@ -8,7 +8,7 @@ import mgmnet.topo_measure as tm
 import networkx as nx
 
 module_name = sys.argv[1]
-name = sys.argv[2] # put system name 
+name = sys.argv[2] # put system name
 module_dict = {'bio': bn.bio(), \
                'union': un.union(), \
                'syn': sn.syn()}
@@ -17,11 +17,13 @@ class_name = module_dict[module_name]
 #for system_name in class_name.number_of_species.iterkeys():
 for system_name in [name]:
     print module_name, system_name
+
     dr_sub = ''
     for ds in ('../results', '/networks', '/%s'%(module_name), '/%s'%(system_name)):
         dr_sub = dr_sub + ds
         if not os.path.exists(dr_sub):
             os.makedirs(dr_sub)
+
     for species in range(1, class_name.number_of_species[system_name] + 1):
         print species
         sEdges = class_name.sub_edges(system_name, species)
