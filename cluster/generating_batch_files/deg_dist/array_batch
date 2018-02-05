@@ -1,8 +1,8 @@
-runClassName="syn"
-runLevel="si"
-runGroup="all"
+runClassName="ranRxn"
+runLevel="ri"
+runGroup="k"
 runScriptName="deg_dist.py"
-nbrTotal=4770
+nbrTotal=5000
 nbrSubmit=1000
 runJobName="deg_${runLevel}${runGroup}"
 upperBound=$(($nbrTotal/$nbrSubmit))
