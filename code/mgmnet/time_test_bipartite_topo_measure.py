@@ -78,9 +78,15 @@ class topoMeasure:
         import networkx as nx
         from networkx.algorithms import bipartite
         import numpy as np
-
+        import time
+        ###
+        itime = time.time()
         '''Check rEdges networks'''
         G = nx.Graph(rEdges)
+        ###
+        ftime = time.time()
+        ###
+        print "time to load a rxn network from rxn_edges:", ftime - itime
 
         '''Divide the set of nodes into sub and rxn group
         ==> group(bipartite=1), group(bipartitie=0) = bipartite.sets(G)
@@ -93,7 +99,8 @@ class topoMeasure:
         #
         # sub_group, rxn_group = bipartite.sets(G)
 
-
+        ###
+        itime = time.time()
         # (2) nbr_nodes
         nbr_nodes = G.number_of_nodes()
         nbr_sub_nodes = 0
@@ -101,14 +108,25 @@ class topoMeasure:
             if n[0] == 'C':
                 nbr_sub_nodes += 1
         nbr_rxn_nodes = nbr_nodes - nbr_sub_nodes
+        ###
+        ftime = time.time()
+        ###
+        print "time to compute the nbr nodes:", ftime - itime
 
+        ###
+        itime = time.time()
         # (3) nbr_edges
         nbr_edges = G.number_of_edges()
-
+        ###
+        ftime = time.time()
+        ###
+        print "time to compute the nbr edges:", ftime - itime
 
         data = [0] * len(self.header1) # if nbr_edges == 0, then data =[0, ... , 0]
 
         if nbr_edges > 0:
+            ###
+            itime = time.time()
             ##### (4) nbr connected_components (with G_lcc)
             if nx.is_connected(G):
                 nbr_connected_components = 1
@@ -116,7 +134,13 @@ class topoMeasure:
             else:
                 nbr_connected_components = nx.number_connected_components(G)
                 G_lcc = max(nx.connected_component_subgraphs(G), key=len)
+            ###
+            ftime = time.time()
+            ###
+            print "time to compute the nbr components:", ftime - itime
 
+            ###
+            itime = time.time()
             for n in G_lcc.nodes():
                 if n[0] == 'C':
                     G_lcc.add_node(n, bipartite=1)
@@ -124,46 +148,104 @@ class topoMeasure:
                     G_lcc.add_node(n, bipartite=0)
 
             sub_group_lcc, rxn_group_lcc = bipartite.sets(G_lcc)
+            ###
+            ftime = time.time()
+            ###
+            print "time to separate nodes into two sets:", ftime - itime
 
+
+            ###
+            itime = time.time()
             ##### (5) nbr nodes_lcc, sub, rxn
             nbr_nodes_lcc = G_lcc.number_of_nodes()
             nbr_sub_nodes_lcc = len(sub_group_lcc)
             nbr_rxn_nodes_lcc = len(rxn_group_lcc)
+            ###
+            ftime = time.time()
+            ###
+            print "time to compute the nbr of nodes in lcc:", ftime - itime
 
+
+            ###
+            itime = time.time()
             ##### (6) nbr edges_lcc
             nbr_edges_lcc = G_lcc.number_of_edges()
+            ###
+            ftime = time.time()
+            ###
+            print "time to compute the nbr of edges in lcc", ftime - itime
 
+            ###
+            itime = time.time()
             ##### (7) ave_sub_degree_lcc
             dict_degree_lcc = G_lcc.degree()
             list_sub_degree_lcc = [dict_degree_lcc[n] for n in sub_group_lcc]
             ave_sub_degree_lcc = np.mean(list_sub_degree_lcc)
             std_sub_degree_lcc = np.std(list_sub_degree_lcc)
+            ###
+            ftime = time.time()
+            ###
+            print "time to compute the ave sub degree:", ftime - itime
 
+            ###
+            itime = time.time()
             ##### (8) ave_rxn_degree_lcc
             list_rxn_degree_lcc = [dict_degree_lcc[n] for n in rxn_group_lcc]
             ave_rxn_degree_lcc = np.mean(list_rxn_degree_lcc)
             std_rxn_degree_lcc = np.std(list_rxn_degree_lcc)
+            ###
+            ftime = time.time()
+            ###
+            print "time to compute the ave rxn degree:", ftime - itime
 
+            '''
+            ###
+            itime = time.time()
             ##### (9) ave_sub_shortest_path_length_lcc
             #dict_shortest_path_length_lcc = nx.shortest_path_length(G_lcc)
             list_sub_shortest_path_length_lcc = [nx.shortest_path_length(G_lcc,u,v) for u in sub_group_lcc for v in sub_group_lcc]
             ave_sub_shortest_path_length_lcc = np.mean(list_sub_shortest_path_length_lcc)
             std_sub_shortest_path_length_lcc = np.std(list_sub_shortest_path_length_lcc)
+            ###
+            ftime = time.time()
+            ###
+            print "time to compute the spl:", ftime - itime
+            '''
 
+            ###
+            itime = time.time()
+            ##### (9-1) ave_sub_shortest_path_length_lcc
+            #dict_shortest_path_length_lcc = nx.shortest_path_length(G_lcc)
+            # list_sub_shortest_path_length_lcc = [nx.shortest_path_length(G_lcc,u,v) for u in sub_group_lcc for v in sub_group_lcc]
+            # ave_sub_shortest_path_length_lcc = np.mean(list_sub_shortest_path_length_lcc)
+            # std_sub_shortest_path_length_lcc = np.std(list_sub_shortest_path_length_lcc)
+            ave_sub_shortest_path_length_lcc = nx.average_shortest_path_length(G_lcc)
+            ###
+            ftime = time.time()
+            ###
+            print "time to compute the spl with average function:", ftime - itime
+
+
+            ###
+            itime = time.time()
             ##### (10) ave_sub_clustering_coeff_lcc
             list_clustering_coeff_lcc = bipartite.clustering(G_lcc, nodes=sub_group_lcc).values()
             ave_sub_clustering_coeff_lcc = np.mean(list_clustering_coeff_lcc)
             std_sub_clustering_coeff_lcc = np.std(list_clustering_coeff_lcc)
+            ###
+            ftime = time.time()
+            ###
+            print "time to compute the clustering:", ftime - itime
 
-            ##### (10-1) ave_sub_clustering_coeff_lcc (min)
-            list_min_clustering_coeff_lcc = bipartite.clustering(G_lcc, nodes=sub_group_lcc, mode='min').values()
-            ave_sub_min_clustering_coeff_lcc = np.mean(list_min_clustering_coeff_lcc)
-            std_sub_min_clustering_coeff_lcc = np.std(list_min_clustering_coeff_lcc)
-
-            ##### (10-2) ave_sub_clustering_coeff_lcc (max)
-            list_max_clustering_coeff_lcc = bipartite.clustering(G_lcc, nodes=sub_group_lcc, mode='max').values()
-            ave_sub_max_clustering_coeff_lcc = np.mean(list_max_clustering_coeff_lcc)
-            std_sub_max_clustering_coeff_lcc = np.std(list_max_clustering_coeff_lcc)
+            # ##### (10-1) ave_sub_clustering_coeff_lcc (min)
+            # list_min_clustering_coeff_lcc = bipartite.clustering(G_lcc, nodes=sub_group_lcc, mode='min').values()
+            # ave_sub_min_clustering_coeff_lcc = np.mean(list_min_clustering_coeff_lcc)
+            # std_sub_min_clustering_coeff_lcc = np.std(list_min_clustering_coeff_lcc)
+            #
+            # ##### (10-2) ave_sub_clustering_coeff_lcc (max)
+            # list_max_clustering_coeff_lcc = bipartite.clustering(G_lcc, nodes=sub_group_lcc, mode='max').values()
+            # ave_sub_max_clustering_coeff_lcc = np.mean(list_max_clustering_coeff_lcc)
+            # std_sub_max_clustering_coeff_lcc = np.std(list_max_clustering_coeff_lcc)
 
             ##### (11) sub_diameter_lcc
             diameter_lcc = max(list_sub_shortest_path_length_lcc)
