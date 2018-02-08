@@ -58,10 +58,10 @@ class topoMeasure:
                        "std_rxn_degree_lcc", \
                        ##### (9) ave_sub_shortest_path_length_lcc
                        "ave_sub_shortest_path_length_lcc", \
-                       "std_sub_shortest_path_length_lcc",\
+                       #"std_sub_shortest_path_length_lcc",\
                        ##### (10) ave_sub_clustering_coeff_lcc (default)
-                       "ave_sub_clustering_coeff_lcc", \
-                       "std_sub_clustering_coeff_lcc"]#, \
+                       "ave_sub_clustering_coeff_lcc"]#, \
+                       #"std_sub_clustering_coeff_lcc"]#, \
                        # ##### (10-1) ave_sub_clustering_coeff_lcc (min)
                        # "ave_sub_min_clustering_coeff_lcc", \
                        # "std_sub_min_clustering_coeff_lcc", \

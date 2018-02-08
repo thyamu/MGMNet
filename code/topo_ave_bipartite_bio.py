@@ -23,7 +23,7 @@ for ds in ('../results_test', '/topo_ave_bipartite', '/bio', '/%s'%(system_name)
     if not os.path.exists(dr):
         os.makedirs(dr)
 
-outputFileName = dr + '/time_bipartite_%s-%d.csv'%(system_name, species)
+outputFileName = dr + '/new_bipartite_%s-%d.csv'%(system_name, species)
 
 header = topo.header
 with open(outputFileName, 'w') as f:
