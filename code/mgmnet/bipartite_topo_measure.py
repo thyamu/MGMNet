@@ -58,18 +58,11 @@ class topoMeasure:
                        "std_rxn_degree_lcc", \
                        ##### (9) ave_sub_shortest_path_length_lcc
                        "ave_sub_shortest_path_length_lcc", \
-                       "std_sub_shortest_path_length_lcc",\
+                       #"std_sub_shortest_path_length_lcc",\
                        ##### (10) ave_sub_clustering_coeff_lcc (default)
                        "ave_sub_clustering_coeff_lcc", \
-                       "std_sub_clustering_coeff_lcc"]#, \
-                       # ##### (10-1) ave_sub_clustering_coeff_lcc (min)
-                       # "ave_sub_min_clustering_coeff_lcc", \
-                       # "std_sub_min_clustering_coeff_lcc", \
-                       # ##### (10-2) ave_sub_clustering_coeff_lcc (max)
-                       # "ave_sub_max_clustering_coeff_lcc", \
-                       # "std_sub_max_clustering_coeff_lcc", \
-                       ##### (11) sub_diameter_lcc
-                       # "sub_diameter_lcc"]
+                       ##### (11) ave_node_betweenness
+                       "ave_betweenness_nodes_lcc"]
 
         self.header = self.header0 + self.header1
 
@@ -145,28 +138,14 @@ class topoMeasure:
             std_rxn_degree_lcc = np.std(list_rxn_degree_lcc)
 
             ##### (9) ave_sub_shortest_path_length_lcc
-            #dict_shortest_path_length_lcc = nx.shortest_path_length(G_lcc)
-            list_sub_shortest_path_length_lcc = [nx.shortest_path_length(G_lcc,u,v) for u in sub_group_lcc for v in sub_group_lcc]
-            ave_sub_shortest_path_length_lcc = np.mean(list_sub_shortest_path_length_lcc)
-            std_sub_shortest_path_length_lcc = np.std(list_sub_shortest_path_length_lcc)
+            ave_sub_shortest_path_length_lcc = nx.average_shortest_path_length(G_lcc)
 
             ##### (10) ave_sub_clustering_coeff_lcc
-            list_clustering_coeff_lcc = bipartite.clustering(G_lcc, nodes=sub_group_lcc).values()
-            ave_sub_clustering_coeff_lcc = np.mean(list_clustering_coeff_lcc)
-            std_sub_clustering_coeff_lcc = np.std(list_clustering_coeff_lcc)
+            ave_sub_clustering_coeff_lcc = bipartite.average_clustering(G_lcc,sub_group_lcc)
 
-            ##### (10-1) ave_sub_clustering_coeff_lcc (min)
-            list_min_clustering_coeff_lcc = bipartite.clustering(G_lcc, nodes=sub_group_lcc, mode='min').values()
-            ave_sub_min_clustering_coeff_lcc = np.mean(list_min_clustering_coeff_lcc)
-            std_sub_min_clustering_coeff_lcc = np.std(list_min_clustering_coeff_lcc)
-
-            ##### (10-2) ave_sub_clustering_coeff_lcc (max)
-            list_max_clustering_coeff_lcc = bipartite.clustering(G_lcc, nodes=sub_group_lcc, mode='max').values()
-            ave_sub_max_clustering_coeff_lcc = np.mean(list_max_clustering_coeff_lcc)
-            std_sub_max_clustering_coeff_lcc = np.std(list_max_clustering_coeff_lcc)
-
-            ##### (11) sub_diameter_lcc
-            diameter_lcc = max(list_sub_shortest_path_length_lcc)
+            ##### (11) ave_node_betweenness
+            list_betweenness_nodes_lcc = nx.betweenness_centrality(G_lcc).values()
+            ave_betweenness_nodes_lcc = np.mean(list_betweenness_nodes_lcc)
 
             data = [ nbr_nodes, nbr_sub_nodes, nbr_rxn_nodes,\
                      nbr_edges,\
@@ -175,11 +154,9 @@ class topoMeasure:
                      nbr_edges_lcc, \
                      ave_sub_degree_lcc, std_sub_degree_lcc, \
                      ave_rxn_degree_lcc, std_rxn_degree_lcc, \
-                     ave_sub_shortest_path_length_lcc, std_sub_shortest_path_length_lcc, \
-                     ave_sub_clustering_coeff_lcc, std_sub_clustering_coeff_lcc]#, \
-                     # ave_sub_min_clustering_coeff_lcc, std_sub_min_clustering_coeff_lcc, \
-                     # ave_sub_max_clustering_coeff_lcc, std_sub_max_clustering_coeff_lcc, \
-                     # diameter_lcc]
+                     ave_sub_shortest_path_length_lcc,\
+                     ave_sub_clustering_coeff_lcc, \
+                     ave_betweenness_nodes_lcc]
         return data
 
 def sub_degree_histogram_old(sEdges, file_name):

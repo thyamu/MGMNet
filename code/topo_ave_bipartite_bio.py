@@ -4,7 +4,6 @@ import csv
 import mgmnet.bio_nets as bn
 import mgmnet.bipartite_topo_measure as bitm
 
-
 bio = bn.bio()
 topo = bitm.topoMeasure()
 
@@ -18,12 +17,12 @@ species = int(sys.argv[3])
 system_name = '%s_%s'%(level, group)
 
 dr = ''
-for ds in ('../results_test', '/topo_ave_bipartite', '/bio', '/%s'%(system_name)):
+for ds in ('../results_cluster', '/topo_ave_bipartite', '/bio', '/%s'%(system_name)):
     dr = dr + ds
     if not os.path.exists(dr):
         os.makedirs(dr)
 
-outputFileName = dr + '/time_bipartite_%s-%d.csv'%(system_name, species)
+outputFileName = dr + '/bipartite_%s-%d.csv'%(system_name, species)
 
 header = topo.header
 with open(outputFileName, 'w') as f:
