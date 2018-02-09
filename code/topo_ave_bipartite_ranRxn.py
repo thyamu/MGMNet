@@ -4,7 +4,6 @@ import csv
 import mgmnet.ranRxn_nets as rn
 import mgmnet.bipartite_topo_measure as bitm
 
-
 ranRxn = rn.ranRxn()
 topo = bitm.topoMeasure()
 

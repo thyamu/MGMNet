@@ -1,23 +1,23 @@
 import sys
 import os
 import csv
-import mgmnet.bio_nets as bn
+import mgmnet.syn_nets as sn
 import mgmnet.bipartite_topo_measure as bitm
 
-bio = bn.bio()
+syn = sn.syn()
 topo = bitm.topoMeasure()
 
 # level
-level = bio.level[sys.argv[1]]
+level = syn.level[sys.argv[1]]
 # group
-group = bio.group[sys.argv[2]]
+group = syn.group[sys.argv[2]]
 # species
 species = int(sys.argv[3])
 
 system_name = '%s_%s'%(level, group)
 
 dr = ''
-for ds in ('../results_cluster', '/topo_ave_bipartite', '/bio', '/%s'%(system_name)):
+for ds in ('../results_cluster','/topo_ave_bipartite', '/syn', '/%s'%(system_name)):
     dr = dr + ds
     if not os.path.exists(dr):
         os.makedirs(dr)
@@ -31,17 +31,16 @@ with open(outputFileName, 'w') as f:
         csvf.writerow(header)
 
 # species_name
-species_name = bio.species_name(system_name, species)
+species_name = syn.species_name(system_name, species)
 
 # nbr_rxn
-nbr_rxn = bio.number_of_rxn(system_name, species)
+nbr_rxn = syn.number_of_rxn(system_name, species)
 
 data0 = [level, group, species, species_name, nbr_rxn]
 
 #----- To import sub-netwroks with rxn-degree for node attributes -----#
-rEdges = bio.rxn_edges(system_name, species)
-#nodeAttr = bio.rxn_degree(system_name, species)
-
+rEdges = syn.rxn_edges(system_name, species)
+#nodeAttr = syn.rxn_degree(system_name, species)
 
 #--- To Compute ---#
 data1 = topo.bipartite_global_measure(rEdges)
