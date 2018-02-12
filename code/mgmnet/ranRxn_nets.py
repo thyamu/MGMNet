@@ -3,14 +3,14 @@ class ranRxn:
         self.level = {'ri': 'ranRxn_individual',\
                      're': 'ranRxn_ecosystem'}
 
-        self.group = {'a': 'archaea', \
-                    'b': 'bacteria', \
-                    'ap':'archaea_parsed', \
-                    'bp':'bacteria_parsed', \
-                    'e': 'eukarya', \
-                    'j': 'JGI', \
-                    'all': 'all', \
-                    'allp': 'all_parsed', \
+        self.group = {#'a': 'archaea', \
+        #             'b': 'bacteria', \
+        #             'ap':'archaea_parsed', \
+        #             'bp':'bacteria_parsed', \
+        #             'e': 'eukarya', \
+        #             'j': 'JGI', \
+        #             'all': 'all', \
+        #             'allp': 'all_parsed', \
                     'k': 'kegg'}
 
         self.number_of_species = {'ranRxn_individual_kegg':5000}
