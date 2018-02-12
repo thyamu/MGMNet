@@ -14,12 +14,12 @@ class syn:
 
         self.number_of_species = {'syn_individual_archaea':2000, \
                                 'syn_individual_bacteria':2000, \
-                                'syn_individual_archaea_parsed':1200,\
-                                'syn_individual_bacteria_parsed':1800,\
+                                #'syn_individual_archaea_parsed':1200,\
+                                #'syn_individual_bacteria_parsed':1800,\
                                 'syn_individual_eukarya':770, \
-                                'syn_individual_all': 4770,\
-                                'syn_individual_all_parsed': 3770, \
-                                'syn_ecosystem_JGI':4000}
+                                'syn_individual_all': 4770}#,\
+                                #'syn_individual_all_parsed': 3770, \
+                                #'syn_ecosystem_JGI':4000}
 
 
         self.number_of_samples = {'syn_individual_archaea':200, \

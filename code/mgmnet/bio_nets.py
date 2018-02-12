@@ -15,12 +15,12 @@ class bio:
 
         self.number_of_species = {'individual_archaea':845, \
                                 'individual_bacteria':21637, \
-                                'individual_archaea_parsed':199, \
-                                'individual_bacteria_parsed':1153,\
+                                #'individual_archaea_parsed':199, \
+                                #'individual_bacteria_parsed':1153,\
                                 'individual_eukarya':77, \
                                 'biosphere_kegg':2, \
-                                'ecosystem_JGI':5587, \
-                                'ecosystem_YNP':26}
+                                'ecosystem_JGI':5587}#, \
+                                #'ecosystem_YNP':26}
 
         self.lines_in_topo_ave = {'biosphere_kegg':2, 'ecosystem_YNP':2, 'ecosystem_JGI':2, \
                 'individual_archaea':1, 'individual_bacteria':1, \
@@ -72,6 +72,8 @@ class bio:
         edge_list = []
         rxn_list = self.load_list_rxn(system_name, species)
         for x in rxn_list:
+            if x not in kegg.rxn_reac.keys() or x not in kegg.rxn_prod.keys(): #change this loop by changing kegg.rxn_reac or prod or associdated files
+                continue
             for r in kegg.rxn_reac[x]:
                 edge_list.append((r, x))
             for p in kegg.rxn_prod[x]:
