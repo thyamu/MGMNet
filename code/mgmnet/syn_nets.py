@@ -24,12 +24,12 @@ class syn:
 
         self.number_of_samples = {'syn_individual_archaea':200, \
                                 'syn_individual_bacteria':200, \
-                                'syn_individual_archaea_parsed':120,\
-                                'syn_individual_bacteria_parsed':180,\
+                                #'syn_individual_archaea_parsed':120,\
+                                #'syn_individual_bacteria_parsed':180,\
                                 'syn_individual_eukarya':77, \
-                                'syn_individual_all': 477,\
-                                'syn_individual_all_parsed': 377, \
-                                'syn_ecosystem_JGI':400}
+                                'syn_individual_all': 477}#,\
+                                #'syn_individual_all_parsed': 377, \
+                                #'syn_ecosystem_JGI':400}
 
         self.lines_in_topo_ave = {'syn_individual_archaea':2, \
                                 'syn_individual_bacteria':2, \
