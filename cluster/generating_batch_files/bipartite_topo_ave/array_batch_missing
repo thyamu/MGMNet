@@ -1,12 +1,12 @@
 runLevel="i"
 runGroup="b"
 runSystemName="individual_bacteria"
-runMissingSample="../../missing/topo_ave/missing_topo_ave_${runSystemName}"
-runScriptName="topo_ave_syn.py"
+runMissingSample="../../missing/topo_ave_bipartite/missing_topo_ave_bipartite_${runSystemName}"
+runScriptName="topo_ave_bipartite_bio.py"
 nbrTotal=$(wc -l ${runMissingSample} | awk '{print $1}')
 dos2unix ${runMissingSample}
-nbrSubmit=100
-runJobName="topo_${runLevel}${runGroup}"
+nbrSubmit=200
+runJobName="topo_bipartite_${runLevel}${runGroup}"
 upperBound=$(($nbrTotal/$nbrSubmit))
 restSubmit=$(($nbrTotal-$upperBound*$nbrSubmit))
 j=0
@@ -14,7 +14,7 @@ for i in $(seq 1 1 $upperBound)
 do
     j=$i
     sed -e "s/arrayIndex/1-$nbrSubmit/" seed_array_topo_ave_missing > ../../missing_${runJobName}_$j.batch
-    sed -e '1s/^/listVar=\(/' -e '$s/$/\)/' ../../missing/topo_ave/missing_topo_ave_${runSystemName} > test.tmp
+    sed -e '1s/^/listVar=\(/' -e '$s/$/\)/' ../../missing/topo_ave_bipartite/missing_topo_ave_bipartite_${runSystemName} > test.tmp
     sed -i -e '/load python/rtest.tmp' ../../missing_${runJobName}_$j.batch
     sed -i "s/jobName/${runJobName}/" ../../missing_${runJobName}_$j.batch
     sed -i "s/scriptName/${runScriptName}/" ../../missing_${runJobName}_$j.batch
@@ -24,7 +24,7 @@ do
 done
 j=$(($j+1))
 sed -e "s/arrayIndex/1-$restSubmit/" seed_array_topo_ave_missing > ../../missing_${runJobName}_$j.batch
-sed -e '1s/^/listVar=\(/' -e '$s/$/\)/' ../../missing/topo_ave/missing_topo_ave_${runSystemName} > test.tmp
+sed -e '1s/^/listVar=\(/' -e '$s/$/\)/' ../../missing/topo_ave_bipartite/missing_topo_ave_bipartite_${runSystemName} > test.tmp
 sed -i -e '/load python/rtest.tmp' ../../missing_${runJobName}_$j.batch
 sed -i "s/jobName/${runJobName}/" ../../missing_${runJobName}_$j.batch
 sed -i "s/scriptName/${runScriptName}/" ../../missing_${runJobName}_$j.batch
