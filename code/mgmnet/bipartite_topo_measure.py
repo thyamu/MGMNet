@@ -112,7 +112,7 @@ class topoMeasure:
                 if n[0] == 'R':
                     G_lcc.add_node(n, bipartite=0)
 
-            sub_group_lcc = [n for n in G_lcc.nodes if G_lcc.nodes[n]['bipartite']==1]
+            sub_group_lcc = [n for n in G_lcc.nodes() if G_lcc.node[n]['bipartite']==1]
             rxn_group_lcc = list(set(G_lcc) - set(sub_group_lcc))
 
             ##### (5) nbr nodes_lcc, sub, rxn
