@@ -39,7 +39,8 @@ class bio:
     def number_of_rxn(self, system_name, species, knockout_ratio):
         inputfile = open('../data/bio/knock_out_rxn_lists/%s/rxn%.2f_%s-%d.dat'\
                     %(system_name, 1- knockout_ratio, system_name, species), 'r')
-        nbr_rxn = sum(1 for line in inputfile) - 1 #subtract 1 for the header in rxn_lists file
+        nbr_rxn = sum(1 for line in inputfile) - 1
+        #subtract 1 for the header in rxn_lists file
         inputfile.close()
         return nbr_rxn
 
@@ -49,7 +50,8 @@ class bio:
                     %(system_name, 1- knockout_ratio, system_name, species), 'r')
         species_name = inputfile.readline()
         for line in inputfile:
-            rxn = line.rstrip()  # rxn_lists contain unique rxns for each genome
+            rxn = line.rstrip()
+            # \rxn_lists contain unique rxns for each genome
             rxn_list.append(rxn)
         inputfile.close()
         return rxn_list
@@ -60,7 +62,9 @@ class bio:
         edge_list = []
         rxn_list = self.load_list_rxn(system_name, species, knockout_ratio)
         for x in rxn_list:
-            if x not in kegg.rxn_reac.keys() or x not in kegg.rxn_prod.keys(): #change this loop by changing kegg.rxn_reac or prod or associdated files
+            if x not in kegg.rxn_reac.keys() or x not in kegg.rxn_prod.keys():
+                # \change this loop by changing
+                # \kegg.rxn_reac or prod or associdated files
                 continue
             for r in kegg.rxn_reac[x]:
                 for p in kegg.rxn_prod[x]:
@@ -76,7 +80,8 @@ class bio:
         edge_list = []
         rxn_list = self.load_list_rxn(system_name, species)
         for x in rxn_list:
-            if x not in kegg.rxn_reac.keys() or x not in kegg.rxn_prod.keys(): #change this loop by changing kegg.rxn_reac or prod or associdated files
+            if x not in kegg.rxn_reac.keys() or x not in kegg.rxn_prod.keys():
+                #change this loop by changing kegg.rxn_reac or prod or associdated files
                 continue
             for r in kegg.rxn_reac[x]:
                 edge_list.append((r, x))
@@ -92,7 +97,8 @@ class bio:
         sub_set = set()
         dict_sub_nbrRxn = {}
         for x in rxn_list:
-            if x not in kegg.rxn_reac.keys() or x not in kegg.rxn_prod.keys(): #change this loop by changing kegg.rxn_reac or prod or associdated files
+            if x not in kegg.rxn_reac.keys() or x not in kegg.rxn_prod.keys():
+                #change this loop by changing kegg.rxn_reac or prod or associdated files
                 continue
             for r in kegg.rxn_reac[x]:
                 if r not in sub_set:

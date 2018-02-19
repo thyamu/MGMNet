@@ -44,28 +44,36 @@ class syn:
         species_name = system_name + '-%d'%(species)
         return species_name
 
-    def number_of_rxn(self, system_name, species):
-        inputfile = open('../data/syn/rxn_lists/%s/rxn_%s-%d.dat'%(system_name, system_name, species), 'r')
-        nbr_rxn = sum(1 for line in inputfile) - 1 #subtract 1 for the header in rxn_lists file
+    def number_of_rxn(self, system_name, species, knockout_ratio):
+        inputfile = open('../data/syn/knock_out_rxn_lists/%s/rxn%.2f_%s-%d.dat'\
+                    %(system_name, 1- knockout_ratio, system_name, species), 'r')                    %(system_name, system_name, species), 'r')
+        nbr_rxn = sum(1 for line in inputfile) - 1
+        #subtract 1 for the header in rxn_lists file
         inputfile.close()
         return nbr_rxn
 
-    def load_list_rxn(self, system_name, species):
+    def load_list_rxn(self, system_name, species, knockout_ratio):
         rxn_list = []
-        inputfile = open('../data/syn/rxn_lists/%s/rxn_%s-%d.dat'%(system_name, system_name, species), 'r')
+        inputfile = open('../data/syn/knock_out_rxn_lists/%s/rxn%.2f_%s-%d.dat'\
+                    %(system_name, 1- knockout_ratio, system_name, species), 'r')
         species_name = inputfile.readline()
         for line in inputfile:
-            rxn = line.rstrip()  # rxn_lists contain unique rxns for each genome
+            rxn = line.rstrip()
+            # \ rxn_lists contain unique rxns for each genome
             rxn_list.append(rxn)
         inputfile.close()
         return rxn_list
 
-    def sub_edges(self, system_name, species):
+    def sub_edges(self, system_name, species, knockout_ratio):
         import kegg_nets as kg
         kegg = kg.kegg()
         edge_list = []
-        rxn_list = self.load_list_rxn(system_name, species)
+        rxn_list = self.load_list_rxn(system_name, species, knockout_ratio)
         for x in rxn_list:
+            if x not in kegg.rxn_reac.keys() or x not in kegg.rxn_prod.keys():
+                # \change this loop by changing
+                # \kegg.rxn_reac or prod or associdated files
+                continue
             for r in kegg.rxn_reac[x]:
                 for p in kegg.rxn_prod[x]:
                     if r == p: ### remove self-loops from sub-sub nets
