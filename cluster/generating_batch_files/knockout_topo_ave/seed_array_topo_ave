@@ -10,4 +10,4 @@
 module load gcc/4.9.2
 module load python/2.7.9
 runID=$(($SLURM_ARRAY_TASK_ID+startIndex))
-python ../code/scriptName level group $runID
+python ../code/scriptName level group $runID 0.1

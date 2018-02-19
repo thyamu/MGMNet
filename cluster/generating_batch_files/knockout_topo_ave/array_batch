@@ -1,7 +1,7 @@
-runLevel="e"
-runGroup="j"
+runLevel="i"
+runGroup="b"
 runScriptName="topo_ave_knockout_bio.py"
-nbrTotal=5587
+nbrTotal=21637
 nbrSubmit=1000
 runJobName="topo_knockout_${runLevel}${runGroup}"
 upperBound=$(($nbrTotal/$nbrSubmit))
