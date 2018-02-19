@@ -46,7 +46,7 @@ class syn:
 
     def number_of_rxn(self, system_name, species, knockout_ratio):
         inputfile = open('../data/syn/knock_out_rxn_lists/%s/rxn%.2f_%s-%d.dat'\
-                    %(system_name, 1- knockout_ratio, system_name, species), 'r')                    %(system_name, system_name, species), 'r')
+                    %(system_name, 1- knockout_ratio, system_name, species), 'r')                    
         nbr_rxn = sum(1 for line in inputfile) - 1
         #subtract 1 for the header in rxn_lists file
         inputfile.close()

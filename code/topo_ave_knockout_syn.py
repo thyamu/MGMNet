@@ -1,10 +1,10 @@
 import sys
 import os
 import csv
-import mgmnet.syn_nets as sn
+import mgmnet.syn_nets_knockout as snko
 import mgmnet.simple_topo_measure as stm
 
-syn = sn.syn()
+syn = snko.syn()
 topo = stm.topoMeasure()
 
 # level
@@ -13,6 +13,8 @@ level = syn.level[sys.argv[1]]
 group = syn.group[sys.argv[2]]
 # species
 species = int(sys.argv[3])
+# knockout_ratio
+knockout_ratio = float(sys.argv[4])
 
 system_name = '%s_%s'%(level, group)
 
@@ -22,7 +24,8 @@ for ds in ('../results_cluster','/topo_ave_knockout', '/syn', '/%s'%(system_name
     if not os.path.exists(dr):
         os.makedirs(dr)
 
-outputFileName = dr + '/ko_%s-%d.csv'%(system_name, species)
+outputFileName = dr + '/knockout%.2f_%s-%d.csv'\
+                        %(knockout_ratio, system_name, species)
 
 header = topo.header
 with open(outputFileName, 'w') as f:
@@ -34,13 +37,12 @@ with open(outputFileName, 'w') as f:
 species_name = syn.species_name(system_name, species)
 
 # nbr_rxn
-nbr_rxn = syn.number_of_rxn(system_name, species)
+nbr_rxn = syn.number_of_rxn(system_name, species, knockout_ratio)
 
 data0 = [level, group, species, species_name, nbr_rxn]
 
 #----- To import sub-netwroks with rxn-degree for node attributes -----#
-sEdges = syn.sub_edges(system_name, species)
-#nodeAttr = syn.rxn_degree(system_name, species)
+sEdges = syn.sub_edges(system_name, species, knockout_ratio)
 
 #--- To Compute ---#
 data1 = topo.simple_global_measure(sEdges)
