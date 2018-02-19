@@ -1,0 +1,28 @@
+runLevel="e"
+runGroup="j"
+runScriptName="topo_ave_knockout_bio.py"
+nbrTotal=5587
+nbrSubmit=1000
+runJobName="topo_knockout_${runLevel}${runGroup}"
+upperBound=$(($nbrTotal/$nbrSubmit))
+restSubmit=$(($nbrTotal-$upperBound*$nbrSubmit))
+j=0
+for i in $(seq 1 1 $upperBound)
+do
+    j=$i
+    runStartIndex=$(($j*$nbrSubmit-$nbrSubmit))
+    sed -e "s/arrayIndex/1-$nbrSubmit/" seed_array_topo_ave > ../../${runJobName}_$j.batch
+    sed -i "s/jobName/${runJobName}/" ../../${runJobName}_$j.batch
+    sed -i "s/scriptName/${runScriptName}/" ../../${runJobName}_$j.batch
+    sed -i "s/level/${runLevel}/" ../../${runJobName}_$j.batch
+    sed -i "s/group/${runGroup}/" ../../${runJobName}_$j.batch
+    sed -i "s/startIndex/$runStartIndex/" ../../${runJobName}_$j.batch
+done
+j=$(($j+1))
+runStartIndex=$(($j*$nbrSubmit-$nbrSubmit))
+sed -e "s/arrayIndex/1-$restSubmit/" seed_array_topo_ave > ../../${runJobName}_$j.batch
+sed -i "s/jobName/${runJobName}/" ../../${runJobName}_$j.batch
+sed -i "s/scriptName/${runScriptName}/" ../../${runJobName}_$j.batch
+sed -i "s/level/${runLevel}/" ../../${runJobName}_$j.batch
+sed -i "s/group/${runGroup}/" ../../${runJobName}_$j.batch
+sed -i "s/startIndex/$runStartIndex/" ../../${runJobName}_$j.batch
