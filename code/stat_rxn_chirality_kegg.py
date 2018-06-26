@@ -32,7 +32,7 @@ for s in range(1, sh.nrows):
 inputfile_name = "../data/bio/rxn_lists/biosphere_kegg/rxn_biosphere_kegg-2.dat"
 rxn_kegg = np.loadtxt(inputfile_name, dtype='str', comments="#", delimiter="\n", unpack=False)
 
-##### map each reaction to chirality of chemical compounds participating in the reaction
+##### map each reaction in kegg to chirality of chemical compounds participating in the reaction
 ### array_chiral: chirality distribution \
 kegg = kg.kegg()
 array_chiral = ["reaction", "nbr_total", "nbr_chiral", "nbr_achiral", "nbr_unknown", "ratio_c_to_a", "percentage_c", "percentage_a", "percentage_u"]
@@ -65,7 +65,7 @@ for ds in ("/chirality", "/stat"):
     dir_output += ds
     if not os.path.exists(dir_output):
         os.makedirs(dir_output)
-output_file_name_dist = dir_output + "/rxn_chiral_distribution.dat"
+output_file_name_dist = dir_output + "/rxn_chiral_distribution_kegg.dat"
 
 ### save the chirality arrays in the output files
 array_chiral.dump(output_file_name_dist)

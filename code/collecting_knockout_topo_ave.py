@@ -48,12 +48,14 @@ for system_name in class_name.number_of_species.iterkeys():
     if not os.path.exists(dr_results):
         os.makedirs(dr_results)
 
-    collectedFileName = dr_collection + '/topo_ave_knockout_%s.csv'%(system_name)
+    collectedFileName = dr_collection + '/topo_ave_knockout%.2f_%s.csv'\
+                                        %(knockout_ratio, system_name)
     with open(collectedFileName, "w") as of:
         cof = csv.writer(of)
         cof.writerow(header)
 
-    missingFileName = dr_collection + '/missing_topo_ave_knockout_%s'%(system_name)
+    missingFileName = dr_collection + '/missing_topo_ave_knockout%.2f_%s'\
+                                        %(knockout_ratio, system_name)
     with open(missingFileName, "w") as mf:
        cmf = csv.writer(mf)
 
@@ -99,7 +101,8 @@ for system_name in class_name.number_of_species.iterkeys():
 
     df_list.append(pd.read_csv(collectedFileName))
 
-    missingBatchName = dr_missing_batch + '/missing_topo_ave_knockout_%s'%(system_name)
+    missingBatchName = dr_missing_batch + '/missing_topo_ave_knockout_%s'\
+                                            %(system_name)
     if os.path.isfile(missingBatchName):
         os.remove(missingBatchName)
 
@@ -112,6 +115,7 @@ for system_name in class_name.number_of_species.iterkeys():
         os.remove(missingFileName)
 
 #-------- Merge all files into one-----------#
-finalFileName = dr_collection + '/topo_ave_knockout_%s.csv'%(module_name)
+finalFileName = dr_collection + '/topo_ave_knockout%.2f_%s.csv'\
+                                    %(knockout_ratio, module_name)
 full_df = pd.concat(df_list)
 full_df.to_csv(finalFileName)

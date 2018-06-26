@@ -15,8 +15,8 @@ class bio:
 
         self.number_of_species = {'individual_archaea':845, \
                                 'individual_bacteria':21637, \
-                                #'individual_archaea_parsed':199, \
-                                #'individual_bacteria_parsed':1153,\
+                                'individual_archaea_parsed':199, \
+                                'individual_bacteria_parsed':1153,\
                                 'individual_eukarya':77, \
                                 'biosphere_kegg':2, \
                                 'ecosystem_JGI':5587}#, \
