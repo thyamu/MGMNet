@@ -3,6 +3,7 @@ cluster/out
 data
 *.zip
 docs
+draft
 networks
 original_data
 organizing_data
