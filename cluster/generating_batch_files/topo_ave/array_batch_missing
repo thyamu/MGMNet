@@ -1,8 +1,8 @@
-runLevel="si"
-runGroup="all"
-runSystemName="syn_individual_all"
+runLevel="bri"
+runGroup="k"
+runSystemName="bioRanRxn_individual_kegg"
 runMissingSample="../../missing/topo_ave/missing_topo_ave_${runSystemName}"
-runScriptName="topo_ave_syn.py"
+runScriptName="topo_ave_bioRanRxn.py"
 nbrTotal=$(wc -l ${runMissingSample} | awk '{print $1}')
 dos2unix ${runMissingSample}
 nbrSubmit=100
