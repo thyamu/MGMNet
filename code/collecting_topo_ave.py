@@ -73,7 +73,7 @@ for system_name in class_name.number_of_species.iterkeys():
         result_file_string = {'bio': '%s-%d.csv'%(system_name, species), \
                        'union': '%s-upto-%d.csv'%(system_name, species), \
                        'syn': '%s-%d.csv'%(system_name, species), \
-                       'ranRxn': '%s-%d.csv'%(system_name, species)
+                       'ranRxn': '%s-%d.csv'%(system_name, species),\
                        'bioRanRxn': '%s-%d.csv'%(system_name, species)} #==>change the string after generate syn results
 
         resultFileName = dr_results + '/' + result_file_string[module_name]
