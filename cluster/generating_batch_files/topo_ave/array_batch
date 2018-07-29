@@ -1,6 +1,6 @@
-runLevel="bri"
+runLevel="bui"
 runGroup="k"
-runScriptName="topo_ave_bioRanRxn.py"
+runScriptName="topo_ave_bioUniRxn.py"
 nbrTotal=5000
 nbrSubmit=1000
 runJobName="topo_${runLevel}${runGroup}"

@@ -1,11 +1,11 @@
-runLevel="bri"
+runLevel="bui"
 runGroup="k"
-runSystemName="bioRanRxn_individual_kegg"
+runSystemName="bioUniRxn_individual_kegg"
 runMissingSample="../../missing/topo_ave/missing_topo_ave_${runSystemName}"
-runScriptName="topo_ave_bioRanRxn.py"
+runScriptName="topo_ave_bioUniRxn.py"
 nbrTotal=$(wc -l ${runMissingSample} | awk '{print $1}')
 dos2unix ${runMissingSample}
-nbrSubmit=10
+nbrSubmit=30
 runJobName="topo_${runLevel}${runGroup}"
 upperBound=$(($nbrTotal/$nbrSubmit))
 restSubmit=$(($nbrTotal-$upperBound*$nbrSubmit))
