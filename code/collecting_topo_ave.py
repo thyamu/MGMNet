@@ -6,6 +6,7 @@ import mgmnet.union_nets as un
 import mgmnet.syn_nets as sn
 import mgmnet.ranRxn_nets as rn
 import mgmnet.bioRanRxn_nets as brn
+import mgmnet.bioUniRxn_nets as bui
 import mgmnet.kegg_nets as kn
 import mgmnet.topo_measure as tm
 import shutil
@@ -21,7 +22,8 @@ module_dict = {'bio': bn.bio(), \
                'union': un.union(), \
                'syn': sn.syn(), \
                'ranRxn': rn.ranRxn(), \
-               'bioRanRxn':brn.bioRanRxn()}
+               'bioRanRxn':brn.bioRanRxn(), \
+               'bioUniRxn':bui.bioUniRxn()}
 
 class_name = module_dict[module_name]
 
@@ -74,7 +76,8 @@ for system_name in class_name.number_of_species.iterkeys():
                        'union': '%s-upto-%d.csv'%(system_name, species), \
                        'syn': '%s-%d.csv'%(system_name, species), \
                        'ranRxn': '%s-%d.csv'%(system_name, species),\
-                       'bioRanRxn': '%s-%d.csv'%(system_name, species)} #==>change the string after generate syn results
+                       'bioRanRxn': '%s-%d.csv'%(system_name, species), \
+                       'bioUniRxn':'%s-%d.csv'%(system_name, species)} #==>change the string after generate syn results
 
         resultFileName = dr_results + '/' + result_file_string[module_name]
         #print resultFileName
