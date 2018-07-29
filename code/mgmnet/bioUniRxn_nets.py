@@ -1,6 +1,6 @@
 class bioUniRxn:
     def __init__(self):
-        self.level = {'bui': 'bioRanRxn_individual'}
+        self.level = {'bui': 'bioUniRxn_individual'}
 
         self.group = {#'a': 'archaea', \
         #             'b': 'bacteria', \
@@ -12,26 +12,26 @@ class bioUniRxn:
         #             'allp': 'all_parsed', \
                     'k': 'kegg'}
 
-        self.number_of_species = {'bioRanRxn_individual_kegg':5000}
+        self.number_of_species = {'bioUniRxn_individual_kegg':5000}
 
-        self.lines_in_topo_ave = {'bioRanRxn_individual_kegg':2}
+        self.lines_in_topo_ave = {'bioUniRxn_individual_kegg':2}
 
 
     def species_name(self, system_name, species):
-        inputfile = open('../data/bioRanRxn/rxn_lists/%s/rxn_%s-%d.dat'%(system_name, system_name, species), 'r')
+        inputfile = open('../data/bioUniRxn/rxn_lists/%s/rxn_%s-%d.dat'%(system_name, system_name, species), 'r')
         species_name = inputfile.readline().rstrip()[2:]
         inputfile.close()
         return species_name
 
     def number_of_rxn(self, system_name, species):
-        inputfile = open('../data/bioRanRxn/rxn_lists/%s/rxn_%s-%d.dat'%(system_name, system_name, species), 'r')
+        inputfile = open('../data/bioUniRxn/rxn_lists/%s/rxn_%s-%d.dat'%(system_name, system_name, species), 'r')
         nbr_rxn = sum(1 for line in inputfile) - 1 #subtract 1 for the header in rxn_lists file
         inputfile.close()
         return nbr_rxn
 
     def load_list_rxn(self, system_name, species):
         rxn_list = []
-        inputfile = open('../data/bioRanRxn/rxn_lists/%s/rxn_%s-%d.dat'%(system_name, system_name, species), 'r')
+        inputfile = open('../data/bioUniRxn/rxn_lists/%s/rxn_%s-%d.dat'%(system_name, system_name, species), 'r')
         species_name = inputfile.readline()
         for line in inputfile:
             rxn = line.rstrip()  # rxn_lists contain unique rxns for each genome
