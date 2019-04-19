@@ -34,7 +34,6 @@ for system_name in [name]:
         if len(sEdges) > 0:
             file_name = dr_sub + '/sub_sub_net_%s-%d'%(system_name, species)
         G = nx.Graph(sEdges)
-        with open(file_name, 'wb') as f:
-            pickle.dump([G.nodes(data=True), G.edges(data=True)], f)
-        # pickle.dump([G.nodes(data=True), G.edges(data=True)], file_name)
-        # #nx.write_gpickle(G, file_name + ".gpickle")
+        #with open(file_name, 'wb') as f:
+        #    pickle.dump([G.nodes(data=True), G.edges(data=True)], f)
+        nx.write_gpickle(G, file_name + ".gpickle")

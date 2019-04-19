@@ -47,7 +47,7 @@ list_domain = ['union_individual_archaea', \
             'union_individual_eukarya']
 
 G_all = G['union_individual_all']
-for i, j in G_all.edges_iter():
+for i, j in G_all.edges():
     edge_weight = 1
     for system_name in list_domain:
         if (i, j) in G[system_name]:
@@ -56,7 +56,7 @@ for i, j in G_all.edges_iter():
 
 list_node_weight = {'union_individual_archaea': 1, 'union_individual_bacteria': 10, 'union_individual_eukarya': 100}
 
-for n in G_all.nodes_iter():
+for n in G_all.nodes():
     node_weight = 0
     for system_name in list_domain:
         if n in G[system_name]:
@@ -74,22 +74,26 @@ bio = bn.bio()
 sEdges = bio.sub_edges('biosphere_kegg', 2)
 G_kegg = nx.Graph(sEdges)
 
-for n in G_kegg.nodes_iter():
+for n in G_kegg.nodes():
     if n in G_all.nodes():
         nw = G_all.node[n]['weight']
         G_kegg.add_node(n, weight=nw)
     else:
         G_kegg.add_node(n, weight=0)
 
-for i, j in G_kegg.edges_iter():
+for i, j in G_kegg.edges():
     if (i, j) in G_all.edges():
         ew = G_all[i][j]['weight']
         G_kegg.add_edge(i, j, weight=ew)
     else:
         G_kegg.add_edge(i, j, weight=0.9)
 
-file_name = '../viz/sub_net_kegg_weighted_all_domain.gexf'
-nx.write_gexf(G_kegg, file_name)
+# file_name = '../viz/sub_net_kegg_weighted_all_domain.gexf'
+# nx.write_gexf(G_kegg, file_name)
+
+file_name = '../viz/sub_net_kegg_weighted_all_domain.gml'
+nx.write_gml(G_kegg, file_name)
+
 #-------- END: small kegg network including archaea, bacteria, and eukarya as a network attribute --------#
 
 
