@@ -4,6 +4,7 @@ import mgmnet.bio_nets as bn
 import mgmnet.union_nets as un
 import mgmnet.syn_nets as sn
 import mgmnet.kegg_nets as kn
+import mgmnet.ranRxn as rn
 import mgmnet.topo_measure as tm
 import networkx as nx
 import pickle
@@ -14,7 +15,8 @@ s1 = int(sys.argv[3])
 s2 = int(sys.argv[4])
 module_dict = {'bio': bn.bio(), \
                'union': un.union(), \
-               'syn': sn.syn()}
+               'syn': sn.syn(), \
+               'ran': rn.ranRxn()}
 class_name = module_dict[module_name]
 
 #for system_name in class_name.number_of_species.iterkeys():
