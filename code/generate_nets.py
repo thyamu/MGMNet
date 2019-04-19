@@ -4,7 +4,7 @@ import mgmnet.bio_nets as bn
 import mgmnet.union_nets as un
 import mgmnet.syn_nets as sn
 import mgmnet.kegg_nets as kn
-import mgmnet.ranRxn as rn
+import mgmnet.ranRxn_nets as rn
 import mgmnet.topo_measure as tm
 import networkx as nx
 import pickle
