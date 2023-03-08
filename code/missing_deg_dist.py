@@ -48,7 +48,7 @@ for system_name in class_name.number_of_species.iterkeys():
         result_file_string = {'bio': '%s-%d.csv'%(system_name, species), \
                        'union': '%s-%d.csv'%(system_name, species), \
                        'syn': '%s-%d.csv'%(system_name, species), \
-                       'ranRxn': '%s-%d.csv'%(system_name, species)} #==>change the string after generate syn results
+                       'ranRxn': '%s-%d.csv'%(system_name, species)} 
 
         resultFileName = dr_results + '/deg_dist_lcc_' + result_file_string[module_name]
         #print resultFileName
@@ -70,13 +70,6 @@ for system_name in class_name.number_of_species.iterkeys():
                 cmf = csv.writer(mf)
                 cmf.writerow(sample)
 
-
-    #     with open(collectedFileName, "a") as of:
-    #         cof = csv.writer(of)
-    #         cof.writerow(outcome)
-    #
-    # df_list.append(pd.read_csv(collectedFileName))
-
     missingBatchName = dr_missing_batch + '/missing_deg_dist_%s'%(system_name)
     if os.path.isfile(missingBatchName):
         os.remove(missingBatchName)
@@ -88,8 +81,3 @@ for system_name in class_name.number_of_species.iterkeys():
         shutil.copyfile(missingFileName, missingBatchName)
     else:
         os.remove(missingFileName)
-
-# #-------- Merge all files into one-----------#
-# finalFileName = dr_collection + '/topo_ave_%s.csv'%(module_name)
-# full_df = pd.concat(df_list)
-# full_df.to_csv(finalFileName)
