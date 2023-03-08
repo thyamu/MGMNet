@@ -17,10 +17,7 @@ import networkx as nx
 
 bio = bn.bio()
 
-# 1. archaeasphere
-# 2. bacteriasphere
-# 3. eukaryasphere
-# 4. ecosphere
+### For given networks 1. archaeasphere, 2. bacteriasphere,  3. eukaryasphere, and  4. ecosphere
 ### list of rxns from union networks
 ### (1) separate nets for 1, 2, 3 and 4
 ### (2) merged net of 1, 2, and 3
@@ -88,36 +85,9 @@ for i, j in G_kegg.edges():
     else:
         G_kegg.add_edge(i, j, weight=0.9)
 
-# file_name = '../viz/sub_net_kegg_weighted_all_domain.gexf'
-# nx.write_gexf(G_kegg, file_name)
-
 file_name = '../viz/sub_net_kegg_weighted_all_domain.gml'
 nx.write_gml(G_kegg, file_name)
 
 #-------- END: small kegg network including archaea, bacteria, and eukarya as a network attribute --------#
 
 
-
-#-------- BEGIN: small kegg network including archaea, bacteria, eukarya, and ecosystem as a network attribute --------#
-#-------- END: small kegg network including archaea, bacteria, eukarya, and ecosystem as a network attribute --------#
-
-
-
-
-# #-------- BEGIN: big kegg network including archaea, bacteria, eukarya, ecosystem and small kegg as a network attribute --------#
-# sEdges = bio.sub_edges('biosphere_kegg', 1)
-# G_kegg = nx.Graph(sEdges)
-#
-# for n in G_kegg.nodes_iter():
-#     if n in G_all.nodes():
-#         nw = G_all.node[n]['weight']
-#         G_kegg.add_node(n, weight=nw)
-#     else:
-#         G_kegg.add_node(n, weight=0)
-#
-# for i, j in G_kegg.edges_iter():
-#     if (i, j) in G_all.edges():
-#         ew = G_all[i][j]['weight']
-#         G_kegg.add_edge(i, j, weight=ew)
-#     else:
-#         G_kegg.add_edge(i, j, weight=0.1)
