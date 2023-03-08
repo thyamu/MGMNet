@@ -19,11 +19,20 @@ for s in range(1, sh.nrows):
     chirality = sh.cell_value(rowx = s, colx = 1)
     dict_chiral[compound] = chirality
 
+#print dict_chiral['C00025']
+
 dir_data = dir_bionet + "/" + system_name
 nbr_files = len(os.listdir(dir_data))#get the number of files under dir_data
+print nbr_files
 
 dir_results = "../results"
 for ds in ("networks_node_attributes", "bio", system_name):
     dir_results = dir_results + "/" + ds
     if not os.path.exists(dir_results):
         os.makedirs(dir_results)
+
+# for i in os.listdir(dir_data):
+#     file_name = dir_data + "/" + i
+#     #print file_name
+#     G = nx.read_gpickle(file_name)
+#     for n in G.nodes_iter():

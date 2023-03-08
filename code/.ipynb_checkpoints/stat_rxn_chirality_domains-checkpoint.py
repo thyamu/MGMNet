@@ -4,7 +4,7 @@ import xlrd
 import networkx as nx
 import collections as cll
 import numpy as np
-
+import mgmnet.kegg_nets as kg
 
 ##### build chirality dictionary
 file_chirality = "../original_data/chirality/KEGG_biosphere_chirality_right_left_protein_forming_amino_acids.xls"
@@ -28,42 +28,36 @@ for s in range(1, sh.nrows):
     ch = sh.cell_value(rowx = s, colx = 1)
     dict_chiral[compound] = chirality_string[ch]
 
-kegg_dist_chirality = cll.Counter(dict_chiral.values())
+kegg = kg.kegg()
 
-##### load biological networks to obtain the set of nodes for each net
-type_chirality = ["chiral", "achiral", "unknown"]
-dir_bionet = "../results/networks/bio"
-dict_systems = {"ap":"individual_archaea_parsed", "bp":"individual_bacteria_parsed", "e": "individual_eukarya"}
-for system_name in dict_systems.itervalues():
-    ### path for input network data
-    dir_data = dir_bionet + "/" + system_name
-    nbr_files = len(next(os.walk(dir_data))[2]) #get the number of files under dir_data
+list_system = ["union_individual_archaea_parsed", "union_individual_bacteria_parsed", "union_individual_eukarya"]
+for system_name in list_system:
+    inputfile_name = "../data/union/rxn_lists/rxn_%s.dat"%(system_name)
+    rxn_domain = np.loadtxt(inputfile_name, dtype='str', comments="#", delimiter="\t", unpack=False)
+    list_rxn = [rxn_domain[i][1] for i in range(len(rxn_domain))]
 
-    ### array_chiral: chirality distribution for each networks
-    array_chiral = ["net", "nbr_total", "nbr_chiral", "nbr_achiral", "nbr_unknown", "ratio_c_to_a", "percentage_c", "percentage_a", "percentage_u"]
-    for i in range(1, nbr_files + 1):
-        ### load a network
-        file_name = dir_data + "/" + "sub_nodes_%s-%d.gpickle"%(system_name, i)
-        G = nx.read_gpickle(file_name)
-
+    ##### map each reaction to chirality of chemical compounds participating in the reaction
+    ### array_chiral: chirality distribution \
+    array_chiral = ["reaction", "nbr_total", "nbr_chiral", "nbr_achiral", "nbr_unknown", "ratio_c_to_a", "percentage_c", "percentage_a", "percentage_u"]
+    for x in list_rxn:
+        if x not in kegg.rxn_prod.keys() or x not in kegg.rxn_reac.keys():
+            continue
+        list_com = kegg.rxn_reac[x] + kegg.rxn_prod[x]
         nbr_chiral = 0
         nbr_achiral = 0
         nbr_unknown = 0
-        for n in G.nodes_iter():
-            if dict_chiral[n] == 'chiral':
+        for s in list_com:
+            if dict_chiral[s] == 'chiral':
                 nbr_chiral += 1
-            elif dict_chiral[n] == 'achiral':
+            elif dict_chiral[s] == 'achiral':
                 nbr_achiral += 1
             else:
                 nbr_unknown += 1
-
-        nbr_total = len(G.nodes())
+        nbr_total = len(list_com)
         if nbr_achiral == 0:
             ratio_c_to_a = -1
         else:
             ratio_c_to_a = nbr_chiral * 1.0 / nbr_achiral
-
-        x = system_name + '_%d'%(i)
         ac = [x, nbr_total, nbr_chiral, nbr_achiral, nbr_unknown, ratio_c_to_a, \
             nbr_chiral * 1.0 / nbr_total, nbr_achiral * 1.0 / nbr_total, nbr_unknown * 1.0 / nbr_total]
         array_chiral = np.vstack((array_chiral, ac))
@@ -74,7 +68,7 @@ for system_name in dict_systems.itervalues():
         dir_output += ds
         if not os.path.exists(dir_output):
             os.makedirs(dir_output)
-    output_file_name_dist = dir_output + "/bionet_chiral_distribution_%s.dat"%(system_name)
+    output_file_name_dist = dir_output + "/rxn_chiral_distribution_%s.dat"%(system_name)
 
     ### save the chirality arrays in the output files
     array_chiral.dump(output_file_name_dist)
