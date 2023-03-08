@@ -31,12 +31,6 @@ for ds in ('../results_cluster', '/topo_ave_bipartite', '/%s'%(module_name)):
     if not os.path.exists(dr_collection):
         os.makedirs(dr_collection)
 
-# dr_missing = ''
-# for ds in ('../results_cluster', '/topo_ave_bipartite', '/%s'%(module_name)):
-#     dr_missing = dr_missing + ds
-#     if not os.path.exists(dr_missing):
-#         os.makedirs(dr_missing)
-
 dr_missing_batch = ''
 for ds in ('../cluster', '/missing', '/topo_ave_bipartite'):
     dr_missing_batch = dr_missing_batch + ds
@@ -45,15 +39,6 @@ for ds in ('../cluster', '/missing', '/topo_ave_bipartite'):
 #---------- collecting results and identifying missing results ----------#
 df_list = []
 for system_name in class_name.number_of_species.iterkeys():
-#for system_name in ['individual_bacteria']:
-    print system_name
-
-    # dr_results = ''
-    # for ds in ('../results_cluster', '/topo_ave_bipartite', '/%s'%(module_name), '/%s'%(system_name)):
-    #     dr_results = dr_results + ds
-    #     if not os.path.exists(dr_results):
-    #         os.makedirs(dr_results)
-
     dr_results = dr_collection + '/%s'%(system_name)
     if not os.path.exists(dr_results):
         os.makedirs(dr_results)
@@ -68,7 +53,6 @@ for system_name in class_name.number_of_species.iterkeys():
        cmf = csv.writer(mf)
 
     for species in range(1, class_name.number_of_species[system_name] + 1):
-        print species
         result_file_string = {'bio': 'bipartite_%s-%d.csv'%(system_name, species), \
                        'union': 'bipartite_%s-upto-%d.csv'%(system_name, species), \
                        'syn': 'bipartite_%s-%d.csv'%(system_name, species), \
