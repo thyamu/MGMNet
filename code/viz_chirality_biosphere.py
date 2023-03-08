@@ -38,9 +38,6 @@ for s in range(2, sh.nrows):
     ch = int(sh.cell_value(rowx = s, colx = 6))
     dict_com_center[compound] = ch
 
-
-# chiral_centers = []
-# chirality = []
 sum_na = 0
 for n in G.nodes():
     ##### chiral centers
@@ -58,8 +55,3 @@ for n in G.nodes():
 
 nx.write_gml(G, '%s.gml'%(file_name))
 nx.write_gexf(G, '%s.gexf'%(file_name))
-# print sum_na
-# print len(G.nodes())
-# print G.nodes()["C00001"], G.nodes()["C00006"]
-# print G.nodes()["C00001"]["chirality"]
-# print G.nodes()["C00006"]["center"]
