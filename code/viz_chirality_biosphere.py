@@ -11,7 +11,6 @@
 import mgmnet.union_nets as un
 import networkx as nx
 
-
 union = un.union()
 system_name = "union_individual_all"
 species = union.number_of_species[system_name]
